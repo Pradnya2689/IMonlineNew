@@ -24,6 +24,7 @@
 		C3CD10161E979381002920A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD10111E979301002920A0 /* Roboto-Regular.ttf */; };
 		C3CD10171E979381002920A0 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD10121E979301002920A0 /* Roboto-Thin.ttf */; };
 		C3CD10191E97C7F6002920A0 /* CountrySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */; };
+		C3D79A111E9B804D0047D694 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D79A101E9B804D0047D694 /* SplashViewController.swift */; };
 		E27D3D9154E3A6324638FC94 /* Pods_IMOnline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4939C1B2DB307499970360BF /* Pods_IMOnline.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		C3CD10111E979301002920A0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		C3CD10121E979301002920A0 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountrySearchTableViewCell.swift; path = ../CountrySearchTableViewCell.swift; sourceTree = "<group>"; };
+		C3D79A101E9B804D0047D694 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashViewController.swift; path = ../SplashViewController.swift; sourceTree = "<group>"; };
 		DADE172D97A8508C8F03DDA4 /* Pods-IMOnline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnline.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnline/Pods-IMOnline.release.xcconfig"; sourceTree = "<group>"; };
 		DF57EC905A399436F0D90F68 /* Pods-IMOnlineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineUITests/Pods-IMOnlineUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E9E33374F2C38F2A290B3076 /* Pods_IMOnlineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMOnlineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 			children = (
 				C36024701E96219E00C72D82 /* AppDelegate.swift */,
 				C36024721E96219E00C72D82 /* ViewController.swift */,
+				C3D79A101E9B804D0047D694 /* SplashViewController.swift */,
 				C36024A11E96836300C72D82 /* CountrySearchViewController.swift */,
 				C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */,
 				C3CD100E1E979301002920A0 /* Roboto-Bold.ttf */,
@@ -478,6 +481,7 @@
 				C36024731E96219E00C72D82 /* ViewController.swift in Sources */,
 				C36024711E96219E00C72D82 /* AppDelegate.swift in Sources */,
 				C36024791E96219E00C72D82 /* IMOnline.xcdatamodeld in Sources */,
+				C3D79A111E9B804D0047D694 /* SplashViewController.swift in Sources */,
 				C36024A21E96836300C72D82 /* CountrySearchViewController.swift in Sources */,
 				C3CD10191E97C7F6002920A0 /* CountrySearchTableViewCell.swift in Sources */,
 			);

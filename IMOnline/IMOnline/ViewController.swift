@@ -35,8 +35,6 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        loginBtn.layer.cornerRadius = 20; // this value vary as per your desire
-        loginBtn.clipsToBounds = true
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(_:)))
         tap.delegate = self
@@ -50,22 +48,22 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         self.countryBtn.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -50, bottom: 0, right: 0)
         self.countryBtn.bringSubview(toFront: self.countryBtn.imageView!)
         
+        // rounded corners for button code
+        loginBtn.layer.cornerRadius = 20; // this value vary as per your desire
+        loginBtn.clipsToBounds = true
+
         countryBtn.layer.cornerRadius = 5; // this value vary as per your desire
         countryBtn.clipsToBounds = true
         countryBtn.layer.borderWidth = 1
         countryBtn.layer.borderColor = UIColor(red: 188.0/255, green: 188.0/255, blue: 188.0/255, alpha: 1.0).cgColor
         
-        //        countryBtn.translatesAutoresizingMaskIntoConstraints = false
-        
-        print(screenWidth)
         //for iphone 5
         if(screenWidth == 320){
             arrowImgView.translatesAutoresizingMaskIntoConstraints = true
             
             arrowImgView.frame = CGRect(x:(Int((screenWidth-countryBtn.frame.width)/2)+Int(countryBtn.frame.width-30)), y: Int(countryBtn.frame.origin.y+countryBtn.frame.height/2), width: 15, height: 15)
-            
         }
-        print(arrowImgView.frame)
+        
     }
     
     func handleTap(_ sender: UITapGestureRecognizer? = nil){
@@ -79,8 +77,6 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         passwordTF.resignFirstResponder()
         return true
     }
-    
-    
     
     func registerKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -108,12 +104,12 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     override func viewWillAppear(_ animated: Bool) {
         registerKeyboardNotifications()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         unregisterKeyboardNotifications()
     }
     
-    //rgb(21,75,173)
-    
+   
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         nameUnderLineLabel.backgroundColor = UIColor(red: 21.0/255.0, green: 75.0/255.0, blue: 173.0/255.0, alpha: 1.0)
@@ -145,6 +141,5 @@ extension UIView {
         gradient.colors = colours.map { $0.cgColor }
         gradient.locations = locations
         self.layer.insertSublayer(gradient, at: 0)
-        //self.layer.sen
     }
 }

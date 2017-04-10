@@ -1,0 +1,767 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		54E8A64648D9EBE9D1D2C9B5 /* Pods_IMOnlineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6D18E6F0ABE6A7352773C3 /* Pods_IMOnlineTests.framework */; };
+		70612403793213DF7C0DFC3E /* Pods_IMOnlineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E33374F2C38F2A290B3076 /* Pods_IMOnlineUITests.framework */; };
+		C36024711E96219E00C72D82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36024701E96219E00C72D82 /* AppDelegate.swift */; };
+		C36024731E96219E00C72D82 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36024721E96219E00C72D82 /* ViewController.swift */; };
+		C36024761E96219E00C72D82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C36024741E96219E00C72D82 /* Main.storyboard */; };
+		C36024791E96219E00C72D82 /* IMOnline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C36024771E96219E00C72D82 /* IMOnline.xcdatamodeld */; };
+		C360247B1E96219E00C72D82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C360247A1E96219E00C72D82 /* Assets.xcassets */; };
+		C360247E1E96219E00C72D82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C360247C1E96219E00C72D82 /* LaunchScreen.storyboard */; };
+		C36024891E96219E00C72D82 /* IMOnlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36024881E96219E00C72D82 /* IMOnlineTests.swift */; };
+		C36024941E96219E00C72D82 /* IMOnlineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36024931E96219E00C72D82 /* IMOnlineUITests.swift */; };
+		C36024A21E96836300C72D82 /* CountrySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36024A11E96836300C72D82 /* CountrySearchViewController.swift */; };
+		C3CD10131E979381002920A0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD100E1E979301002920A0 /* Roboto-Bold.ttf */; };
+		C3CD10141E979381002920A0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD100F1E979301002920A0 /* Roboto-Light.ttf */; };
+		C3CD10151E979381002920A0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD10101E979301002920A0 /* Roboto-Medium.ttf */; };
+		C3CD10161E979381002920A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD10111E979301002920A0 /* Roboto-Regular.ttf */; };
+		C3CD10171E979381002920A0 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD10121E979301002920A0 /* Roboto-Thin.ttf */; };
+		C3CD10191E97C7F6002920A0 /* CountrySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */; };
+		E27D3D9154E3A6324638FC94 /* Pods_IMOnline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4939C1B2DB307499970360BF /* Pods_IMOnline.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C36024851E96219E00C72D82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C36024651E96219E00C72D82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C360246C1E96219E00C72D82;
+			remoteInfo = IMOnline;
+		};
+		C36024901E96219E00C72D82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C36024651E96219E00C72D82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C360246C1E96219E00C72D82;
+			remoteInfo = IMOnline;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C1E3CCA32AE725CAE0D9F42 /* Pods-IMOnline.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnline.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnline/Pods-IMOnline.debug.xcconfig"; sourceTree = "<group>"; };
+		3952B361E06EA9F2CD69C408 /* Pods-IMOnlineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineTests/Pods-IMOnlineTests.release.xcconfig"; sourceTree = "<group>"; };
+		39B8756E2DCE633A3D4F905D /* Pods-IMOnlineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineUITests/Pods-IMOnlineUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4939C1B2DB307499970360BF /* Pods_IMOnline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMOnline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B446295157B034CBAE4BE040 /* Pods-IMOnlineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineTests/Pods-IMOnlineTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C360246D1E96219E00C72D82 /* IMOnline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMOnline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C36024701E96219E00C72D82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C36024721E96219E00C72D82 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C36024751E96219E00C72D82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C36024781E96219E00C72D82 /* IMOnline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IMOnline.xcdatamodel; sourceTree = "<group>"; };
+		C360247A1E96219E00C72D82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C360247D1E96219E00C72D82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C360247F1E96219E00C72D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C36024841E96219E00C72D82 /* IMOnlineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMOnlineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C36024881E96219E00C72D82 /* IMOnlineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMOnlineTests.swift; sourceTree = "<group>"; };
+		C360248A1E96219E00C72D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C360248F1E96219E00C72D82 /* IMOnlineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMOnlineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C36024931E96219E00C72D82 /* IMOnlineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMOnlineUITests.swift; sourceTree = "<group>"; };
+		C36024951E96219E00C72D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C36024A11E96836300C72D82 /* CountrySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountrySearchViewController.swift; path = ../CountrySearchViewController.swift; sourceTree = "<group>"; };
+		C3CD100E1E979301002920A0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		C3CD100F1E979301002920A0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		C3CD10101E979301002920A0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		C3CD10111E979301002920A0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		C3CD10121E979301002920A0 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountrySearchTableViewCell.swift; path = ../CountrySearchTableViewCell.swift; sourceTree = "<group>"; };
+		DADE172D97A8508C8F03DDA4 /* Pods-IMOnline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnline.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnline/Pods-IMOnline.release.xcconfig"; sourceTree = "<group>"; };
+		DF57EC905A399436F0D90F68 /* Pods-IMOnlineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineUITests/Pods-IMOnlineUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E9E33374F2C38F2A290B3076 /* Pods_IMOnlineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMOnlineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD6D18E6F0ABE6A7352773C3 /* Pods_IMOnlineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMOnlineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C360246A1E96219E00C72D82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E27D3D9154E3A6324638FC94 /* Pods_IMOnline.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C36024811E96219E00C72D82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54E8A64648D9EBE9D1D2C9B5 /* Pods_IMOnlineTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C360248C1E96219E00C72D82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70612403793213DF7C0DFC3E /* Pods_IMOnlineUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A0042D1091F4DB74EE7008D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C1E3CCA32AE725CAE0D9F42 /* Pods-IMOnline.debug.xcconfig */,
+				DADE172D97A8508C8F03DDA4 /* Pods-IMOnline.release.xcconfig */,
+				B446295157B034CBAE4BE040 /* Pods-IMOnlineTests.debug.xcconfig */,
+				3952B361E06EA9F2CD69C408 /* Pods-IMOnlineTests.release.xcconfig */,
+				DF57EC905A399436F0D90F68 /* Pods-IMOnlineUITests.debug.xcconfig */,
+				39B8756E2DCE633A3D4F905D /* Pods-IMOnlineUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9664DA997E5EEFE3330FB129 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4939C1B2DB307499970360BF /* Pods_IMOnline.framework */,
+				FD6D18E6F0ABE6A7352773C3 /* Pods_IMOnlineTests.framework */,
+				E9E33374F2C38F2A290B3076 /* Pods_IMOnlineUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C36024641E96219E00C72D82 = {
+			isa = PBXGroup;
+			children = (
+				C360246F1E96219E00C72D82 /* IMOnline */,
+				C36024871E96219E00C72D82 /* IMOnlineTests */,
+				C36024921E96219E00C72D82 /* IMOnlineUITests */,
+				C360246E1E96219E00C72D82 /* Products */,
+				1A0042D1091F4DB74EE7008D /* Pods */,
+				9664DA997E5EEFE3330FB129 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C360246E1E96219E00C72D82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C360246D1E96219E00C72D82 /* IMOnline.app */,
+				C36024841E96219E00C72D82 /* IMOnlineTests.xctest */,
+				C360248F1E96219E00C72D82 /* IMOnlineUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C360246F1E96219E00C72D82 /* IMOnline */ = {
+			isa = PBXGroup;
+			children = (
+				C36024701E96219E00C72D82 /* AppDelegate.swift */,
+				C36024721E96219E00C72D82 /* ViewController.swift */,
+				C36024A11E96836300C72D82 /* CountrySearchViewController.swift */,
+				C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */,
+				C3CD100E1E979301002920A0 /* Roboto-Bold.ttf */,
+				C3CD100F1E979301002920A0 /* Roboto-Light.ttf */,
+				C3CD10101E979301002920A0 /* Roboto-Medium.ttf */,
+				C3CD10111E979301002920A0 /* Roboto-Regular.ttf */,
+				C3CD10121E979301002920A0 /* Roboto-Thin.ttf */,
+				C36024741E96219E00C72D82 /* Main.storyboard */,
+				C360247A1E96219E00C72D82 /* Assets.xcassets */,
+				C360247C1E96219E00C72D82 /* LaunchScreen.storyboard */,
+				C360247F1E96219E00C72D82 /* Info.plist */,
+				C36024771E96219E00C72D82 /* IMOnline.xcdatamodeld */,
+			);
+			path = IMOnline;
+			sourceTree = "<group>";
+		};
+		C36024871E96219E00C72D82 /* IMOnlineTests */ = {
+			isa = PBXGroup;
+			children = (
+				C36024881E96219E00C72D82 /* IMOnlineTests.swift */,
+				C360248A1E96219E00C72D82 /* Info.plist */,
+			);
+			path = IMOnlineTests;
+			sourceTree = "<group>";
+		};
+		C36024921E96219E00C72D82 /* IMOnlineUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C36024931E96219E00C72D82 /* IMOnlineUITests.swift */,
+				C36024951E96219E00C72D82 /* Info.plist */,
+			);
+			path = IMOnlineUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C360246C1E96219E00C72D82 /* IMOnline */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C36024981E96219E00C72D82 /* Build configuration list for PBXNativeTarget "IMOnline" */;
+			buildPhases = (
+				30D57438FE20AF9E5E2C85EC /* [CP] Check Pods Manifest.lock */,
+				C36024691E96219E00C72D82 /* Sources */,
+				C360246A1E96219E00C72D82 /* Frameworks */,
+				C360246B1E96219E00C72D82 /* Resources */,
+				EFC9114FB5F9DE9C60E99709 /* [CP] Embed Pods Frameworks */,
+				7F1BE6E281A9DA77BEF23EE1 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IMOnline;
+			productName = IMOnline;
+			productReference = C360246D1E96219E00C72D82 /* IMOnline.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C36024831E96219E00C72D82 /* IMOnlineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C360249B1E96219E00C72D82 /* Build configuration list for PBXNativeTarget "IMOnlineTests" */;
+			buildPhases = (
+				76D23D1F7AF2AA32DC32630D /* [CP] Check Pods Manifest.lock */,
+				C36024801E96219E00C72D82 /* Sources */,
+				C36024811E96219E00C72D82 /* Frameworks */,
+				C36024821E96219E00C72D82 /* Resources */,
+				99026F718BA81E2BFDB23FE9 /* [CP] Embed Pods Frameworks */,
+				1B8373A7570AECB1A86E891C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C36024861E96219E00C72D82 /* PBXTargetDependency */,
+			);
+			name = IMOnlineTests;
+			productName = IMOnlineTests;
+			productReference = C36024841E96219E00C72D82 /* IMOnlineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C360248E1E96219E00C72D82 /* IMOnlineUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C360249E1E96219E00C72D82 /* Build configuration list for PBXNativeTarget "IMOnlineUITests" */;
+			buildPhases = (
+				D618382A094AFA629E66DB69 /* [CP] Check Pods Manifest.lock */,
+				C360248B1E96219E00C72D82 /* Sources */,
+				C360248C1E96219E00C72D82 /* Frameworks */,
+				C360248D1E96219E00C72D82 /* Resources */,
+				0F36EC9107AF15D2E765F37D /* [CP] Embed Pods Frameworks */,
+				66DA8582E0CDDAC83CE36435 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C36024911E96219E00C72D82 /* PBXTargetDependency */,
+			);
+			name = IMOnlineUITests;
+			productName = IMOnlineUITests;
+			productReference = C360248F1E96219E00C72D82 /* IMOnlineUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C36024651E96219E00C72D82 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = IngramMicro;
+				TargetAttributes = {
+					C360246C1E96219E00C72D82 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+					};
+					C36024831E96219E00C72D82 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = C360246C1E96219E00C72D82;
+					};
+					C360248E1E96219E00C72D82 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = C360246C1E96219E00C72D82;
+					};
+				};
+			};
+			buildConfigurationList = C36024681E96219E00C72D82 /* Build configuration list for PBXProject "IMOnline" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C36024641E96219E00C72D82;
+			productRefGroup = C360246E1E96219E00C72D82 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C360246C1E96219E00C72D82 /* IMOnline */,
+				C36024831E96219E00C72D82 /* IMOnlineTests */,
+				C360248E1E96219E00C72D82 /* IMOnlineUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C360246B1E96219E00C72D82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3CD10131E979381002920A0 /* Roboto-Bold.ttf in Resources */,
+				C3CD10141E979381002920A0 /* Roboto-Light.ttf in Resources */,
+				C3CD10151E979381002920A0 /* Roboto-Medium.ttf in Resources */,
+				C3CD10161E979381002920A0 /* Roboto-Regular.ttf in Resources */,
+				C3CD10171E979381002920A0 /* Roboto-Thin.ttf in Resources */,
+				C360247E1E96219E00C72D82 /* LaunchScreen.storyboard in Resources */,
+				C360247B1E96219E00C72D82 /* Assets.xcassets in Resources */,
+				C36024761E96219E00C72D82 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C36024821E96219E00C72D82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C360248D1E96219E00C72D82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F36EC9107AF15D2E765F37D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IMOnlineUITests/Pods-IMOnlineUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1B8373A7570AECB1A86E891C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IMOnlineTests/Pods-IMOnlineTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		30D57438FE20AF9E5E2C85EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		66DA8582E0CDDAC83CE36435 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IMOnlineUITests/Pods-IMOnlineUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76D23D1F7AF2AA32DC32630D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7F1BE6E281A9DA77BEF23EE1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IMOnline/Pods-IMOnline-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99026F718BA81E2BFDB23FE9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IMOnlineTests/Pods-IMOnlineTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D618382A094AFA629E66DB69 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EFC9114FB5F9DE9C60E99709 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IMOnline/Pods-IMOnline-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C36024691E96219E00C72D82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C36024731E96219E00C72D82 /* ViewController.swift in Sources */,
+				C36024711E96219E00C72D82 /* AppDelegate.swift in Sources */,
+				C36024791E96219E00C72D82 /* IMOnline.xcdatamodeld in Sources */,
+				C36024A21E96836300C72D82 /* CountrySearchViewController.swift in Sources */,
+				C3CD10191E97C7F6002920A0 /* CountrySearchTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C36024801E96219E00C72D82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C36024891E96219E00C72D82 /* IMOnlineTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C360248B1E96219E00C72D82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C36024941E96219E00C72D82 /* IMOnlineUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C36024861E96219E00C72D82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C360246C1E96219E00C72D82 /* IMOnline */;
+			targetProxy = C36024851E96219E00C72D82 /* PBXContainerItemProxy */;
+		};
+		C36024911E96219E00C72D82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C360246C1E96219E00C72D82 /* IMOnline */;
+			targetProxy = C36024901E96219E00C72D82 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C36024741E96219E00C72D82 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C36024751E96219E00C72D82 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C360247C1E96219E00C72D82 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C360247D1E96219E00C72D82 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C36024961E96219E00C72D82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C36024971E96219E00C72D82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C36024991E96219E00C72D82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C1E3CCA32AE725CAE0D9F42 /* Pods-IMOnline.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IMOnline/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		C360249A1E96219E00C72D82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DADE172D97A8508C8F03DDA4 /* Pods-IMOnline.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IMOnline/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		C360249C1E96219E00C72D82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B446295157B034CBAE4BE040 /* Pods-IMOnlineTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = IMOnlineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnlineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IMOnline.app/IMOnline";
+			};
+			name = Debug;
+		};
+		C360249D1E96219E00C72D82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3952B361E06EA9F2CD69C408 /* Pods-IMOnlineTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = IMOnlineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnlineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IMOnline.app/IMOnline";
+			};
+			name = Release;
+		};
+		C360249F1E96219E00C72D82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF57EC905A399436F0D90F68 /* Pods-IMOnlineUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = IMOnlineUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnlineUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = IMOnline;
+			};
+			name = Debug;
+		};
+		C36024A01E96219E00C72D82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39B8756E2DCE633A3D4F905D /* Pods-IMOnlineUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = IMOnlineUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnlineUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = IMOnline;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C36024681E96219E00C72D82 /* Build configuration list for PBXProject "IMOnline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C36024961E96219E00C72D82 /* Debug */,
+				C36024971E96219E00C72D82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C36024981E96219E00C72D82 /* Build configuration list for PBXNativeTarget "IMOnline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C36024991E96219E00C72D82 /* Debug */,
+				C360249A1E96219E00C72D82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C360249B1E96219E00C72D82 /* Build configuration list for PBXNativeTarget "IMOnlineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C360249C1E96219E00C72D82 /* Debug */,
+				C360249D1E96219E00C72D82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C360249E1E96219E00C72D82 /* Build configuration list for PBXNativeTarget "IMOnlineUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C360249F1E96219E00C72D82 /* Debug */,
+				C36024A01E96219E00C72D82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C36024771E96219E00C72D82 /* IMOnline.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C36024781E96219E00C72D82 /* IMOnline.xcdatamodel */,
+			);
+			currentVersion = C36024781E96219E00C72D82 /* IMOnline.xcdatamodel */;
+			path = IMOnline.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C36024651E96219E00C72D82 /* Project object */;
+}

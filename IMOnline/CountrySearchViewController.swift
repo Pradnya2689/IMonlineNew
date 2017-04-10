@@ -13,11 +13,13 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
 
     @IBOutlet weak var searchTextField: UITextField!
     
-    var countryNameAAray = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
+    var countryNameAAray : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
+    var countryNameAAray1 : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
     var flagArray = ["Australia","Croatia","England","France","Iceland","Jordan"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchTextField.addTarget(self, action: Selector(("textFieldDidChange11")), for: UIControlEvents.allEditingEvents)
 
         // Do any additional setup after loading the view.
         
@@ -39,7 +41,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return countryNameAAray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,19 +51,32 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         cell.flagImgView.image = UIImage(named: flagArray[indexPath.row])
-        cell.countryNameLB.text = countryNameAAray[indexPath.row]
+        cell.countryNameLB.text = countryNameAAray[indexPath.row] as! String
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print(indexPath)
+        print(countryNameAAray[indexPath.row])
         
         self.dismiss(animated: true, completion: nil)
-       // self.navigationController?.dismiss(animated: true, completion: nil)
+       
     }
     
-    
+    func textFieldDidChange11() {
+        if((searchTextField.text?.characters.count)! > 0){
+            let searchpredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchTextField.text!)
+            //filterArray = NSArray()
+            countryNameAAray.filter(using: searchpredicate)
+            self.countrySearchTableView.reloadData()
+        }else{
+            countryNameAAray.removeAllObjects()
+            countryNameAAray = self.countryNameAAray1.mutableCopy() as! NSMutableArray
+            self.countrySearchTableView.reloadData()
+        }
+        
+        //return true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

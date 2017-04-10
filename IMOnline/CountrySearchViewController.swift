@@ -13,6 +13,8 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     
     @IBOutlet weak var searchTextField: UITextField!
     
+    var isCall : String = ""
+    
     var countryNameAAray : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
     var countryNameAAray1 : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
     var flagArray = ["Australia","Croatia","England","France","Iceland","Jordan"]
@@ -59,8 +61,15 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         print(countryNameAAray[indexPath.row])
-        
-        self.dismiss(animated: true, completion: nil)
+        if(isCall == "SplashView"){
+            
+            let nextView = self.storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
+            self.navigationController?.pushViewController(nextView, animated: true)
+            
+        }else{
+            
+             self.dismiss(animated: true, completion: nil)
+        }
        
     }
     

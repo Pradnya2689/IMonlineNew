@@ -28,6 +28,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     @IBAction func countryBtnAction(_ sender: UIButton) {
         
         let nextView = storyboard?.instantiateViewController(withIdentifier: "search") as! CountrySearchViewController
+        nextView.isCall = "loginView"
         navigationController?.present(nextView, animated: true, completion: nil)
     }
     
@@ -102,6 +103,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         registerKeyboardNotifications()
     }
     

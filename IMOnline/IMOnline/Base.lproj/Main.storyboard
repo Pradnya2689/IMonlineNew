@@ -26,35 +26,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="worldMap" translatesAutoresizingMaskIntoConstraints="NO" id="Cfq-CE-9It">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VDb-Cp-2Ts">
                                 <rect key="frame" x="0.0" y="115" width="375" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="69b-gG-vYm"/>
-                                    <constraint firstAttribute="width" constant="375" id="zXc-9O-Mhx"/>
-                                </constraints>
-                            </imageView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="worldMap" translatesAutoresizingMaskIntoConstraints="NO" id="Cfq-CE-9It">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="375" id="aRp-dg-MGU"/>
+                                            <constraint firstAttribute="height" constant="150" id="rV2-nV-3h7"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashlogoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="6G7-Qb-5xP">
-                                <rect key="frame" x="53" y="257" width="268" height="100"/>
+                                <rect key="frame" x="57" y="270" width="261" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="5n2-u8-M1b"/>
-                                    <constraint firstAttribute="width" constant="268" id="WJU-Em-uxi"/>
+                                    <constraint firstAttribute="height" constant="100" id="MB1-F8-yxV"/>
+                                    <constraint firstAttribute="width" constant="261" id="omT-N9-aCm"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.082352941176470587" green="0.29411764705882354" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="AC9-XG-CKZ" firstAttribute="top" secondItem="Cfq-CE-9It" secondAttribute="bottom" constant="402" id="A6V-Xa-Rye"/>
-                            <constraint firstItem="6G7-Qb-5xP" firstAttribute="leading" secondItem="CxK-dg-z13" secondAttribute="leading" constant="53" id="Tuw-vk-fea"/>
-                            <constraint firstItem="Cfq-CE-9It" firstAttribute="top" secondItem="q6b-dV-YGg" secondAttribute="bottom" constant="51" id="X8h-oV-9rM"/>
-                            <constraint firstItem="6G7-Qb-5xP" firstAttribute="top" secondItem="Cfq-CE-9It" secondAttribute="bottom" constant="-8" id="cRK-Qb-ayK"/>
-                            <constraint firstAttribute="trailing" secondItem="6G7-Qb-5xP" secondAttribute="trailing" constant="54" id="eA9-qw-bWJ"/>
-                            <constraint firstItem="Cfq-CE-9It" firstAttribute="leading" secondItem="CxK-dg-z13" secondAttribute="leading" id="w0e-aI-16s"/>
-                            <constraint firstAttribute="trailing" secondItem="Cfq-CE-9It" secondAttribute="trailing" id="ylW-k9-ofb"/>
-                            <constraint firstItem="AC9-XG-CKZ" firstAttribute="top" secondItem="6G7-Qb-5xP" secondAttribute="bottom" constant="310" id="zqV-lK-VeM"/>
+                            <constraint firstAttribute="trailing" secondItem="6G7-Qb-5xP" secondAttribute="trailing" constant="57" id="5Ud-Hj-vpf"/>
+                            <constraint firstItem="6G7-Qb-5xP" firstAttribute="leading" secondItem="CxK-dg-z13" secondAttribute="leading" constant="57" id="649-t1-NuU"/>
+                            <constraint firstItem="VDb-Cp-2Ts" firstAttribute="top" secondItem="q6b-dV-YGg" secondAttribute="bottom" constant="51" id="Co5-qb-tke"/>
+                            <constraint firstAttribute="trailing" secondItem="VDb-Cp-2Ts" secondAttribute="trailing" id="Pii-sq-l25"/>
+                            <constraint firstItem="6G7-Qb-5xP" firstAttribute="top" secondItem="VDb-Cp-2Ts" secondAttribute="bottom" constant="5" id="Y7I-vE-mGi"/>
+                            <constraint firstItem="VDb-Cp-2Ts" firstAttribute="leading" secondItem="CxK-dg-z13" secondAttribute="leading" id="uNu-QI-rYa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Itn-aC-ZE7"/>
                     <connections>
+                        <outlet property="imgStackView" destination="VDb-Cp-2Ts" id="N6f-wV-qYu"/>
                         <outlet property="logoImgView" destination="6G7-Qb-5xP" id="VXT-d1-Gln"/>
                         <outlet property="mapImgView" destination="Cfq-CE-9It" id="vL3-KM-zXT"/>
                     </connections>

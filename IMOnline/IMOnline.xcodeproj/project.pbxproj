@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4CD376C41E9B68DB005C0D7A /* IMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD376C31E9B68DB005C0D7A /* IMConstants.swift */; };
 		4CD376C61E9B949E005C0D7A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD376C51E9B949E005C0D7A /* SplashViewController.swift */; };
+		4CD376CA1E9BBA49005C0D7A /* ContryApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD376C91E9BBA49005C0D7A /* ContryApiModel.swift */; };
 		54E8A64648D9EBE9D1D2C9B5 /* Pods_IMOnlineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6D18E6F0ABE6A7352773C3 /* Pods_IMOnlineTests.framework */; };
 		70612403793213DF7C0DFC3E /* Pods_IMOnlineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E33374F2C38F2A290B3076 /* Pods_IMOnlineUITests.framework */; };
 		C36024711E96219E00C72D82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36024701E96219E00C72D82 /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 		4939C1B2DB307499970360BF /* Pods_IMOnline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMOnline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD376C31E9B68DB005C0D7A /* IMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMConstants.swift; sourceTree = "<group>"; };
 		4CD376C51E9B949E005C0D7A /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		4CD376C91E9BBA49005C0D7A /* ContryApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContryApiModel.swift; sourceTree = "<group>"; };
 		B446295157B034CBAE4BE040 /* Pods-IMOnlineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineTests/Pods-IMOnlineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C360246D1E96219E00C72D82 /* IMOnline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMOnline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C36024701E96219E00C72D82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			children = (
 				C36024A11E96836300C72D82 /* CountrySearchViewController.swift */,
 				C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */,
+				4CD376C91E9BBA49005C0D7A /* ContryApiModel.swift */,
 			);
 			name = "County Selection Module";
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				TargetAttributes = {
 					C360246C1E96219E00C72D82 = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = A8U8Q2EEBA;
 						ProvisioningStyle = Automatic;
 					};
 					C36024831E96219E00C72D82 = {
@@ -506,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C36024731E96219E00C72D82 /* ViewController.swift in Sources */,
+				4CD376CA1E9BBA49005C0D7A /* ContryApiModel.swift in Sources */,
 				4CD376C41E9B68DB005C0D7A /* IMConstants.swift in Sources */,
 				C36024711E96219E00C72D82 /* AppDelegate.swift in Sources */,
 				C36024791E96219E00C72D82 /* IMOnline.xcdatamodeld in Sources */,
@@ -606,7 +611,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -649,7 +654,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -662,7 +667,9 @@
 			baseConfigurationReference = 0C1E3CCA32AE725CAE0D9F42 /* Pods-IMOnline.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A8U8Q2EEBA;
 				INFOPLIST_FILE = IMOnline/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -675,7 +682,9 @@
 			baseConfigurationReference = DADE172D97A8508C8F03DDA4 /* Pods-IMOnline.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A8U8Q2EEBA;
 				INFOPLIST_FILE = IMOnline/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;
 				PRODUCT_NAME = "$(TARGET_NAME)";

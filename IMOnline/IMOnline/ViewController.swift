@@ -36,7 +36,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
+       
         let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(_:)))
         tap.delegate = self
         view.addGestureRecognizer(tap)

@@ -65,22 +65,22 @@ struct Constants {
     // DACH REST Services URLs
     /////////////////////////////////////////////////////////////
     //#define URL_LOGIN_DACH HOST_URL@"/1.0.0.0/Session/Login/?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&ccd=%@&bnr=%@&knr=%@&uid=%@&sid=%@&lang=DE&search=ALL&country=MX&password=%@"
-    static let URL_LOGIN_DACH_HOST_URL = "/1.0.0.0/Session/Login/?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&ccd=%@&bnr=%@&knr=%@&uid=%@&sid=%@&lang=DE&search=ALL&country=MX&password=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
+    static let URL_LOGIN_DACH = "\(HOST_URL)/1.0.0.0/Session/Login/?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&ccd=%@&bnr=%@&knr=%@&uid=%@&sid=%@&lang=DE&search=ALL&country=MX&password=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
     
-    static let URL_GET_SESSION_DACH_HOST_URL = "/1.0.0.0/Session/?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&ccd=%@&bnr=%@&knr=%@&uid=%@&username=&lang=%@&password=%@&country=%@"
+    static let URL_GET_SESSION_DACH = "\(HOST_URL)/1.0.0.0/Session/?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&ccd=%@&bnr=%@&knr=%@&uid=%@&username=&lang=%@&password=%@&country=%@"
     
-    static let URL_COUNTRY_BNR_DACH_HOST_URL = "/1.0.0.0/Settings/?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=iphone&OSVERSION=%@&sid=%@&lang=%@&country=%@&id=LOGIN_SETTINGS"
+    static let URL_COUNTRY_BNR_DACH = "\(HOST_URL)/1.0.0.0/Settings/?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=iphone&OSVERSION=%@&sid=%@&lang=%@&country=%@&id=LOGIN_SETTINGS"
     
-    static let URL_PRODUCT_SEARCH_HOST_URL = "/1.0.0.0/Productsearch/"
+    static let URL_PRODUCT_SEARCH = "\(HOST_URL)/1.0.0.0/Productsearch/"
     
-    static let URL_SETTINGS_REST_HOST_URL = "/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iphone&APPVERSION=3.0&CONNECTIONTYPE=wifi&DEVICE=iphone&OSVERSION=5.0&ccd=%@&bnr=%@&knr=%@&uid=%@&sid=%@&lang=%@&country=MX"
+    static let URL_SETTINGS_REST = "\(HOST_URL)/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iphone&APPVERSION=3.0&CONNECTIONTYPE=wifi&DEVICE=iphone&OSVERSION=5.0&ccd=%@&bnr=%@&knr=%@&uid=%@&sid=%@&lang=%@&country=MX"
     
     /////////////////////////////////////////////////////////////
     // Endeavour REST Services URLs
     /////////////////////////////////////////////////////////////
     
-    static let URL_GET_FUNCTION_LIST_HOST_URL = "/Dispatcher/Functionlist/"
-    static let URL_GET_COUNTRY_LIST_HOST_URL = "/Dispatcher/Countrylist/"
+    static let URL_GET_FUNCTION_LIST = "\(HOST_URL)/Dispatcher/Functionlist/"
+    static let URL_GET_COUNTRY_LIST = "\(HOST_URL)/Dispatcher/Countrylist/"
     
     static let SEARCH_BTN = "SEARCH"
     static let BASKET_BTN = "BASKET"
@@ -105,3 +105,8 @@ struct Constants {
 
     
 }
+
+func clearAllDefaults(){
+    
+}
+

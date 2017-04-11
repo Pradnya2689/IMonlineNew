@@ -7,7 +7,18 @@
 //
 
 import Foundation
+import Alamofire
+
 
 class ContryApiModel:NSObject{
+    
+    
+    func fetCountryList(){
+        Alamofire.request("https://httpbin.org/get").responseString { response in
+            print("Success: \(response.result.isSuccess)")
+            print("Response String: \(response.result.value)")
+    }
+    
+    }
     
 }

@@ -10,7 +10,6 @@ import Foundation
 struct Constants {
     //App Constants
     static let APP_NAME = "IMOnline"
-    
     static let ENV_DACH = "D"
     static let ENV_ENDEAVOUR = "E"
     static let ENV_LEGACY = "L"
@@ -30,7 +29,6 @@ struct Constants {
     
     /// Stage 1 DEV
     static let HOST_URL = "https://mobility-stg.ingrammicro.com"
-    
     
     // Stage 2 DEV
     //static let HOST_URL = "https://mobility-stg2.ingrammicro.com"

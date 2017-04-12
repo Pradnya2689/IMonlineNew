@@ -24,6 +24,8 @@ struct Constants {
     static let CONTENTYPE_VALUE = "application/mobile"
     static let CONTENTTYPE_JSON = "application/json"
     
+    static let SESSION_COOKIE_NAME = ".ASPXAUTHMobile"
+    static let US_SESSION_COOKIE_NAME = "IMGlobalWebAuthCookieMobile"
     
     //pragma mark base url's
     
@@ -88,8 +90,8 @@ struct Constants {
     static let TRACKING_BTN = "TRACKING"
 
 //IMHELPER
-    static let SESSION_COOKIE_NAME = ".ASPXAUTHMobile"
-    static let US_SESSION_COOKIE_NAME = "IMGlobalWebAuthCookieMobile"
+//    static let SESSION_COOKIE_NAME = ".ASPXAUTHMobile"
+//    static let US_SESSION_COOKIE_NAME = "IMGlobalWebAuthCookieMobile"
     static let DOMAIN_URI = "www.ingrammicro.de"
     static let COOKIE_URI = "ingrammicro.com"
     
@@ -100,7 +102,28 @@ struct Constants {
 //    #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 //    #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
     
-
+//User
+    
+    static let DEFAULTS_KEY_COUNTRY = "countryCode"
+    static let DEFAULTS_KEY_LANGUAGE = "language"
+    static let DEFAULTS_KEY_BNR = "bnr"
+    static let DEFAULTS_KEY_CUSTOMER_NUMBER = "customerNumber"
+    static let DEFAULTS_KEY_USER_ID = "userId"
+    
+    static let DEFAULTS_SHOW_EK_PRICE = "showEKPrice"
+    static let DEFAULTS_SHOW_EVP_PRICE = "showEVPPrice"
+    static let DEFAULTS_SHOW_SELL_PRICE = "showSellPrice"
+    static let DEFAULTS_SELL_PRICE_PERCENTAGE = "sellPricePercentage"
+    static let DEFAULTS_SHOW_TAXES = "showTaxes"
+    static let DEFAULTS_TAXES_PERCENTAGE = "taxesPercentage"
+    static let DEFAULT_CURRENCY = "EUR"
+    
+    static let FILTER_AVAILABLE = "SEARCH_ONLY_AVAILABLE"
+    static let FILTER_PROMOTIONS = "SEARCH_ONLY_PROMOTIONS"
+    static let FILTER_NEW = "SEARCH_ONLY_NEW"
+    static let FILTER_STOCKORORDER = "SEARCH_ONLY_STOCKORORDER"
+    static let FILTER_LICENSE = "SEARCH_ONLY_LICENSE"
+    static let FILTER_DISCONTINUED = "SEARCH_ONLY_DISCONTINUED"
     
 }
 

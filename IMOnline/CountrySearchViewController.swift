@@ -78,6 +78,8 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
             let searchpredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchTextField.text!)
             //filterArray = NSArray()
             countryNameAAray.filter(using: searchpredicate)
+            
+            
             self.countrySearchTableView.reloadData()
         }else{
             countryNameAAray.removeAllObjects()

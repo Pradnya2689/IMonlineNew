@@ -22,6 +22,9 @@ class SplashViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         
+        let sharedInstance = ContryApiModel()
+     sharedInstance.fetCountryList()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

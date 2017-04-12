@@ -124,6 +124,25 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         passUnderLineLB.backgroundColor = UIColor(red: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1.0)
     }
     
+    @IBAction func loginClicked(){
+        if(usernameTF.text == "" && passwordTF.text == ""){
+            showAlert(messageToShow: "Please enter username, password field.")
+        }else{
+            LoginApiModel.sharedInstance.loginWebservice()
+        }
+        
+    }
+    func loginService(userid:String,password:String){
+        
+    }
+    func showAlert(messageToShow:String){
+        let alertView:UIAlertView = UIAlertView()
+        alertView.title = ""
+        alertView.message = messageToShow
+        alertView.delegate = nil
+        alertView.addButton(withTitle: "OK")
+        alertView.show()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -22,6 +22,8 @@ class SplashViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,10 +32,10 @@ class SplashViewController: UIViewController {
         
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
-        
-        
-        UIView.animate(withDuration: 2.0, delay: 1.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+ 
+        UIView.animate(withDuration: 1.0, delay: 0.5, options: UIViewAnimationOptions.curveEaseOut, animations: {
             
             self.logoImgView.alpha = 1.0
             
@@ -41,9 +43,14 @@ class SplashViewController: UIViewController {
             
             if finished {
                 
-                let nextView = self.storyboard?.instantiateViewController(withIdentifier: "search") as! CountrySearchViewController
-                nextView.isCall = "SplashView"
-                self.navigationController?.pushViewController(nextView, animated: true)
+                UIView.animate(withDuration: 2.0, delay: 1.5, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                    
+                    let nextView = self.storyboard?.instantiateViewController(withIdentifier: "search") as! CountrySearchViewController
+                    nextView.isCall = "SplashView"
+                    self.navigationController?.pushViewController(nextView, animated: true)
+                    
+                }, completion: nil)
+                
             }
             
             

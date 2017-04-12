@@ -296,6 +296,7 @@
 				TargetAttributes = {
 					C360246C1E96219E00C72D82 = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = A8U8Q2EEBA;
 						ProvisioningStyle = Automatic;
 					};
 					C36024831E96219E00C72D82 = {
@@ -662,6 +663,7 @@
 			baseConfigurationReference = 0C1E3CCA32AE725CAE0D9F42 /* Pods-IMOnline.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A8U8Q2EEBA;
 				INFOPLIST_FILE = IMOnline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;
@@ -675,6 +677,7 @@
 			baseConfigurationReference = DADE172D97A8508C8F03DDA4 /* Pods-IMOnline.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A8U8Q2EEBA;
 				INFOPLIST_FILE = IMOnline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;

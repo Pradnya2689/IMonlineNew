@@ -21,25 +21,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AFF-c5-BgV">
-                                <rect key="frame" x="0.0" y="115" width="375" height="150"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="worldMap" translatesAutoresizingMaskIntoConstraints="NO" id="6zP-Gx-0wh">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="14h-8s-drv"/>
-                                            <constraint firstAttribute="width" constant="375" id="S2G-6I-gBp"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0bg" translatesAutoresizingMaskIntoConstraints="NO" id="Zxk-QZ-70h">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.08235294118" green="0.29411764709999999" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="AFF-c5-BgV" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="95" id="6Fd-bv-uD0"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="AFF-c5-BgV" secondAttribute="bottom" constant="402" id="JIS-FC-2mu"/>
-                            <constraint firstAttribute="trailing" secondItem="AFF-c5-BgV" secondAttribute="trailing" id="et0-1B-cHm"/>
-                            <constraint firstItem="AFF-c5-BgV" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="m9V-O4-18q"/>
+                            <constraint firstItem="Zxk-QZ-70h" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="4Jv-tJ-YY5"/>
+                            <constraint firstItem="Zxk-QZ-70h" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="VNQ-I7-jGa"/>
+                            <constraint firstAttribute="trailing" secondItem="Zxk-QZ-70h" secondAttribute="trailing" id="fKN-GK-rky"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Zxk-QZ-70h" secondAttribute="bottom" id="xfo-kq-LSL"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -49,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="worldMap" width="360" height="232"/>
+        <image name="0bg" width="540" height="960"/>
     </resources>
 </document>

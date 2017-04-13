@@ -133,7 +133,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         if(usernameTF.text == "" && passwordTF.text == ""){
             showAlert(messageToShow: "Please enter username, password field.")
         }else{
-            LoginApiModel.sharedInstance.loginWebservice()
+            WebServiceManager.sharedInstance.loginWebservice()
         }
         
     }

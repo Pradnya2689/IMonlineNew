@@ -18,3 +18,4 @@ class ResponseParser: NSObject {
         self.lines = responseStr.components(separatedBy: .newlines) as NSArray
     }
 }
+

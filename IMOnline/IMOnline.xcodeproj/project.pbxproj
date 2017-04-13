@@ -128,6 +128,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4C78154E1E9F541800F0F3D0 /* NewtWorkClasses */ = {
+			isa = PBXGroup;
+			children = (
+				4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */,
+				4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */,
+			);
+			name = NewtWorkClasses;
+			sourceTree = "<group>";
+		};
 		4CA7AE661E9E26D500E0DCBB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,8 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				C36024721E96219E00C72D82 /* ViewController.swift */,
-				4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */,
-				4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */,
 			);
 			name = LoginModule;
 			sourceTree = "<group>";
@@ -202,6 +209,7 @@
 		C360246F1E96219E00C72D82 /* IMOnline */ = {
 			isa = PBXGroup;
 			children = (
+				4C78154E1E9F541800F0F3D0 /* NewtWorkClasses */,
 				4CA7AE661E9E26D500E0DCBB /* Modules */,
 				4CD376C51E9B949E005C0D7A /* SplashViewController.swift */,
 				4CD376C21E9B6843005C0D7A /* County Selection Module */,

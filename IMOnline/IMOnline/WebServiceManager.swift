@@ -33,5 +33,6 @@ class WebServiceManager: NSObject {
                 print("Response JSON: \(response.result.value)")
         }
     }
+    
 
 }

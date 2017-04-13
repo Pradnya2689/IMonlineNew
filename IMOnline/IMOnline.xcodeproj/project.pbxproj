@@ -223,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				C35B681E1E9F54BC00260F01 /* ProductSearch */,
+				4C78154E1E9F541800F0F3D0 /* NewtWorkClasses */,
 				4CA7AE661E9E26D500E0DCBB /* Modules */,
 				4CD376C51E9B949E005C0D7A /* SplashViewController.swift */,
 				4CD376C21E9B6843005C0D7A /* County Selection Module */,

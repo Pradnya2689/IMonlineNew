@@ -53,7 +53,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         loginBtn.layer.cornerRadius = 20; // this value vary as per your desire
         loginBtn.clipsToBounds = true
 
-        countryBtn.layer.cornerRadius = 5; // this value vary as per your desire
+        countryBtn.layer.cornerRadius = 10; // this value vary as per your desire
         countryBtn.clipsToBounds = true
         countryBtn.layer.borderWidth = 1
         countryBtn.layer.borderColor = UIColor(red: 188.0/255, green: 188.0/255, blue: 188.0/255, alpha: 1.0).cgColor
@@ -128,7 +128,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         if(usernameTF.text == "" && passwordTF.text == ""){
             showAlert(messageToShow: "Please enter username, password field.")
         }else{
-            LoginApiModel.sharedInstance.loginWebservice()
+            WebServiceManager.sharedInstance.loginWebservice()
         }
         
     }

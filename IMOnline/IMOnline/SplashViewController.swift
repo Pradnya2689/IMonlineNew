@@ -45,9 +45,16 @@ class SplashViewController: UIViewController {
                 
                 UIView.animate(withDuration: 2.0, delay: 1.5, options: UIViewAnimationOptions.curveEaseOut, animations: {
                     
-                    let nextView = self.storyboard?.instantiateViewController(withIdentifier: "search") as! CountrySearchViewController
-                    nextView.isCall = "SplashView"
-                    self.navigationController?.pushViewController(nextView, animated: true)
+                    if #available(iOS 10.0, *) {
+                        let nextView = self.storyboard?.instantiateViewController(withIdentifier: "search") as! CountrySearchViewController
+                        nextView.isCall = "SplashView"
+                        self.navigationController?.pushViewController(nextView, animated: true)
+                    } else {
+                        // Fallback on earlier versions
+                       // let nextView = self.storyboard?.ini
+                        
+                    }
+                    
                     
                 }, completion: nil)
                 

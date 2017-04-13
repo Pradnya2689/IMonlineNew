@@ -27,9 +27,14 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     
     @IBAction func countryBtnAction(_ sender: UIButton) {
         
-        let nextView = storyboard?.instantiateViewController(withIdentifier: "search") as! CountrySearchViewController
-        nextView.isCall = "loginView"
-        navigationController?.present(nextView, animated: true, completion: nil)
+        if #available(iOS 10.0, *) {
+            let nextView = storyboard?.instantiateViewController(withIdentifier: "search") as! CountrySearchViewController
+            nextView.isCall = "loginView"
+            navigationController?.present(nextView, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
+        }
+       
     }
     
     override func viewDidLoad() {

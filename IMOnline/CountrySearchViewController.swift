@@ -9,6 +9,19 @@
 import UIKit
 import Speech
 
+@available(iOS 10.0, *)
+class siriRecogn: NSObject , SFSpeechRecognizerDelegate{
+    
+    static let sharedInstance = siriRecogn()
+    
+     let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+     var recognitionTask: SFSpeechRecognitionTask?
+     let audioEngine = AVAudioEngine()
+    
+}
+
+
 class CountrySearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIGestureRecognizerDelegate,SFSpeechRecognizerDelegate {
     @IBOutlet weak var countrySearchTableView: UITableView!
     
@@ -21,23 +34,17 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     var countryNameAAray1 : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
     var flagArray = ["Australia","Croatia","England","France","Iceland","Jordan"]
     
+
+
     @IBAction func micBtnAction(_ sender: UIButton) {
-        
-//        if audioEngine.isRunning{
-//            audioEngine.stop()
-//            recognitionRequest?.endAudio()
-//            micButton.isEnabled = false
-//            //micBtn.setTitle("Start Recording", for: .normal)
-//        }else{
-            startRecording()
-            //micBtn.setTitle("Stop Recording", for: .normal)
-        //}
+
+        if #available(iOS 10.0, *){
+            
+             startRecording()
+        }
     }
     
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
-    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    private var recognitionTask: SFSpeechRecognitionTask?
-    private let audioEngine = AVAudioEngine()
+    var isEnab : Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,38 +52,45 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
 
         // Do any additional setup after loading the view.
         
-        micButton.isEnabled = false
         
-        speechRecognizer?.delegate = self
-        
-        SFSpeechRecognizer.requestAuthorization{ (authStatus) in
+        if #available(iOS 10.0, *) {
             
-            var isButtonEnabled = false
+            siriRecogn.sharedInstance.speechRecognizer?.delegate = self
             
-            switch authStatus{
+            
+            SFSpeechRecognizer.requestAuthorization{ (authStatus) in
                 
-            case .authorized:
-                isButtonEnabled = true
+                self.isEnab = false
                 
-            case .denied:
-                isButtonEnabled = false
-                print("User denied access to speech recognition")
+                switch authStatus{
+                    
+                case .authorized:
+                    self.isEnab = true
+                    
+                case .denied:
+                    self.isEnab = false
+                    print("User denied access to speech recognition")
+                    
+                    
+                case .restricted:
+                    self.isEnab = false
+                    print("Speech recognition restricted on this device")
+                    
+                    
+                case .notDetermined:
+                    self.isEnab = false
+                    print("Speech recognition not yet authorized")
+         
+                }
                 
-            case .restricted:
-                isButtonEnabled = false
-                print("Speech recognition restricted on this device")
-                
-            case .notDetermined:
-                isButtonEnabled = false
-                print("Speech recognition not yet authorized")
-                
+                OperationQueue.main.addOperation {
+                    self.micButton.isEnabled = self.isEnab
+                }
             }
-            
-            OperationQueue.main.addOperation {
-                self.micButton.isEnabled = isButtonEnabled
-            }
-            
+        }else {
+            // Fallback on earlier versions
         }
+        
         
     }
     
@@ -90,95 +104,73 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
    // MARK: - Microphone Function
     
     func startRecording() {
-        
-        if recognitionTask != nil {
-            recognitionTask?.cancel()
-            recognitionTask = nil
-        }
-        
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            try audioSession.setCategory(AVAudioSessionCategoryRecord)
-            try audioSession.setMode(AVAudioSessionModeMeasurement)
-            try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
-        } catch {
-            print("audioSession properties weren't set because of an error.")
-        }
-        
-        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        
-        guard let inputNode = audioEngine.inputNode else {
-            fatalError("Audio engine has no input node")
-        }
-        
-        guard let recognitionRequest = recognitionRequest else {
-            fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
-        }
-        
-        recognitionRequest.shouldReportPartialResults = true
-        
-        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
+        if #available(iOS 10.0, *){
             
-            var isFinal = false
-            
-//            if result != nil {
-//                
-//                self.searchTextField.text = result?.bestTranscription.formattedString
-//                isFinal = (result?.isFinal)!
-//                
-//                self.textFieldDidChangeSiri()
-//                
-//            }
-//            
-//            
-//            if error != nil || isFinal {
-//                self.audioEngine.stop()
-//                inputNode.removeTap(onBus: 0)
-//                
-//                self.recognitionRequest = nil
-//                self.recognitionTask = nil
-//                
-//                self.micButton.isEnabled = true
-//            }
-            
-            
-            if result != nil {
-                
-                self.searchTextField.text = result?.bestTranscription.formattedString
-                
-//                self.cancelRecording()
-                self.audioEngine.stop()
-                inputNode.removeTap(onBus: 0)
-                self.recognitionRequest = nil
-                self.recognitionTask = nil
-                self.micButton.isEnabled = true
-                
-                self.textFieldDidChangeSiri()
-                                
+            if siriRecogn.sharedInstance.recognitionTask != nil {
+                siriRecogn.sharedInstance.recognitionTask?.cancel()
+                siriRecogn.sharedInstance.recognitionTask = nil
             }
-
             
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                try audioSession.setCategory(AVAudioSessionCategoryRecord)
+                try audioSession.setMode(AVAudioSessionModeMeasurement)
+                try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+            } catch {
+                print("audioSession properties weren't set because of an error.")
+            }
             
-        })
-        
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
-            self.recognitionRequest?.append(buffer)
+            siriRecogn.sharedInstance.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+            
+            guard let inputNode = siriRecogn.sharedInstance.audioEngine.inputNode else {
+                fatalError("Audio engine has no input node")
+            }
+            
+            guard  let recognitionRequest = siriRecogn.sharedInstance.recognitionRequest else {
+                fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
+            }
+            
+            siriRecogn.sharedInstance.recognitionRequest?.shouldReportPartialResults = true
+            
+            siriRecogn.sharedInstance.recognitionTask = siriRecogn.sharedInstance.speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
+                
+                if result != nil {
+                    
+                    self.searchTextField.text  = result?.bestTranscription.formattedString
+                    
+                    siriRecogn.sharedInstance.audioEngine.stop()
+                    inputNode.removeTap(onBus: 0)
+                    siriRecogn.sharedInstance.recognitionRequest = nil
+                    siriRecogn.sharedInstance.recognitionTask = nil
+                    self.micButton.isEnabled = true
+                    
+                    
+                    self.textFieldDidChangeSiri()
+                }
+                
+            })
+            
+            let recordingFormat = inputNode.outputFormat(forBus: 0)
+            inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
+                siriRecogn.sharedInstance.recognitionRequest?.append(buffer)
+            }
+            
+            siriRecogn.sharedInstance.audioEngine.prepare()
+            
+            do {
+                try siriRecogn.sharedInstance.audioEngine.start()
+            } catch {
+                print("audioEngine couldn't start because of an error.")
+            }
+            searchTextField.text = "Say something, I'm listening!"
+            
+        }else{
+            
         }
-        
-        audioEngine.prepare()
-        
-        do {
-            try audioEngine.start()
-        } catch {
-            print("audioEngine couldn't start because of an error.")
-        }
-        
-        searchTextField.text = "Say something, I'm listening!"
-        
     }
     
     
+    @available(iOS 10.0, *)
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
             micButton.isEnabled = true

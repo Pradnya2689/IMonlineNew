@@ -26,41 +26,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VDb-Cp-2Ts">
-                                <rect key="frame" x="0.0" y="115" width="375" height="150"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="worldMap" translatesAutoresizingMaskIntoConstraints="NO" id="Cfq-CE-9It">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="375" id="aRp-dg-MGU"/>
-                                            <constraint firstAttribute="height" constant="150" id="rV2-nV-3h7"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0bg" translatesAutoresizingMaskIntoConstraints="NO" id="Md5-NF-ldH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashlogoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="6G7-Qb-5xP">
-                                <rect key="frame" x="57" y="270" width="261" height="100"/>
+                                <rect key="frame" x="57" y="335" width="261" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="MB1-F8-yxV"/>
-                                    <constraint firstAttribute="width" constant="261" id="omT-N9-aCm"/>
+                                    <constraint firstAttribute="width" constant="261" id="Dbe-fB-KRp"/>
+                                    <constraint firstAttribute="height" constant="100" id="YCN-5T-lhr"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.082352941176470587" green="0.29411764705882354" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="6G7-Qb-5xP" secondAttribute="trailing" constant="57" id="5Ud-Hj-vpf"/>
-                            <constraint firstItem="6G7-Qb-5xP" firstAttribute="leading" secondItem="CxK-dg-z13" secondAttribute="leading" constant="57" id="649-t1-NuU"/>
-                            <constraint firstItem="VDb-Cp-2Ts" firstAttribute="top" secondItem="q6b-dV-YGg" secondAttribute="bottom" constant="51" id="Co5-qb-tke"/>
-                            <constraint firstAttribute="trailing" secondItem="VDb-Cp-2Ts" secondAttribute="trailing" id="Pii-sq-l25"/>
-                            <constraint firstItem="6G7-Qb-5xP" firstAttribute="top" secondItem="VDb-Cp-2Ts" secondAttribute="bottom" constant="5" id="Y7I-vE-mGi"/>
-                            <constraint firstItem="VDb-Cp-2Ts" firstAttribute="leading" secondItem="CxK-dg-z13" secondAttribute="leading" id="uNu-QI-rYa"/>
+                            <constraint firstItem="6G7-Qb-5xP" firstAttribute="top" secondItem="q6b-dV-YGg" secondAttribute="bottom" constant="271" id="T0B-vU-Oa4"/>
+                            <constraint firstItem="Md5-NF-ldH" firstAttribute="leading" secondItem="CxK-dg-z13" secondAttribute="leading" id="VNp-cm-Enm"/>
+                            <constraint firstItem="AC9-XG-CKZ" firstAttribute="top" secondItem="6G7-Qb-5xP" secondAttribute="bottom" constant="232" id="dTl-9u-IpS"/>
+                            <constraint firstItem="Md5-NF-ldH" firstAttribute="top" secondItem="CxK-dg-z13" secondAttribute="top" id="flO-fT-dPs"/>
+                            <constraint firstAttribute="trailing" secondItem="6G7-Qb-5xP" secondAttribute="trailing" constant="57" id="gKl-ab-oGt"/>
+                            <constraint firstItem="6G7-Qb-5xP" firstAttribute="leading" secondItem="CxK-dg-z13" secondAttribute="leading" constant="57" id="sCj-4b-dn1"/>
+                            <constraint firstItem="AC9-XG-CKZ" firstAttribute="top" secondItem="Md5-NF-ldH" secondAttribute="bottom" id="tDi-1U-gdj"/>
+                            <constraint firstAttribute="trailing" secondItem="Md5-NF-ldH" secondAttribute="trailing" id="y6P-9Z-KZC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Itn-aC-ZE7"/>
                     <connections>
-                        <outlet property="imgStackView" destination="VDb-Cp-2Ts" id="N6f-wV-qYu"/>
                         <outlet property="logoImgView" destination="6G7-Qb-5xP" id="VXT-d1-Gln"/>
-                        <outlet property="mapImgView" destination="Cfq-CE-9It" id="vL3-KM-zXT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjR-Qe-yZE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -347,6 +338,9 @@
                                                             <constraint firstAttribute="width" constant="30" id="rmq-Qc-Swd"/>
                                                         </constraints>
                                                         <state key="normal" image="iconMike"/>
+                                                        <connections>
+                                                            <action selector="micBtnAction:" destination="9FR-Xs-xK9" eventType="touchUpInside" id="JzD-ZX-01P"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.94509803921568625" green="0.96078431372549022" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
@@ -458,6 +452,7 @@
                     </view>
                     <connections>
                         <outlet property="countrySearchTableView" destination="FOy-lt-Sz7" id="Kw6-fR-mwE"/>
+                        <outlet property="micButton" destination="iUx-yz-j0o" id="nbq-ec-n8r"/>
                         <outlet property="searchTextField" destination="wmK-yf-BI7" id="QVl-bh-DT6"/>
                     </connections>
                 </viewController>
@@ -485,11 +480,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="0bg" width="540" height="960"/>
         <image name="Australia" width="24" height="24"/>
         <image name="countryArrow" width="38" height="38"/>
         <image name="iconMike" width="32" height="32"/>
         <image name="logo_3x" width="245" height="60"/>
         <image name="splashlogoWhite" width="336" height="64"/>
-        <image name="worldMap" width="360" height="232"/>
     </resources>
 </document>

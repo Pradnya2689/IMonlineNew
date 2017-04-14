@@ -43,6 +43,13 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         super.viewDidLoad()
         searchTextField.addTarget(self, action: Selector(("textFieldDidChange11")), for: UIControlEvents.allEditingEvents)
 
+        WebServiceManager.sharedInstance.fetchCountries(withCompletionBlock: {(_ _countries: [Any]) -> Void in
+            print(_countries)
+        }, failedBlock: {() -> Void in
+        })
+
+        
+        
         // Do any additional setup after loading the view.
         
         micButton.isEnabled = false

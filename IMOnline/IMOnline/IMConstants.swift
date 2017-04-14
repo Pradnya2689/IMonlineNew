@@ -27,10 +27,15 @@ struct Constants {
     static let SESSION_COOKIE_NAME = ".ASPXAUTHMobile"
     static let US_SESSION_COOKIE_NAME = "IMGlobalWebAuthCookieMobile"
     
+    
+    
     //pragma mark base url's
     
     /// Stage 1 DEV
     static let HOST_URL = "https://mobility-stg.ingrammicro.com"
+    
+    
+    static let URL_GET_COUNTRY_LIST  = "\(HOST_URL)/Dispatcher/Countrylist/"
     
     // Stage 2 DEV
     //static let HOST_URL = "https://mobility-stg2.ingrammicro.com"
@@ -80,7 +85,7 @@ struct Constants {
     /////////////////////////////////////////////////////////////
     
     static let URL_GET_FUNCTION_LIST = "\(HOST_URL)/Dispatcher/Functionlist/"
-    static let URL_GET_COUNTRY_LIST = "\(HOST_URL)/Dispatcher/Countrylist/"
+    static let URL_GET_COUNTRY_LIST1 = "\(HOST_URL)/Dispatcher/Countrylist/"
     
     static let SEARCH_BTN = "SEARCH"
     static let BASKET_BTN = "BASKET"

@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         UIApplication.shared.statusBarStyle = .lightContent
         
+        InternetConnctionChk()
         return true
     }
     

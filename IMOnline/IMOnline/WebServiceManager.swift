@@ -39,6 +39,13 @@ public func country(withId _id: String, code _code: String, name _name: String, 
 class WebServiceManager: NSObject {
     static let sharedInstance = WebServiceManager()
     var countryArr = NSMutableArray()
+    var isOutagePageVisible:Bool!
+    var user:IMUser!
+    var countrySelection:IMCountry!
+    var saveID:NSString!
+    var securityCode:NSString!
+    var resendCode:NSString!
+    var operations:NSArray!
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
         
@@ -52,8 +59,8 @@ class WebServiceManager: NSObject {
         
         
     }
-   
-        func loginWebservice(){
+   //endavour
+  func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
         
         let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Session/Login/?DEVICE=iPhone&AGENT=iOS&OSVERSION=10.2&CONNECTIONTYPE=WIFI&APPVERSION=3.0&lang=EN&country=MX&deviceid=ABD979BE-11F6-487F-AAE1-EECE1A5144A1&saveid=false&securitycode=&resendcode=false")!
         var urlRequest = URLRequest(url: url)
@@ -64,18 +71,60 @@ class WebServiceManager: NSObject {
         urlRequest.httpBody = parameters.data(using: String.Encoding.utf8)
         
         urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
-        
+   
         Alamofire.request(urlRequest)
             .responseString { response in
                 print("Response String: \(response.result.value)")
                 let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
                 print(parser.lines)
+                let sessionCookie = IMHelper.fetchSessionCookie(request:  response.response!)
+                let allCookies = IMHelper.fetchCookieArray(response: response.response! )
+                let cookval = allCookies.first!
+                print(allCookies)
+                IMHelper.setCookie(domain: cookval.domain, path: cookval.path, name: cookval.name, value: cookval.value, secure: cookval.isSecure, expires: cookval.expiresDate!,url: "")
+                let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iOS&APPVERSION=3.0&CONNECTIONTYPE=WIFI&DEVICE=iPhone&OSVERSION=10.2&uid=pradnya.dongre@ingrammicro.com&lang=EN&country=MX")!
+                var urlRequest = URLRequest(url: url)
+                urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
+                urlRequest.httpMethod = "GET"
+                urlRequest.httpShouldHandleCookies = true
+                urlRequest.addValue("0", forHTTPHeaderField: "Content-Length")
+                
+                Alamofire.request(urlRequest)
+                    .responseString { response in
+                        print("Response String: \(response.result.value)")
+                        let settingsParser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                        //  Converted with Swiftify v1.0.6314 - https://objectivec2swift.com/
+                        if settingsParser.isOutageAvailable() && self.isOutagePageVisible {
+                            var outageResponse: String = settingsParser.outageResponse()
+                            self.isOutagePageVisible = true
+                            failedBlock()
+                        }
+                        if self.user != nil && sessionCookie != nil {
+                            self.user.sessionCookie = sessionCookie
+                            self.user.allCookies = allCookies
+                        }
+                        var message = parser.validateLogin()
+                        if(message == nil){
+                            self.user.remember()
+                            var paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&uid=%@&lang=%@&country=%@"
+                            var settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr), "iOS", IMHelper.appVersion(),
+                               // IMHelper.connectionType(),
+                                IMHelper.deviceModel(),
+                                IMHelper.currentOS(),
+                                self.user.userId!,
+                                WebServiceManager.sharedInstance.countrySelection.languageCode,
+                                WebServiceManager.sharedInstance.countrySelection.countryId)
+                            
+                        }
+                }
+
+                
             }
             .responseJSON { response in
                 print("Response JSON: \(response.result.value)")
         }
     }
-    
+   
     
     func performRESTCall(baseURL: String, httpMethod: String, parameters: [NSObject : AnyObject], successBlock: @escaping (_ response: String) -> Void, failedBlock: @escaping () -> Void) {
         //    NSLog(@"Received Parameters: %@",parameters);

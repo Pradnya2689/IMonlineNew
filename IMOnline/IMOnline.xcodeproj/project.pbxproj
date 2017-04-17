@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4C3BA43A1E9E6FDD00D0ECEB /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */; };
 		4CA7AE681E9E4C6000E0DCBB /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */; };
+		4CD077621EA4BCE1000F2780 /* IMHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD077611EA4BCE1000F2780 /* IMHelper.swift */; };
+		4CD077641EA4F0E5000F2780 /* IMOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD077631EA4F0E5000F2780 /* IMOperation.swift */; };
 		4CD376C41E9B68DB005C0D7A /* IMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD376C31E9B68DB005C0D7A /* IMConstants.swift */; };
 		4CD376C61E9B949E005C0D7A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD376C51E9B949E005C0D7A /* SplashViewController.swift */; };
 		4CD376CA1E9BBA49005C0D7A /* ContryApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD376C91E9BBA49005C0D7A /* ContryApiModel.swift */; };
@@ -31,7 +33,6 @@
 		C3CD10161E979381002920A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD10111E979301002920A0 /* Roboto-Regular.ttf */; };
 		C3CD10171E979381002920A0 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD10121E979301002920A0 /* Roboto-Thin.ttf */; };
 		C3CD10191E97C7F6002920A0 /* CountrySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */; };
-		D98060871E9F8109002B12AF /* IMHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98060861E9F8109002B12AF /* IMHelper.swift */; };
 		D98FEB6D1E9FA98700B4C03C /* IMUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98FEB6C1E9FA98700B4C03C /* IMUser.swift */; };
 		E27D3D9154E3A6324638FC94 /* Pods_IMOnline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4939C1B2DB307499970360BF /* Pods_IMOnline.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,8 @@
 		4939C1B2DB307499970360BF /* Pods_IMOnline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMOnline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceManager.swift; sourceTree = "<group>"; };
 		4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
+		4CD077611EA4BCE1000F2780 /* IMHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMHelper.swift; sourceTree = "<group>"; };
+		4CD077631EA4F0E5000F2780 /* IMOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMOperation.swift; sourceTree = "<group>"; };
 		4CD376C31E9B68DB005C0D7A /* IMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMConstants.swift; sourceTree = "<group>"; };
 		4CD376C51E9B949E005C0D7A /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4CD376C91E9BBA49005C0D7A /* ContryApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContryApiModel.swift; sourceTree = "<group>"; };
@@ -87,7 +90,6 @@
 		C3CD10111E979301002920A0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		C3CD10121E979301002920A0 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountrySearchTableViewCell.swift; path = ../CountrySearchTableViewCell.swift; sourceTree = "<group>"; };
-		D98060861E9F8109002B12AF /* IMHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMHelper.swift; sourceTree = "<group>"; };
 		D98FEB6C1E9FA98700B4C03C /* IMUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMUser.swift; sourceTree = "<group>"; };
 		DADE172D97A8508C8F03DDA4 /* Pods-IMOnline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnline.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnline/Pods-IMOnline.release.xcconfig"; sourceTree = "<group>"; };
 		DF57EC905A399436F0D90F68 /* Pods-IMOnlineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineUITests/Pods-IMOnlineUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +141,8 @@
 		4C78154E1E9F541800F0F3D0 /* NewtWorkClasses */ = {
 			isa = PBXGroup;
 			children = (
+				4CD077631EA4F0E5000F2780 /* IMOperation.swift */,
+				4CD077611EA4BCE1000F2780 /* IMHelper.swift */,
 				4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */,
 				4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */,
 			);
@@ -241,7 +245,6 @@
 				C360247F1E96219E00C72D82 /* Info.plist */,
 				C36024771E96219E00C72D82 /* IMOnline.xcdatamodeld */,
 				4CD376C31E9B68DB005C0D7A /* IMConstants.swift */,
-				D98060861E9F8109002B12AF /* IMHelper.swift */,
 			);
 			path = IMOnline;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CD077641EA4F0E5000F2780 /* IMOperation.swift in Sources */,
 				C36024731E96219E00C72D82 /* ViewController.swift in Sources */,
 				4CD376CA1E9BBA49005C0D7A /* ContryApiModel.swift in Sources */,
 				C35B681D1E9F54B800260F01 /* ProductSearchViewController.swift in Sources */,
@@ -558,11 +562,11 @@
 				C36024711E96219E00C72D82 /* AppDelegate.swift in Sources */,
 				4CA7AE681E9E4C6000E0DCBB /* ResponseParser.swift in Sources */,
 				C35B681C1E9F54B800260F01 /* ProductSearchViewCell.swift in Sources */,
-				D98060871E9F8109002B12AF /* IMHelper.swift in Sources */,
 				D98FEB6D1E9FA98700B4C03C /* IMUser.swift in Sources */,
 				C36024791E96219E00C72D82 /* IMOnline.xcdatamodeld in Sources */,
 				C36024A21E96836300C72D82 /* CountrySearchViewController.swift in Sources */,
 				4C3BA43A1E9E6FDD00D0ECEB /* WebServiceManager.swift in Sources */,
+				4CD077621EA4BCE1000F2780 /* IMHelper.swift in Sources */,
 				C3CD10191E97C7F6002920A0 /* CountrySearchTableViewCell.swift in Sources */,
 				4CD376C61E9B949E005C0D7A /* SplashViewController.swift in Sources */,
 			);

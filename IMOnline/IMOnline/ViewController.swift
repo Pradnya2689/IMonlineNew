@@ -133,12 +133,28 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         if(usernameTF.text == "" && passwordTF.text == ""){
             showAlert(messageToShow: "Please enter username, password field.")
         }else{
-            WebServiceManager.sharedInstance.loginWebservice()
+            loginService(userid: usernameTF.text!, password: passwordTF.text!)
         }
-        
+
     }
     func loginService(userid:String,password:String){
+        var user = IMUser.sharedInstance as! IMUser
         
+        user.userId = userid
+        user.password = password
+        user.language = "EN"
+        user.countryCode = "MX"
+        
+        
+        //For endavour contry
+        if("E" == Constants.ENV_ENDEAVOUR){
+            
+        }
+        
+        WebServiceManager.sharedInstance.loginWebservice(withCompletionBlock: { (_: [Any]) in
+            
+        }, failedBlock: {() -> Void in
+        })
     }
     func showAlert(messageToShow:String){
         let alertView:UIAlertView = UIAlertView()

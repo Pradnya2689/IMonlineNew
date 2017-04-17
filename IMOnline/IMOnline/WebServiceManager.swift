@@ -44,10 +44,10 @@ class WebServiceManager: NSObject {
         
        
         let params: [AnyHashable: Any]? = [
-            "LANGCODE" : (NSLocale.preferredLanguages[0] as? [AnyHashable: Any])
+            "LANGCODE" : (NSLocale.preferredLanguages[0])
         ]
         self.performRESTCall(baseURL: Constants.URL_GET_COUNTRY_LIST, httpMethod: "GET", parameters: params as! [NSObject : AnyObject], successBlock: {(_ responseText: String) -> Void in
-            print(responseText)
+            print(successBlock)
         }, failedBlock: failedBlock)
         
         
@@ -93,7 +93,7 @@ class WebServiceManager: NSObject {
 //        failedBlock = failedBlock
         var _netWorkFlag: Bool = true
         
-        var addedParameters = [String: String]()
+        var addedParameters = [AnyHashable: Any]()
         if parameters != nil {
             for (k, v) in parameters { addedParameters.updateValue(v as! String, forKey: k as! String) }
         }
@@ -109,8 +109,8 @@ class WebServiceManager: NSObject {
         
         let authorisationParameters: String = self.authorisationParametersREST()
         print(addedParameters)
-        let urlString: String = self.serviceParameters(fromDictionary: addedParameters as! [String : String])
-        
+        let serviceParameters: String = self.serviceParameters(fromDictionary: addedParameters as! [String : String])
+        let urlString: String = "\(baseURL)?\(authorisationParameters)\(serviceParameters)"
         // https://mobility-stg2.ingrammicro.com/Dispatcher/Countrylist/?country=&ccd=EN&lang=en&bnr=&knr=&uid=&sid=&AGENT=iOS&LANGCODE=en&DEVICE=iPhone&OSVERSION=10.2&CONNECTIONTYPE=WIFI&APPVERSION=3.0
         let url = URL(string: urlString)!
         var urlRequest = URLRequest(url: url)
@@ -129,7 +129,10 @@ class WebServiceManager: NSObject {
                 print("Response String: \(response.result.value)")
                 let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
                 successBlock(parser.response as String)
-                print(parser.lines)
+                var arr : NSArray = []
+                arr = parser.myArrayFunc() as NSArray
+               print(arr)
+                
             }
             .responseJSON { response in
                 print("Response JSON: \(response.result.value)")
@@ -148,7 +151,7 @@ class WebServiceManager: NSObject {
         //languageDic will have the needed components
         let countryCode: String? = (languageDic["kCFLocaleCountryCodeKey"] as? String)
         //countryCode = "US"
-        let languageCode: String? = (languageDic["kCFLocaleLanguageCodeKey"] as? String)
+        let languageCode: String? = (languageDic["kCFLocaleLanguageCodeKey"] as! String)
         //languageCode = "en"
     print(IMCountry.sharedInstance.countryId)
         print(IMUser.sharedInstance.language ?? "")
@@ -158,7 +161,7 @@ class WebServiceManager: NSObject {
 //        print(IMUser.sharedInstance.userId)
 //        print(IMUser.sharedInstance.sessionId)
         
-        return "country=\(IMHelper.empty(forNil: IMCountry.sharedInstance.countryId))&ccd=\(IMHelper.empty(forNil: IMUser.sharedInstance.language ?? ""))&lang=\(languageCode)&bnr=\(IMHelper.empty(forNil: IMUser.sharedInstance.bnr ?? ""))&knr=\(IMHelper.empty(forNil: IMUser.sharedInstance.customerNumber ?? ""))&uid=\(IMHelper.empty(forNil: IMUser.sharedInstance.userId ?? ""))&sid=\(IMHelper.empty(forNil: IMUser.sharedInstance.sessionId ?? ""))"
+        return "country=\(IMHelper.empty(forNil: IMCountry.sharedInstance.countryId))&ccd=\(IMHelper.empty(forNil: IMUser.sharedInstance.language ?? ""))&lang=\(languageCode!)&bnr=\(IMHelper.empty(forNil: IMUser.sharedInstance.bnr ?? ""))&knr=\(IMHelper.empty(forNil: IMUser.sharedInstance.customerNumber ?? ""))&uid=\(IMHelper.empty(forNil: IMUser.sharedInstance.userId ?? ""))&sid=\(IMHelper.empty(forNil: IMUser.sharedInstance.sessionId ?? ""))"
     }
     
     func serviceParameters(fromDictionary dictionary: [AnyHashable: String]) -> String {

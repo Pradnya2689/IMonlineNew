@@ -20,6 +20,8 @@ class IMUser: NSObject {
     var sessionId : String?
     // var countryCode : String?
     
+    var sessionCookie:HTTPCookie!
+    var allCookies:[HTTPCookie]!
     var shouldShowEKPrice: Bool = false
     var shouldShowEVPPrice: Bool = false
     var shouldShowSellPrice: Bool = false

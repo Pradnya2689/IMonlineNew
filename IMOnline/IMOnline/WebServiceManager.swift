@@ -16,13 +16,13 @@ import Alamofire
 
 class WebServiceManager: NSObject {
     static let sharedInstance = WebServiceManager()
-     var countrySelection = IMCountry()
+    var countrySelection : IMCountry!
     var user = IMUser()
     
     var countryArr = NSMutableArray()
     var isOutagePageVisible:Bool!
-    var user:IMUser!
-    var countrySelection:IMCountry!
+//    var user:IMUser!
+//    var countrySelection:IMCountry!
     var saveID:NSString!
     var securityCode:NSString!
     var resendCode:NSString!
@@ -83,7 +83,7 @@ class WebServiceManager: NSObject {
         
         
     }
-        func loginWebservice(){
+        func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
         
         let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Session/Login/?DEVICE=iPhone&AGENT=iOS&OSVERSION=10.2&CONNECTIONTYPE=WIFI&APPVERSION=3.0&lang=EN&country=MX&deviceid=ABD979BE-11F6-487F-AAE1-EECE1A5144A1&saveid=false&securitycode=&resendcode=false")!
         var urlRequest = URLRequest(url: url)
@@ -160,10 +160,10 @@ class WebServiceManager: NSObject {
                             self.user.searchFilters = settingsParser.searchFilters() as NSArray!
                             settingsParser.cultureSettings()
 
-                            if !(UserDefaults.standard.string(forKey: "selectedCountry") == WebServiceManager.sharedInstance.countrySelection.countryId) || !(UserDefaults.standard.string(forKey: "loginUserId") == WebServiceManager.sharedInstance.user?.userId) {
+                            if !(UserDefaults.standard.string(forKey: "selectedCountry") == WebServiceManager.sharedInstance.countrySelection.countryId) || !(UserDefaults.standard.string(forKey: "loginUserId") == WebServiceManager.sharedInstance.user.userId) {
                                 UserDefaults.standard.set(true, forKey: "updateCache")
                                 UserDefaults.standard.set(WebServiceManager.sharedInstance.countrySelection.countryId, forKey: "selectedCountry")
-                                UserDefaults.standard.set(WebServiceManager.sharedInstance.user?.userId, forKey: "loginUserId")
+                                UserDefaults.standard.set(WebServiceManager.sharedInstance.user.userId, forKey: "loginUserId")
                                 UserDefaults.standard.set(nil, forKey: "setDeliveryway")
                                 self.user.defaultUserSetting()
                                 //uttam.b Ticket 54178:Switching User or coutry should refresh right data

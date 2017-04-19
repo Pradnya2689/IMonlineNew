@@ -45,7 +45,9 @@ class WebServiceManager: NSObject {
     var saveID:NSString!
     var securityCode:NSString!
     var resendCode:NSString!
-    var operations:NSArray!
+    var operationss:NSArray!
+    var productGroups:ProductGroup!
+    
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
         
@@ -82,50 +84,121 @@ class WebServiceManager: NSObject {
                 let cookval = allCookies.first!
                 print(allCookies)
                 IMHelper.setCookie(domain: cookval.domain, path: cookval.path, name: cookval.name, value: cookval.value, secure: cookval.isSecure, expires: cookval.expiresDate!,url: "")
-                let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iOS&APPVERSION=3.0&CONNECTIONTYPE=WIFI&DEVICE=iPhone&OSVERSION=10.2&uid=pradnya.dongre@ingrammicro.com&lang=EN&country=MX")!
-                var urlRequest = URLRequest(url: url)
+                
+                if parser.isOutageAvailable() && self.isOutagePageVisible {
+                    var outageResponse: String = parser.outageResponse()
+                    self.isOutagePageVisible = true
+                    failedBlock()
+                }
+                if self.user != nil && sessionCookie != nil {
+                    self.user.sessionCookie = sessionCookie
+                    self.user.allCookies = allCookies
+                }
+                var message = parser.validateLogin()
+                if(message == nil){
+                self.user .remember()
+               // let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iOS&APPVERSION=3.0&CONNECTIONTYPE=WIFI&DEVICE=iPhone&OSVERSION=10.2&uid=pradnya.dongre@ingrammicro.com&lang=EN&country=MX")!
+                    
+                    var paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&uid=%@&lang=%@&country=%@"
+                    var settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr), "iOS", IMHelper.appVersion(),
+                                              // IMHelper.connectionType(),
+                        IMHelper.deviceModel(),
+                        IMHelper.currentOS(),
+                        self.user.userId!,
+                        WebServiceManager.sharedInstance.countrySelection.languageCode,
+                        WebServiceManager.sharedInstance.countrySelection.countryId)
+                    
+                    var urlRequest = URLRequest(url: URL(string:settingsPath)!)
                 urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
                 urlRequest.httpMethod = "GET"
                 urlRequest.httpShouldHandleCookies = true
                 urlRequest.addValue("0", forHTTPHeaderField: "Content-Length")
-                
+                urlRequest.httpShouldHandleCookies = true
+            
                 Alamofire.request(urlRequest)
                     .responseString { response in
                         print("Response String: \(response.result.value)")
                         let settingsParser = ResponseParser.init(responseStr: response.result.value as! NSString)
                         //  Converted with Swiftify v1.0.6314 - https://objectivec2swift.com/
-                        if settingsParser.isOutageAvailable() && self.isOutagePageVisible {
+                        
+                            //self.user.remember()
+                        if settingsParser.isOutageAvailable() && !self.isOutagePageVisible {
                             var outageResponse: String = settingsParser.outageResponse()
                             self.isOutagePageVisible = true
                             failedBlock()
                         }
-                        if self.user != nil && sessionCookie != nil {
-                            self.user.sessionCookie = sessionCookie
-                            self.user.allCookies = allCookies
-                        }
-                        var message = parser.validateLogin()
-                        if(message == nil){
-                            self.user.remember()
-                            var paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&uid=%@&lang=%@&country=%@"
-                            var settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr), "iOS", IMHelper.appVersion(),
-                               // IMHelper.connectionType(),
-                                IMHelper.deviceModel(),
-                                IMHelper.currentOS(),
-                                self.user.userId!,
-                                WebServiceManager.sharedInstance.countrySelection.languageCode,
-                                WebServiceManager.sharedInstance.countrySelection.countryId)
+
+                        if (settingsParser.canLogin()){
+                            self.user.canAccessTracking = settingsParser.canAccessTracking()
+                            self.user.canOrder = settingsParser.canOrder()
+                            self.user.isAdmin = settingsParser.isAdmin()
+                            self.user.isDropShipAllowed = settingsParser.isDropshipAllowed()
+                            //46276 Amit.p
+                            self.user.isStatesAvailable = settingsParser.isStatesAvailable()
+                            self.user.currency = WebServiceManager.sharedInstance.countrySelection.currencySymbol as NSString!
+                            self.user.searchFilters = settingsParser.searchFilters() as NSArray!
+                            settingsParser.cultureSettings()
+
+                            if !(UserDefaults.standard.string(forKey: "selectedCountry") == WebServiceManager.sharedInstance.countrySelection.countryId) || !(UserDefaults.standard.string(forKey: "loginUserId") == WebServiceManager.sharedInstance.user?.userId) {
+                                UserDefaults.standard.set(true, forKey: "updateCache")
+                                UserDefaults.standard.set(WebServiceManager.sharedInstance.countrySelection.countryId, forKey: "selectedCountry")
+                                UserDefaults.standard.set(WebServiceManager.sharedInstance.user?.userId, forKey: "loginUserId")
+                                UserDefaults.standard.set(nil, forKey: "setDeliveryway")
+                                self.user.defaultUserSetting()
+                                //uttam.b Ticket 54178:Switching User or coutry should refresh right data
+                            }
+                            else {
+                                UserDefaults.standard.set(false, forKey: "updateCache")
+                            }
                             
+                            self.loadWheelData()
+                        }
+                        
                         }
                 }
-
-                
-            }
+        }
             .responseJSON { response in
                 print("Response JSON: \(response.result.value)")
         }
     }
    
     
+    func loadWheelData() {
+        WebServiceManager.sharedInstance.fetchVendorsGroups(withCompletionBlock: {(_ wheelData: [Any]) -> Void in
+        }, failedBlock: {() -> Void in
+        })
+    }
+    
+    func fetchVendorsGroups(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
+        //  Converted with Swiftify v1.0.6314 - https://objectivec2swift.com/
+        var productGroupsSavedAtDate: Date? = UserDefaults.standard.object(forKey: Constants.DEFAULTS_KEY_PRODUCTGROUPS_REMEMBERED_AT_DATE) as! Date?
+        if productGroupsSavedAtDate != nil && Date().timeIntervalSince(productGroupsSavedAtDate!) < Double(Constants.PRODUCTGROUPS_TIMEOUT_IN_SECONDS) && !UserDefaults.standard.bool(forKey: "updateCache") {
+
+            var path: String = URL(fileURLWithPath: IMHelper.documentsDirectory()).appendingPathComponent(Constants.PRODUCT_GROUPS_FILE).absoluteString
+            var productGroupsAsText = try? String(contentsOfFile: path, encoding: String.Encoding.utf8)
+           // productGroups = ProductGroup(string: productGroupsAsText)
+            return
+        }
+        
+        var parameters: [AnyHashable: Any] = [
+            IMHelper.empty(forNil: user.sessionId!) : IMHelper.empty(forNil: user.userId!),
+            WebServiceManager.sharedInstance.countrySelection.countryId : IMHelper.empty(forNil: user.language!),
+            "search" : "ALL"
+        ]
+        performRESTCall(baseURL: IMHelper.getURIforContractName("LoadVendorGroups"), httpMethod: "GET", parameters: parameters as [NSObject : AnyObject], successBlock: {(_ responseText: String) -> Void in
+            var parser = ResponseParser(responseStr: responseText as NSString)
+            if parser.successREST() {
+                var path: String = URL(fileURLWithPath: IMHelper.documentsDirectory()).appendingPathComponent(Constants.PRODUCT_GROUPS_FILE).absoluteString
+                try? responseText.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
+                UserDefaults.standard.setValue(Date(), forKey: Constants.DEFAULTS_KEY_PRODUCTGROUPS_REMEMBERED_AT_DATE)
+               // productGroups = ProductGroups(string: responseText)
+            }
+            else {
+                failedBlock()
+            }
+        }, failedBlock: failedBlock)
+
+    }
     func performRESTCall(baseURL: String, httpMethod: String, parameters: [NSObject : AnyObject], successBlock: @escaping (_ response: String) -> Void, failedBlock: @escaping () -> Void) {
         //    NSLog(@"Received Parameters: %@",parameters);
         self.performRESTCall(baseURL, httpMethod: (httpMethod as! String), parameters: parameters, successBlock: successBlock, failedBlock: failedBlock, showLoginViewIfSessionInvalid: true)

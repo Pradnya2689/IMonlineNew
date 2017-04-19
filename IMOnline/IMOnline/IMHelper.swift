@@ -106,14 +106,16 @@ class IMHelper: NSObject {
     }
     class func getURIforContractName(_ _name: String) -> String {
        // DLog("look for contract %@", _name)
-//        for op:IMOperation in WebServiceManager.sharedInstance.operations as! IMOperation
-//        {
-//            if (op.contractName() == _name) && (op.appVersion() == IMHelper.appVersion()) {
-//              //  DLog("[* found operation '%@' for Appversion %@]", op.contractName, op.appVersion)
-//                return op.contractURI
-//            }
-//        }
+        for op: IMOperation in WebServiceManager.sharedInstance.operationss as! [IMOperation] {
+            if (op.contractName == _name) && (op.appVersion == IMHelper.appVersion()) {
+               // DLog("[* found operation '%@' for Appversion %@]", op.contractName, op.appVersion)
+                return op.contractURI
+            }
+        }
         return ""
+    }
+    class func documentsDirectory() -> String {
+        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
    class func fetchSessionCookie(request:HTTPURLResponse) -> HTTPCookie{
         var cookie : HTTPCookie!
@@ -128,8 +130,19 @@ class IMHelper: NSObject {
         
         
         return cookie;
+    
         
-        
+    }
+    class func trimString(_ _str: String) -> String {
+        return _str.trimmingCharacters(in: CharacterSet.whitespaces)
+    }
+    class func isNumeric(_ _str: String) -> Bool {
+        let numberFormatter = NumberFormatter()
+        let number = numberFormatter.number(from: _str)
+        if number != nil {
+            return true
+        }
+        return false
     }
    }
 

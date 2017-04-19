@@ -40,6 +40,8 @@ class IMUser: NSObject {
     var addsShown:NSMutableDictionary!
     var cookieString:NSString!
     var ads_ImpressionList:NSMutableArray!
+    var currency: NSString!
+    var currencyCultureForPage:NSMutableArray!
     override init() {
         
 //        if super.init() {

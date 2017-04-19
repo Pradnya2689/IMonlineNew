@@ -9,8 +9,8 @@
 import UIKit
 
 class IMOperation: NSObject {
-    static var appVersion: NSString!
-    static var contractName: NSString!
-    static var contractMethod: NSString!
-    static var contractURI: NSString!
+     var appVersion: String!
+     var contractName: String!
+     var contractMethod: String!
+     var contractURI: String!
 }

@@ -164,5 +164,87 @@ class ResponseParser: NSObject
         return strErrMessage;
 
     }
+    func canLogin() -> Bool {
+        return ("true" == self.valueforSeparatedKey(key: "LOGIN").lowercased())
+    }
+    
+    func canAccessTracking() -> Bool {
+        return ("true" == self.valueforSeparatedKey(key: "TRACKING"))
+    }
+    func canOrder() -> Bool {
+        return ("true" == self.valueforSeparatedKey(key: "ORDER"))
+    }
+    func isAdmin() -> Bool {
+        return ("true" == self.valueforSeparatedKey(key: "ADMIN"))
+    }
+    func isStatesAvailable() -> Bool {
+        if self.valueforSeparatedKey(key:"STATES_ AVAILABLE").compare("TRUE", options: .caseInsensitive) == .orderedSame {
+            return true
+        }
+        return false
+        //return [@"true" isEqualToString:[self valueForSeparatedKey:@"STATES_ AVAILABLE"]];
+    }
+
+    func isDropshipAllowed() -> Bool {
+        let dropShipAllowed: String = self.valueforSeparatedKey(key:"ISDROPSHIPALLOWED")
+        if dropShipAllowed.compare("true", options: .caseInsensitive) == .orderedSame {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    func valueforSeparatedKey( key: String) -> String {
+        let prefix: String = "\(key);"
+        for line:String in self.lines as! [String] {
+            if line.hasPrefix(prefix) {
+                let elements: [Any] = line.components(separatedBy: ";")
+                return elements[1] as! String
+            }
+        }
+        return ""
+    }
+    func successREST() -> Bool {
+        return ("\"OK\"" == self.valueforSeparatedKey(key:"TIER_II_STATUS"))
+    }
+    func cultureSettings() {
+        let cultureSettings: String = self.valueforSeparatedKey(key:"CURRENCY_FORMAT")
+        WebServiceManager.sharedInstance.user.currencyCultureForPage = NSMutableArray()
+        let elements: [Any] = cultureSettings.components(separatedBy:"|")
+        for cultureForPage: String in elements as! [String] {
+            let cultureDetails: [Any] = cultureForPage.components(separatedBy:  "~")
+            if cultureDetails.count >= 3 {
+                WebServiceManager.sharedInstance.user?.currencyCultureForPage?.add(cultureDetails)
+            }
+        }
+        if (WebServiceManager.sharedInstance.user?.currencyCultureForPage?.count)! >= 6 {
+            WebServiceManager.sharedInstance.user?.useUserCulterSettings = true
+        }
+        print("currencycount: \(WebServiceManager.sharedInstance.user?.currencyCultureForPage?.count)")
+    }
+
+    func searchFilters() -> [Any] {
+        var filters = [Any]()
+        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_AVAILABLE")) {
+            filters.append("SEARCH_ONLY_AVAILABLE")
+        }
+        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_PROMOTIONS")) {
+            filters.append("SEARCH_ONLY_PROMOTIONS")
+        }
+        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_NEW")) {
+            filters.append("SEARCH_ONLY_NEW")
+        }
+        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_STOCKORORDER")) {
+            filters.append("SEARCH_ONLY_STOCKORORDER")
+        }
+        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_LICENSE")) {
+            filters.append("SEARCH_ONLY_LICENSE")
+        }
+        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_DISCONTINUED")) {
+            filters.append("SEARCH_ONLY_DISCONTINUED")
+        }
+        return filters
+    }
+
 }
 

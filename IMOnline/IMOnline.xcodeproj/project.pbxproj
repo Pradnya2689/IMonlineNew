@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C1087401EA6357A00B430FB /* ProductGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C10873F1EA6357A00B430FB /* ProductGroup.swift */; };
+		4C1087421EA63C7800B430FB /* IMGroupCombDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1087411EA63C7800B430FB /* IMGroupCombDTO.swift */; };
+		4C1087441EA63D6A00B430FB /* IMGroupDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1087431EA63D6A00B430FB /* IMGroupDTO.swift */; };
+		4C1087471EA63E3F00B430FB /* IMProductGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1087461EA63E3F00B430FB /* IMProductGroup.swift */; };
 		4C3BA43A1E9E6FDD00D0ECEB /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */; };
 		4CA7AE681E9E4C6000E0DCBB /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */; };
 		4CD077621EA4BCE1000F2780 /* IMHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD077611EA4BCE1000F2780 /* IMHelper.swift */; };
@@ -59,6 +63,10 @@
 		3952B361E06EA9F2CD69C408 /* Pods-IMOnlineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineTests/Pods-IMOnlineTests.release.xcconfig"; sourceTree = "<group>"; };
 		39B8756E2DCE633A3D4F905D /* Pods-IMOnlineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineUITests/Pods-IMOnlineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4939C1B2DB307499970360BF /* Pods_IMOnline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMOnline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C10873F1EA6357A00B430FB /* ProductGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductGroup.swift; sourceTree = "<group>"; };
+		4C1087411EA63C7800B430FB /* IMGroupCombDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMGroupCombDTO.swift; sourceTree = "<group>"; };
+		4C1087431EA63D6A00B430FB /* IMGroupDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMGroupDTO.swift; sourceTree = "<group>"; };
+		4C1087461EA63E3F00B430FB /* IMProductGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMProductGroup.swift; sourceTree = "<group>"; };
 		4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceManager.swift; sourceTree = "<group>"; };
 		4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
 		4CD077611EA4BCE1000F2780 /* IMHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMHelper.swift; sourceTree = "<group>"; };
@@ -145,6 +153,10 @@
 				4CD077611EA4BCE1000F2780 /* IMHelper.swift */,
 				4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */,
 				4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */,
+				4C10873F1EA6357A00B430FB /* ProductGroup.swift */,
+				4C1087411EA63C7800B430FB /* IMGroupCombDTO.swift */,
+				4C1087431EA63D6A00B430FB /* IMGroupDTO.swift */,
+				4C1087461EA63E3F00B430FB /* IMProductGroup.swift */,
 			);
 			name = NewtWorkClasses;
 			sourceTree = "<group>";
@@ -565,10 +577,14 @@
 				D98FEB6D1E9FA98700B4C03C /* IMUser.swift in Sources */,
 				C36024791E96219E00C72D82 /* IMOnline.xcdatamodeld in Sources */,
 				C36024A21E96836300C72D82 /* CountrySearchViewController.swift in Sources */,
+				4C1087401EA6357A00B430FB /* ProductGroup.swift in Sources */,
+				4C1087471EA63E3F00B430FB /* IMProductGroup.swift in Sources */,
 				4C3BA43A1E9E6FDD00D0ECEB /* WebServiceManager.swift in Sources */,
+				4C1087421EA63C7800B430FB /* IMGroupCombDTO.swift in Sources */,
 				4CD077621EA4BCE1000F2780 /* IMHelper.swift in Sources */,
 				C3CD10191E97C7F6002920A0 /* CountrySearchTableViewCell.swift in Sources */,
 				4CD376C61E9B949E005C0D7A /* SplashViewController.swift in Sources */,
+				4C1087441EA63D6A00B430FB /* IMGroupDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

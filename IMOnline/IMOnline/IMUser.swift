@@ -22,6 +22,8 @@ class IMUser: NSObject {
     var sessionCookie:HTTPCookie!
     var allCookies:[HTTPCookie]!
     
+    var sessionCookie:HTTPCookie!
+    var allCookies:[HTTPCookie]!
     var shouldShowEKPrice: Bool = false
     var shouldShowEVPPrice: Bool = false
     var shouldShowSellPrice: Bool = false

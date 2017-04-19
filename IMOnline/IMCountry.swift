@@ -11,7 +11,6 @@ import UIKit
 class IMCountry: NSObject {
     static let sharedInstance = IMCountry()
     
-    
     var countryId: String = ""
     var name: String = ""
     var languageCode: String = ""

@@ -16,7 +16,7 @@ import Alamofire
 
 class WebServiceManager: NSObject {
     static let sharedInstance = WebServiceManager()
-     var countrySelection = IMCountry()
+    var countrySelection : IMCountry!
     var user = IMUser()
     
     var countryArr = NSMutableArray()

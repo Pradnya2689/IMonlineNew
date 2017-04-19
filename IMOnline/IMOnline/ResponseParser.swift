@@ -227,6 +227,7 @@ class ResponseParser: NSObject
         }
         return ""
     }
+    
         func successREST() -> Bool {
             return ("\"OK\"" == self.valueforSeparatedKey(key:"TIER_II_STATUS"))
         }

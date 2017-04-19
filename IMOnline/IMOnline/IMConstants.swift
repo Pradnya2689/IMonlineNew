@@ -27,6 +27,8 @@ struct Constants {
     static let SESSION_COOKIE_NAME = ".ASPXAUTHMobile"
     static let US_SESSION_COOKIE_NAME = "IMGlobalWebAuthCookieMobile"
     
+    static let ANY_GROUP = -1
+    
      
     
     

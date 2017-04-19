@@ -221,9 +221,11 @@ class ResponseParser: NSObject
         for line:String in self.lines as! [String] {
             if line.hasPrefix(prefix) {
                 let elements: [Any] = line.components(separatedBy: ";")
+                return elements[1] as! String
             }
             return ""
         }
+        return ""
     }
         func successREST() -> Bool {
             return ("\"OK\"" == self.valueforSeparatedKey(key:"TIER_II_STATUS"))
@@ -236,10 +238,10 @@ class ResponseParser: NSObject
                 let cultureDetails: [Any] = cultureForPage.components(separatedBy:  "~")
                 if cultureDetails.count >= 3 {
                 }
-                if (WebServiceManager.sharedInstance.user?.currencyCultureForPage?.count)! >= 6 {
-                    WebServiceManager.sharedInstance.user?.useUserCulterSettings = true
+                if (WebServiceManager.sharedInstance.user.currencyCultureForPage?.count)! >= 6 {
+                    WebServiceManager.sharedInstance.user.useUserCulterSettings = true
                 }
-                print("currencycount: \(WebServiceManager.sharedInstance.user?.currencyCultureForPage?.count)")
+                print("currencycount: \(WebServiceManager.sharedInstance.user.currencyCultureForPage?.count)")
             }
     }
             func searchFilters() -> [Any] {

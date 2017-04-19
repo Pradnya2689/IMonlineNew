@@ -233,9 +233,9 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         print(co.name)
         print(co.countryId)
         WebServiceManager.sharedInstance.countrySelection = countryArray[indexPath.row] as! IMCountry
-        WebServiceManager.sharedInstance.user.countryCode = WebServiceManager.sharedInstance.countrySelection.countryId 
+        WebServiceManager.sharedInstance.user.countryCode = WebServiceManager.sharedInstance.countrySelection.countryId
        selectedContryCode = WebServiceManager.sharedInstance.user.countryCode!
-        print(WebServiceManager.sharedInstance.countrySelection.name)
+      //print(WebServiceManager.sharedInstance.countrySelection.name)
         print(WebServiceManager.sharedInstance.user.countryCode!)
         print(selectedContryCode)
         

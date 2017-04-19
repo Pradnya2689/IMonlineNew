@@ -159,6 +159,10 @@
 				4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */,
 				D96D366D1EA4AC20000AEE8F /* IMCountry.swift */,
 				D98FEB6C1E9FA98700B4C03C /* IMUser.swift */,
+				4C10873F1EA6357A00B430FB /* ProductGroup.swift */,
+				4C1087411EA63C7800B430FB /* IMGroupCombDTO.swift */,
+				4C1087431EA63D6A00B430FB /* IMGroupDTO.swift */,
+				4C1087461EA63E3F00B430FB /* IMProductGroup.swift */,
 			);
 			name = NewtWorkClasses;
 			sourceTree = "<group>";

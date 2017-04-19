@@ -23,27 +23,28 @@ class ResponseParser: NSObject
         
         var countries = [Any]()
         let elements : [String] = (self.lines[0] as AnyObject).components(separatedBy: ";")
-     //   let elements: [Any] =  self.lines.componentsSeparatedByCharactersInSet(";")
+        //   let elements: [Any] =  self.lines.componentsSeparatedByCharactersInSet(";")
         
         for country in self.lines
         {
             print(country)
         }
-
+        
         return countries
     }
     
-    func myArrayFunc() -> Array<String>
+    func myArrayFunc() -> Array<IMCountry>
     {
         var countries = [Any]()
+        var countries1 = [Any]()
         let elements : [String] = (self.lines[0] as AnyObject).components(separatedBy: ";")
         //   let elements: [Any] =  self.lines.componentsSeparatedByCharactersInSet(";")
         
         for country in self.lines
         {
-             let elements : [String] = (country as AnyObject).components(separatedBy: ";")
+            let elements : [String] = (country as AnyObject).components(separatedBy: ";")
             
-           
+            
             
             
             let empty : String = elements[0]
@@ -57,17 +58,36 @@ class ResponseParser: NSObject
                 {
                     break
                 }
-              let countryadd = elements[1]
+                //                var country = IMCountry(id: (elements[0] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), code: (elements[3] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), name: (elements[1] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), env: (elements[4] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), currency: (elements[5] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), decimalSeprator: (elements[7] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), thousandSeprator: (elements[6] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""))
+                
+                //  var country = IMCountry cou
+                
+                var country = IMCountry().country(withId: elements[0].replacingOccurrences(of: "\"", with: ""), code: elements[3].replacingOccurrences(of: "\"", with: ""), name: elements[1].replacingOccurrences(of: "\"", with: ""), env: elements[4].replacingOccurrences(of: "\"", with: ""), currency: elements[5].replacingOccurrences(of: "\"", with: ""), decimalSeprator: elements[7].replacingOccurrences(of: "\"", with: ""), thousandSeprator: elements[6].replacingOccurrences(of: "\"", with: ""))
+                //                country.country(withId: (elements[0] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), code: (elements[3] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), name: (elements[1] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), env: (elements[4] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), currency: (elements[5] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), decimalSeprator: (elements[7] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""), thousandSeprator: (elements[6] as? IMCountry)?.replacingOccurrences(of: "\"", with: ""))
+                //  (country as AnyObject).countryEnvironmentType = elements[elements.count-1].replacingOccurrences(of: "\"", with: "")
+                let countryadd = elements[1]
                 let empty : String = countryadd.replacingOccurrences(of: "\"", with: "")
-                countries.append(empty)
+                countries.append(country)
+                countries1.append(country)
             }
             
-           print(countries)
-
+            print(countries)
+            print(countries1)
+            for cot in countries1
+            {
+                var c = cot as! IMCountry
+                print(c.name)
+                print(c.countryId)
+                print(c.languageCode)
+                print(c.environmentType)
+                print(c.decimalSeprator)
+                print(c.thousandSeprator)
+                
+            }
             
         }
         
-        return countries as! Array<String>
+        return countries  as! Array<IMCountry>
     }
     
     func isOutageAvailable() -> Bool {
@@ -88,7 +108,7 @@ class ResponseParser: NSObject
         var ms: String = ""
         for line in self.lines {
             // NSArray *elements = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@";"]];
-           let line = (line as AnyObject).replacingOccurrences(of: ";", with: " ") 
+            let line = (line as AnyObject).replacingOccurrences(of: ";", with: " ")
             if (line == "TIER_I_ERRORMESSAGE") || (line as NSString).range(of: "TIER_").location != NSNotFound {
                 continue
             }
@@ -96,7 +116,7 @@ class ResponseParser: NSObject
         }
         return ms
     }
-
+    
     func validateLogin() -> NSString{
         
         if(self.lines.count <= 0){
@@ -132,7 +152,7 @@ class ResponseParser: NSObject
         if _errStr != nil
         {
             if (_errStr as NSString).range(of: "1326").location != NSNotFound {
-                 strErrMessage = NSLocalizedString("Benutzerdaten oder Passwort falsch.", comment: "login failed error message") as NSString
+                strErrMessage = NSLocalizedString("Benutzerdaten oder Passwort falsch.", comment: "login failed error message") as NSString
                 
             }
             if (_errStr as NSString).range(of: "1909").location != NSNotFound {
@@ -140,30 +160,32 @@ class ResponseParser: NSObject
                 return strErrMessage
             }
             if (_errStr as NSString).range(of: "1331").location != NSNotFound {
-                 strErrMessage = NSLocalizedString("Zugang deaktiviert.", comment: "Account disabled") as NSString
+                strErrMessage = NSLocalizedString("Zugang deaktiviert.", comment: "Account disabled") as NSString
                 return strErrMessage
             }
             if (_errStr as NSString).range(of: "1793").location != NSNotFound {
-                 strErrMessage = NSLocalizedString("Zugang ist abgelaufen.", comment: "Account expired") as NSString
+                strErrMessage = NSLocalizedString("Zugang ist abgelaufen.", comment: "Account expired") as NSString
                 return strErrMessage
             }
             if (_errStr as NSString).range(of: "1330").location != NSNotFound {
-                 strErrMessage = NSLocalizedString("Passwort ist abgelaufen.", comment: "Password expired") as NSString
+                strErrMessage = NSLocalizedString("Passwort ist abgelaufen.", comment: "Password expired") as NSString
                 return strErrMessage
                 
             }
             if (_errStr as NSString).range(of: "1907").location != NSNotFound {
-                 strErrMessage = NSLocalizedString("Passwort muss geändert werden.", comment: "Password must change") as NSString
+                strErrMessage = NSLocalizedString("Passwort muss geändert werden.", comment: "Password must change") as NSString
                 return strErrMessage
             }
             if (_errStr as NSString).range(of: "9999").location != NSNotFound {
-                 strErrMessage = NSLocalizedString("Show two factor auth", comment: "Show two factor auth") as NSString
+                strErrMessage = NSLocalizedString("Show two factor auth", comment: "Show two factor auth") as NSString
                 return strErrMessage
             }
         }
         return strErrMessage;
-
+        
     }
+    
+    
     func canLogin() -> Bool {
         return ("true" == self.valueforSeparatedKey(key: "LOGIN").lowercased())
     }
@@ -184,7 +206,7 @@ class ResponseParser: NSObject
         return false
         //return [@"true" isEqualToString:[self valueForSeparatedKey:@"STATES_ AVAILABLE"]];
     }
-
+    
     func isDropshipAllowed() -> Bool {
         let dropShipAllowed: String = self.valueforSeparatedKey(key:"ISDROPSHIPALLOWED")
         if dropShipAllowed.compare("true", options: .caseInsensitive) == .orderedSame {
@@ -199,52 +221,48 @@ class ResponseParser: NSObject
         for line:String in self.lines as! [String] {
             if line.hasPrefix(prefix) {
                 let elements: [Any] = line.components(separatedBy: ";")
-                return elements[1] as! String
             }
+            return ""
         }
-        return ""
     }
-    func successREST() -> Bool {
-        return ("\"OK\"" == self.valueforSeparatedKey(key:"TIER_II_STATUS"))
-    }
-    func cultureSettings() {
-        let cultureSettings: String = self.valueforSeparatedKey(key:"CURRENCY_FORMAT")
-        WebServiceManager.sharedInstance.user.currencyCultureForPage = NSMutableArray()
-        let elements: [Any] = cultureSettings.components(separatedBy:"|")
-        for cultureForPage: String in elements as! [String] {
-            let cultureDetails: [Any] = cultureForPage.components(separatedBy:  "~")
-            if cultureDetails.count >= 3 {
-                WebServiceManager.sharedInstance.user?.currencyCultureForPage?.add(cultureDetails)
+        func successREST() -> Bool {
+            return ("\"OK\"" == self.valueforSeparatedKey(key:"TIER_II_STATUS"))
+        }
+        func cultureSettings() {
+            let cultureSettings: String = self.valueforSeparatedKey(key:"CURRENCY_FORMAT")
+            WebServiceManager.sharedInstance.user.currencyCultureForPage = NSMutableArray()
+            let elements: [Any] = cultureSettings.components(separatedBy:"|")
+            for cultureForPage: String in elements as! [String] {
+                let cultureDetails: [Any] = cultureForPage.components(separatedBy:  "~")
+                if cultureDetails.count >= 3 {
+                }
+                if (WebServiceManager.sharedInstance.user?.currencyCultureForPage?.count)! >= 6 {
+                    WebServiceManager.sharedInstance.user?.useUserCulterSettings = true
+                }
+                print("currencycount: \(WebServiceManager.sharedInstance.user?.currencyCultureForPage?.count)")
             }
-        }
-        if (WebServiceManager.sharedInstance.user?.currencyCultureForPage?.count)! >= 6 {
-            WebServiceManager.sharedInstance.user?.useUserCulterSettings = true
-        }
-        print("currencycount: \(WebServiceManager.sharedInstance.user?.currencyCultureForPage?.count)")
     }
-
-    func searchFilters() -> [Any] {
-        var filters = [Any]()
-        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_AVAILABLE")) {
-            filters.append("SEARCH_ONLY_AVAILABLE")
-        }
-        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_PROMOTIONS")) {
-            filters.append("SEARCH_ONLY_PROMOTIONS")
-        }
-        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_NEW")) {
-            filters.append("SEARCH_ONLY_NEW")
-        }
-        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_STOCKORORDER")) {
-            filters.append("SEARCH_ONLY_STOCKORORDER")
-        }
-        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_LICENSE")) {
-            filters.append("SEARCH_ONLY_LICENSE")
-        }
-        if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_DISCONTINUED")) {
-            filters.append("SEARCH_ONLY_DISCONTINUED")
-        }
-        return filters
-    }
-
+            func searchFilters() -> [Any] {
+                var filters = [Any]()
+                if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_AVAILABLE")) {
+                    filters.append("SEARCH_ONLY_AVAILABLE")
+                }
+                if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_PROMOTIONS")) {
+                    filters.append("SEARCH_ONLY_PROMOTIONS")
+                }
+                if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_NEW")) {
+                    filters.append("SEARCH_ONLY_NEW")
+                }
+                if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_STOCKORORDER")) {
+                    filters.append("SEARCH_ONLY_STOCKORORDER")
+                }
+                if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_LICENSE")) {
+                    filters.append("SEARCH_ONLY_LICENSE")
+                }
+                if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_DISCONTINUED")) {
+                    filters.append("SEARCH_ONLY_DISCONTINUED")
+                }
+                return filters
+            }
 }
 

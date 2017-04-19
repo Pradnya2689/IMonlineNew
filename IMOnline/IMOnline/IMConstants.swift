@@ -26,8 +26,10 @@ struct Constants {
     
     static let SESSION_COOKIE_NAME = ".ASPXAUTHMobile"
     static let US_SESSION_COOKIE_NAME = "IMGlobalWebAuthCookieMobile"
-    static let NOTIFICATION_READY_FOR_SEARCH = "productGroupsInitialzed"
-    static let ANY_GROUP = -1
+    
+     
+    
+    
     
     //pragma mark base url's
     

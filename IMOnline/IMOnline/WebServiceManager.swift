@@ -9,35 +9,16 @@
 import UIKit
 import Alamofire
 
-class IMCountry : NSObject
-{
-    
-     static let sharedInstance = IMCountry()
-    
-    
-    var countryId: String = ""
-    var name: String = ""
-    var languageCode: String = ""
-    var environmentType: String = ""
-    var decimalSeprator: String = ""
-    var thousandSeprator: String = ""
-    var currencySymbol: String = ""
-    
-public func country(withId _id: String, code _code: String, name _name: String, env _env: String, currency _currency: String, decimalSeprator _decimalSeprator: String, thousandSeprator _thousandSeprator: String) -> Any {
-    let country = IMCountry()
-    country.countryId = _id
-    country.name = _name
-    country.languageCode = _code
-    country.environmentType = _env
-    country.decimalSeprator = _decimalSeprator
-    country.thousandSeprator = _thousandSeprator
-    country.currencySymbol = _currency
-    return country
-}
-}
+//class IMCountry : NSObject
+//{
+//    
+//    }
 
 class WebServiceManager: NSObject {
     static let sharedInstance = WebServiceManager()
+     var countrySelection = IMCountry()
+    var user = IMUser()
+    
     var countryArr = NSMutableArray()
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
@@ -48,11 +29,51 @@ class WebServiceManager: NSObject {
         ]
         self.performRESTCall(baseURL: Constants.URL_GET_COUNTRY_LIST, httpMethod: "GET", parameters: params as! [NSObject : AnyObject], successBlock: {(_ responseText: String) -> Void in
             print(successBlock)
+            //let stringdemo = responseText as
+            //let parser = ResponseParser.init(responseStr: successBlock as! String as NSString)
+            
+            let parser = ResponseParser.init(responseStr: responseText as NSString )
+            var arr : NSArray = []
+            arr = parser.myArrayFunc() as NSArray
+            successBlock(arr as! [Any])
+//            let parser = ResponseParser().response
+//            var arr : NSArray = []
+//                          arr = parser.myArrayFunc() as NSArray
+//            //
+//                            successBlock(arr as NSArray)
+           // successBlock = SUC
         }, failedBlock: failedBlock)
         
         
     }
    
+    
+    func fetchFunctionList(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
+        
+        
+        
+        let params: [AnyHashable: Any]? = [
+            "LANGCODE" : (NSLocale.preferredLanguages[0])
+        ]
+        self.performRESTCall(baseURL: Constants.URL_GET_FUNCTION_LIST, httpMethod: "GET", parameters: params as! [NSObject : AnyObject], successBlock: {(_ responseText: String) -> Void in
+            print(successBlock)
+            //let stringdemo = responseText as
+            //let parser = ResponseParser.init(responseStr: successBlock as! String as NSString)
+            
+            let parser = ResponseParser.init(responseStr: responseText as NSString )
+            var arr : NSArray = []
+            arr = parser.myArrayFunc() as NSArray
+            successBlock(arr as! [Any])
+            //            let parser = ResponseParser().response
+            //            var arr : NSArray = []
+            //                          arr = parser.myArrayFunc() as NSArray
+            //            //
+            //                            successBlock(arr as NSArray)
+            // successBlock = SUC
+        }, failedBlock: failedBlock)
+        
+        
+    }
         func loginWebservice(){
         
         let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Session/Login/?DEVICE=iPhone&AGENT=iOS&OSVERSION=10.2&CONNECTIONTYPE=WIFI&APPVERSION=3.0&lang=EN&country=MX&deviceid=ABD979BE-11F6-487F-AAE1-EECE1A5144A1&saveid=false&securitycode=&resendcode=false")!
@@ -129,9 +150,11 @@ class WebServiceManager: NSObject {
                 print("Response String: \(response.result.value)")
                 let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
                 successBlock(parser.response as String)
-                var arr : NSArray = []
-                arr = parser.myArrayFunc() as NSArray
-               print(arr)
+//                var arr : NSArray = []
+//                arr = parser.myArrayFunc() as NSArray
+//                
+//                 successBlock(arr as NSArray)
+//               print(arr)
                 
             }
             .responseJSON { response in
@@ -153,7 +176,7 @@ class WebServiceManager: NSObject {
         //countryCode = "US"
         let languageCode: String? = (languageDic["kCFLocaleLanguageCodeKey"] as! String)
         //languageCode = "en"
-    print(IMCountry.sharedInstance.countryId)
+        print(IMCountry.sharedInstance.countryId)
         print(IMUser.sharedInstance.language ?? "")
 //        print(IMUser.sharedInstance.bnr)
         
@@ -161,7 +184,7 @@ class WebServiceManager: NSObject {
 //        print(IMUser.sharedInstance.userId)
 //        print(IMUser.sharedInstance.sessionId)
         
-        return "country=\(IMHelper.empty(forNil: IMCountry.sharedInstance.countryId))&ccd=\(IMHelper.empty(forNil: IMUser.sharedInstance.language ?? ""))&lang=\(languageCode!)&bnr=\(IMHelper.empty(forNil: IMUser.sharedInstance.bnr ?? ""))&knr=\(IMHelper.empty(forNil: IMUser.sharedInstance.customerNumber ?? ""))&uid=\(IMHelper.empty(forNil: IMUser.sharedInstance.userId ?? ""))&sid=\(IMHelper.empty(forNil: IMUser.sharedInstance.sessionId ?? ""))"
+        return "country=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.countrySelection.countryId))&ccd=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.language ?? ""))&lang=\(languageCode!)&bnr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.bnr ?? ""))&knr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.customerNumber ?? ""))&uid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.userId ?? ""))&sid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.sessionId ?? ""))"
     }
     
     func serviceParameters(fromDictionary dictionary: [AnyHashable: String]) -> String {

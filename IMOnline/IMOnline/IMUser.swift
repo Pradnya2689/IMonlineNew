@@ -18,6 +18,7 @@ class IMUser: NSObject {
     var customerNumber : String?
     var password : String?
     var sessionId : String?
+    // var countryCode : String?
     
     
     override init() {

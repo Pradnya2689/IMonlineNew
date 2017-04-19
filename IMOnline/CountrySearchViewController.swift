@@ -9,6 +9,9 @@
 import UIKit
 import Speech
 
+
+var selectedContryCode : String = String()
+
 @available(iOS 10.0, *)
 class siriRecogn: NSObject , SFSpeechRecognizerDelegate{
     
@@ -30,8 +33,12 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     
     var isCall : String = ""
     
-    var countryNameAAray : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
-    var countryNameAAray1 : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
+//    var countryNameAAray : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
+//    var countryNameAAray1 : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
+    
+    var countryNameAAray  = NSMutableArray()
+    var countryNameAAray1 = NSMutableArray()
+    var countryArray = NSMutableArray()
     var flagArray = ["Australia","Croatia","England","France","Iceland","Jordan"]
     
 
@@ -52,10 +59,23 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
 
         WebServiceManager.sharedInstance.fetchCountries(withCompletionBlock: {(_ _countries: [Any]) -> Void in
             print(_countries)
+
+            
+           // print(country123!)
+            for conty in _countries
+            {
+                var country123 = (conty as? IMCountry)?.name
+            self.countryNameAAray.add(country123!)
+                self.countryNameAAray1.add(country123!)
+                self.countryArray.add(conty)
+            
+            }
+            self.countrySearchTableView.reloadData()
+            
         }, failedBlock: {() -> Void in
         })
 
-        
+   //self.countrySearchTableView.reloadData()
         
         // Do any additional setup after loading the view.
         
@@ -201,7 +221,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
-        cell.flagImgView.image = UIImage(named: flagArray[indexPath.row])
+       // cell.flagImgView.image = UIImage(named: flagArray[indexPath.row])
         cell.countryNameLB.text = countryNameAAray[indexPath.row] as! String
         return cell
     }
@@ -209,25 +229,62 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         print(countryNameAAray[indexPath.row])
-        if(isCall == "SplashView"){
+        var co = countryArray[indexPath.row] as! IMCountry
+        print(co.name)
+        print(co.countryId)
+        WebServiceManager.sharedInstance.countrySelection = countryArray[indexPath.row] as! IMCountry
+        WebServiceManager.sharedInstance.user.countryCode = WebServiceManager.sharedInstance.countrySelection.countryId 
+       selectedContryCode = WebServiceManager.sharedInstance.user.countryCode!
+        print(WebServiceManager.sharedInstance.countrySelection.name)
+        print(WebServiceManager.sharedInstance.user.countryCode!)
+        print(selectedContryCode)
+        
+       
+        WebServiceManager.sharedInstance.fetchFunctionList(withCompletionBlock: {(_ functions: [Any]) -> Void in
+           print(functions)
             
-            let nextView = self.storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
-            self.navigationController?.pushViewController(nextView, animated: true)
             
-        }else{
+            // print(country123!)
+//            for conty in _countries
+//            {
+//                var country123 = (conty as? IMCountry)?.name
+//                self.countryNameAAray.add(country123!)
+//                self.countryNameAAray1.add(country123!)
+//                self.countryArray.add(conty)
+//                
+//            }
+//            self.countrySearchTableView.reloadData()
+            
+        }, failedBlock: {() -> Void in
+        })
+            
+            
+        if(isCall == "SplashView")
+        {
+            
+//            let nextView = self.storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
+//            self.navigationController?.pushViewController(nextView, animated: true)
+            
+        }
+        else
+        {
             
              self.dismiss(animated: true, completion: nil)
         }
        
     }
     
-    func textFieldDidChange11() {
-        if((searchTextField.text?.characters.count)! > 0){
+    func textFieldDidChange11()
+    {
+        if((searchTextField.text?.characters.count)! > 0)
+        {
             let searchpredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchTextField.text!)
             //filterArray = NSArray()
             countryNameAAray.filter(using: searchpredicate)
             self.countrySearchTableView.reloadData()
-        }else{
+        }
+        else
+        {
             countryNameAAray.removeAllObjects()
             countryNameAAray = self.countryNameAAray1.mutableCopy() as! NSMutableArray
             self.countrySearchTableView.reloadData()

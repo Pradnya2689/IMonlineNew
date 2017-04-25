@@ -29,6 +29,7 @@ struct Constants {
     
     static let ANY_GROUP = -1
     
+   static let NOTIFICATION_READY_FOR_SEARCH = "productGroupsInitialzed"
      
     
     

@@ -20,6 +20,8 @@ class WebServiceManager: NSObject {
     var countrySelection = IMCountry()
     var user = IMUser()
     var hersteller = NSMutableArray()
+    var operations = [Any]()
+    
     var countryArr = NSMutableArray()
     var isOutagePageVisible:Bool!
 //    var user:IMUser!
@@ -30,6 +32,8 @@ class WebServiceManager: NSObject {
     var operationss:NSArray!
     var productGroups:ProductGroups!
     var numberOfGroups3:Int!
+   // var productGroups:ProductGroup!
+    var outageHtmlData:NSMutableString!
     
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 
+
 //class IMCountry : NSObject
 //{
 //    
@@ -16,7 +17,7 @@ import Alamofire
 
 class WebServiceManager: NSObject {
     static let sharedInstance = WebServiceManager()
-    var countrySelection : IMCountry!
+    var countrySelection = IMCountry()
     var user = IMUser()
     var hersteller = NSMutableArray()
     var countryArr = NSMutableArray()
@@ -72,7 +73,8 @@ class WebServiceManager: NSObject {
             
             let parser = ResponseParser.init(responseStr: responseText as NSString )
             var arr : NSArray = []
-            arr = parser.myArrayFunc() as NSArray
+            arr = parser.FunctionList() as NSArray
+            print(arr)
             successBlock(arr as! [Any])
             //            let parser = ResponseParser().response
             //            var arr : NSArray = []
@@ -273,7 +275,9 @@ class WebServiceManager: NSObject {
                 print("Response String: \(response.result.value)")
                 let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
                 successBlock(parser.response as String)
-//                var arr : NSArray = []
+                
+                
+               //                var arr : NSArray = []
 //                arr = parser.myArrayFunc() as NSArray
 //                
 //                 successBlock(arr as NSArray)
@@ -284,7 +288,7 @@ class WebServiceManager: NSObject {
                 print("Response JSON: \(response.result.value)")
         }
 
-        
+       
         
         
     }
@@ -299,15 +303,22 @@ class WebServiceManager: NSObject {
         //countryCode = "US"
         let languageCode: String? = (languageDic["kCFLocaleLanguageCodeKey"] as! String)
         //languageCode = "en"
-        print(IMCountry.sharedInstance.countryId)
-        print(IMUser.sharedInstance.language ?? "")
-//        print(IMUser.sharedInstance.bnr)
+//        print(IMCountry.sharedInstance.countryId)
+//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
+//        print(WebServiceManager.sharedInstance.user?.language )
+//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
+//        print(WebServiceManager.sharedInstance.user.language )
+////        print(IMUser.sharedInstance.bnr)
         
-//        print(IMUser.sharedInstance.customerNumber)
-//        print(IMUser.sharedInstance.userId)
-//        print(IMUser.sharedInstance.sessionId)
+//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
+//        print(WebServiceManager.sharedInstance.user.language)
+//        print(WebServiceManager.sharedInstance.user.bnr)
+//        
+//        print(WebServiceManager.sharedInstance.user.customerNumber)
+//        print( WebServiceManager.sharedInstance.user.userId)
+//        print(WebServiceManager.sharedInstance.user.sessionId)
         
-        return "country=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.countrySelection.countryId))&ccd=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.language ?? ""))&lang=\(languageCode!)&bnr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.bnr ?? ""))&knr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.customerNumber ?? ""))&uid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.userId ?? ""))&sid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.sessionId ?? ""))"
+         return "country=\(IMHelper.empty(forNil: (WebServiceManager.sharedInstance.countrySelection.countryId)))&ccd=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.language ?? ""))&lang=\(languageCode!)&bnr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.bnr ?? ""))&knr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.customerNumber ?? ""))&uid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.userId ?? ""))&sid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.sessionId ?? ""))"
     }
     
     func serviceParameters(fromDictionary dictionary: [AnyHashable: String]) -> String {

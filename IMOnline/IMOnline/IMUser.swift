@@ -19,9 +19,11 @@ class IMUser: NSObject {
     var password : String?
     var sessionId : String?
     // var countryCode : String?
-    
     var sessionCookie:HTTPCookie!
     var allCookies:[HTTPCookie]!
+    var functions = [Any]()
+//    var sessionCookie:HTTPCookie!
+//    var allCookies:[HTTPCookie]!
     var shouldShowEKPrice: Bool = false
     var shouldShowEVPPrice: Bool = false
     var shouldShowSellPrice: Bool = false
@@ -81,7 +83,7 @@ class IMUser: NSObject {
         standardDefaults.synchronize()
     }
     func logout() {
-        WebServiceManager.sharedInstance.countrySelection = nil
+        WebServiceManager.sharedInstance.countrySelection = IMCountry()
         canOrder = false
         canAccessTracking = false
         sessionId = nil

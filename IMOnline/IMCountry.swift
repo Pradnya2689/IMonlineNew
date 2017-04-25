@@ -19,7 +19,7 @@ class IMCountry: NSObject {
     var thousandSeprator: String = ""
     var currencySymbol: String = ""
     var countryEnvironmentType : String = ""
-    var functionList : String = ""
+    var functionList = [Any]()
     
    
     

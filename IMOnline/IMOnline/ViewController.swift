@@ -24,6 +24,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     @IBOutlet weak var usernameTF: UITextField!
     @IBOutlet weak var forgotPassBtn: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
+    var selectedcountry = NSString()
     
     @IBAction func countryBtnAction(_ sender: UIButton) {
         
@@ -41,7 +42,8 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-       
+       print(selectedcountry)
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(_:)))
         tap.delegate = self
         view.addGestureRecognizer(tap)
@@ -108,7 +110,8 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.countryBtn.setTitle("", for: UIControlState.normal)
+        self.countryBtn.setTitle(selectedcountry as String, for: UIControlState.normal)
         registerKeyboardNotifications()
     }
     

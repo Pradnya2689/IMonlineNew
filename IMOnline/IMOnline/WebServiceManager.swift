@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 
+
 //class IMCountry : NSObject
 //{
 //    
@@ -16,18 +17,20 @@ import Alamofire
 
 class WebServiceManager: NSObject {
     static let sharedInstance = WebServiceManager()
-    var countrySelection : IMCountry!
+    var countrySelection = IMCountry()
     var user = IMUser()
+    var operations = [Any]()
     
     var countryArr = NSMutableArray()
     var isOutagePageVisible:Bool!
-   // var user:IMUser?
-   // var countrySelection:IMCountry?
+//    var user:IMUser!
+//    var countrySelection:IMCountry!
     var saveID:NSString!
     var securityCode:NSString!
     var resendCode:NSString!
     var operationss:NSArray!
     var productGroups:ProductGroup!
+    var outageHtmlData:NSMutableString!
     
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
@@ -71,7 +74,8 @@ class WebServiceManager: NSObject {
             
             let parser = ResponseParser.init(responseStr: responseText as NSString )
             var arr : NSArray = []
-            arr = parser.myArrayFunc() as NSArray
+            arr = parser.FunctionList() as NSArray
+            print(arr)
             successBlock(arr as! [Any])
             //            let parser = ResponseParser().response
             //            var arr : NSArray = []
@@ -83,9 +87,7 @@ class WebServiceManager: NSObject {
         
         
     }
-       // func loginWebservice(){
-   //endavour
-  func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
+        func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
         
         let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Session/Login/?DEVICE=iPhone&AGENT=iOS&OSVERSION=10.2&CONNECTIONTYPE=WIFI&APPVERSION=3.0&lang=EN&country=MX&deviceid=ABD979BE-11F6-487F-AAE1-EECE1A5144A1&saveid=false&securitycode=&resendcode=false")!
         var urlRequest = URLRequest(url: url)
@@ -274,7 +276,9 @@ class WebServiceManager: NSObject {
                 print("Response String: \(response.result.value)")
                 let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
                 successBlock(parser.response as String)
-//                var arr : NSArray = []
+                
+                
+               //                var arr : NSArray = []
 //                arr = parser.myArrayFunc() as NSArray
 //                
 //                 successBlock(arr as NSArray)
@@ -285,7 +289,7 @@ class WebServiceManager: NSObject {
                 print("Response JSON: \(response.result.value)")
         }
 
-        
+       
         
         
     }
@@ -307,13 +311,13 @@ class WebServiceManager: NSObject {
 //        print(WebServiceManager.sharedInstance.user.language )
 ////        print(IMUser.sharedInstance.bnr)
         
-        print(WebServiceManager.sharedInstance.countrySelection.countryId)
-        print(WebServiceManager.sharedInstance.user.language)
-        print(WebServiceManager.sharedInstance.user.bnr)
-        
-        print(WebServiceManager.sharedInstance.user.customerNumber)
-        print( WebServiceManager.sharedInstance.user.userId)
-        print(WebServiceManager.sharedInstance.user.sessionId)
+//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
+//        print(WebServiceManager.sharedInstance.user.language)
+//        print(WebServiceManager.sharedInstance.user.bnr)
+//        
+//        print(WebServiceManager.sharedInstance.user.customerNumber)
+//        print( WebServiceManager.sharedInstance.user.userId)
+//        print(WebServiceManager.sharedInstance.user.sessionId)
         
          return "country=\(IMHelper.empty(forNil: (WebServiceManager.sharedInstance.countrySelection.countryId)))&ccd=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.language ?? ""))&lang=\(languageCode!)&bnr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.bnr ?? ""))&knr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.customerNumber ?? ""))&uid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.userId ?? ""))&sid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.sessionId ?? ""))"
     }

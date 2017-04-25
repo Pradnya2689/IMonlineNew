@@ -8,7 +8,8 @@
 
 import UIKit
 
-class IMOperation: NSObject {
+class IMOperation: NSObject
+{
      var appVersion: String!
      var contractName: String!
      var contractMethod: String!

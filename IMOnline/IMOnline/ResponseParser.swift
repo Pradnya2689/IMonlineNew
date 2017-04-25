@@ -90,6 +90,90 @@ class ResponseParser: NSObject
         return countries  as! Array<IMCountry>
     }
     
+    func FunctionList() -> Array<Any>
+    {
+        var _RIGHTS_BLOCK: Bool = false
+        
+        var funcSet = [Any]()
+        var operations = [Any]()
+        
+        
+        var imOperation: IMOperation? = nil
+        //IMOperation *imOperation = nil;
+        
+        
+        
+        for var line in self.lines
+        {
+            
+            
+            if (line as AnyObject).hasPrefix("[RIGHTS]")
+            {
+                _RIGHTS_BLOCK = true
+            }
+            
+            if !_RIGHTS_BLOCK
+            {
+                // exclude lines
+                if ((line as! String) == "")
+                {
+                    continue
+                }
+                
+                // var elements: [Any] = (line as AnyObject).components(separatedBy: CharacterSet(charactersInString: "="))
+                var elements : [Any] = (line as! String).components(separatedBy: "=")             // start block operation contracts
+                if (elements[0] as AnyObject).hasPrefix("APP_VERSION")
+                {
+                                        imOperation = IMOperation()
+                                        imOperation?.appVersion = (elements[1] as AnyObject).replacingOccurrences(of: "\"", with: "")
+                }
+                if (elements[0] as AnyObject).hasPrefix("OPERATION_CONTRACT_NAME")
+                {
+                     imOperation?.contractName = (elements[1] as AnyObject).replacingOccurrences(of: "\"", with: "")
+                }
+                if (elements[0] as AnyObject).hasPrefix("OPERATION_CONTRACT_URI")
+                {
+                     imOperation?.contractURI = (elements[1] as AnyObject).replacingOccurrences(of: "\"", with: "")
+                }
+                if (elements[0] as AnyObject).hasPrefix("OPERATION_CONTRACT_METHOD")
+                {
+                     imOperation?.contractMethod = (elements[1] as AnyObject).replacingOccurrences(of: "\"", with: "")
+                }
+               
+                if (elements[0] as AnyObject).hasPrefix("IS_AUTH_REQUIRED") {
+                    operations.append(imOperation)
+                    //[imOperation toString];
+                }
+                
+                
+            }
+            
+            if _RIGHTS_BLOCK
+            {
+                // exclude lines
+                if (line as! String) == "" || (line as AnyObject).hasPrefix("[RIGHTS]") || (line as AnyObject).hasPrefix("Tier") {
+                    continue
+                }
+                                var elements: [Any] = (line as! String).components(separatedBy: ";")
+                                var Flist = IMFunctionList()
+                                Flist.appVersion = elements[0] as! String
+                                Flist.appTierVersion = elements[1] as! String
+                                Flist.countryCode = elements[2] as! String
+                                Flist.groupName = elements[3] as! String
+//                                Flist.value = (elements[4] == "TRUE") ? true : false
+//                                Flist.contractsGroup = CInt(elements[5])
+                                //[func toString];
+                                funcSet.append(Flist)
+            }
+            
+        }
+        
+                WebServiceManager.sharedInstance.countrySelection.functionList = funcSet
+                WebServiceManager.sharedInstance.operations = operations
+        return funcSet as! Array<Any>
+    }
+
+    
     func isOutageAvailable() -> Bool {
         let outageAvailable = value(forKey: "TIER_I_STATUS") as! String
         if (outageAvailable == "\"ServiceUnavailable\"") {
@@ -186,6 +270,8 @@ class ResponseParser: NSObject
     }
     
     
+   
+    
     func canLogin() -> Bool {
         return ("true" == self.valueforSeparatedKey(key: "LOGIN").lowercased())
     }
@@ -221,13 +307,13 @@ class ResponseParser: NSObject
         for line:String in self.lines as! [String] {
             if line.hasPrefix(prefix) {
                 let elements: [Any] = line.components(separatedBy: ";")
-                return elements[1] as! String
-            }
+                 return elements[1] as! String            }
             return ""
-        }
-        return ""
+         return ""
+       
     }
-    
+         return ""
+    }
         func successREST() -> Bool {
             return ("\"OK\"" == self.valueforSeparatedKey(key:"TIER_II_STATUS"))
         }

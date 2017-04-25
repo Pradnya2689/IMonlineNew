@@ -10,6 +10,7 @@ import UIKit
 import Speech
 
 
+
 var selectedContryCode : String = String()
 
 @available(iOS 10.0, *)
@@ -31,8 +32,11 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
     
-    var isCall : String = ""
+    let MESSAGE_TITLE_KEY = "title"
+    let MESSAGE_DESC_KEY = "description"
     
+    var isCall : String = ""
+    var selectedCountryStr : String = ""
 //    var countryNameAAray : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
 //    var countryNameAAray1 : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
     
@@ -230,6 +234,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         
         print(countryNameAAray[indexPath.row])
         var co = countryArray[indexPath.row] as! IMCountry
+        selectedCountryStr = co.name
         print(co.name)
         print(co.countryId)
         WebServiceManager.sharedInstance.countrySelection = countryArray[indexPath.row] as! IMCountry
@@ -242,18 +247,14 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
        
         WebServiceManager.sharedInstance.fetchFunctionList(withCompletionBlock: {(_ functions: [Any]) -> Void in
            print(functions)
+           WebServiceManager.sharedInstance.user.functions = functions
             
-            
-            // print(country123!)
-//            for conty in _countries
-//            {
-//                var country123 = (conty as? IMCountry)?.name
-//                self.countryNameAAray.add(country123!)
-//                self.countryNameAAray1.add(country123!)
-//                self.countryArray.add(conty)
-//                
-//            }
-//            self.countrySearchTableView.reloadData()
+            let nextView = self.storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
+            print(self.selectedCountryStr)
+            nextView.selectedcountry = self.selectedCountryStr as NSString
+          // nextView.countryBtn.setTitle("hi", for: UIControlState.normal)
+                self.navigationController?.pushViewController(nextView, animated: true)
+    
             
         }, failedBlock: {() -> Void in
         })

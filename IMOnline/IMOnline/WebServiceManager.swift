@@ -18,7 +18,7 @@ class WebServiceManager: NSObject {
     static let sharedInstance = WebServiceManager()
     var countrySelection : IMCountry!
     var user = IMUser()
-    
+    var hersteller = NSMutableArray()
     var countryArr = NSMutableArray()
     var isOutagePageVisible:Bool!
 //    var user:IMUser!
@@ -27,7 +27,8 @@ class WebServiceManager: NSObject {
     var securityCode:NSString!
     var resendCode:NSString!
     var operationss:NSArray!
-    var productGroups:ProductGroup!
+    var productGroups:ProductGroups!
+    var numberOfGroups3:Int!
     
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
@@ -197,7 +198,7 @@ class WebServiceManager: NSObject {
 
             var path: String = URL(fileURLWithPath: IMHelper.documentsDirectory()).appendingPathComponent(Constants.PRODUCT_GROUPS_FILE).absoluteString
             var productGroupsAsText = try? String(contentsOfFile: path, encoding: String.Encoding.utf8)
-           // productGroups = ProductGroup(string: productGroupsAsText)
+            productGroups = ProductGroups(string: productGroupsAsText!)
             return
         }
         

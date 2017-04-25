@@ -243,7 +243,7 @@ class ResponseParser: NSObject
                 }
                 print("currencycount: \(WebServiceManager.sharedInstance.user.currencyCultureForPage?.count)")
             }
-    }
+        }
             func searchFilters() -> [Any] {
                 var filters = [Any]()
                 if ("TRUE" == self.valueforSeparatedKey(key:"SEARCH_ONLY_AVAILABLE")) {

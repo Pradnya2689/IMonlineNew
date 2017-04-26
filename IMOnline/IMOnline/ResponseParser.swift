@@ -8,10 +8,17 @@
 
 import UIKit
 
+let MESSAGE_TITLE_KEY = "title"
+let MESSAGE_DESC_KEY = "description"
+
 class ResponseParser: NSObject
 {
     var lines:NSArray!
     var response: NSString!
+    
+    
+    //Declare afterwards in IMBASKET class
+   
     
     init(responseStr:NSString)
     {
@@ -169,7 +176,7 @@ class ResponseParser: NSObject
         }
         
                 WebServiceManager.sharedInstance.countrySelection.functionList = funcSet
-                WebServiceManager.sharedInstance.operations = operations
+                WebServiceManager.sharedInstance.operationss = operations as NSArray!
         return funcSet as! Array<Any>
     }
 
@@ -304,7 +311,44 @@ class ResponseParser: NSObject
         return false
         //return [@"true" isEqualToString:[self valueForSeparatedKey:@"STATES_ AVAILABLE"]];
     }
-    
+    func validateEndeavourSession(_ _url: String) -> NSMutableDictionary {
+        var dict = NSMutableDictionary()
+        
+        
+        if valueforEqualsKey(key: "TIER_II_STATUSCODE") == "" || valueforEqualsKey(key: "TIER_II_STATUSDESCRIPTION") == "" {
+            return NSMutableDictionary()
+        }
+
+        if (_url as NSString).range(of: "/Order/").length > 0 || (_url as NSString).range(of: "/Basket/").length > 0 || (_url as NSString).range(of: "/Productsearch/").length > 0 || (_url as NSString).range(of: "/ReadLocalSettingsList/").length > 0 || (_url as NSString).range(of: "/GetUserAddresses/").length > 0 {
+            if ("\"401\"" == valueforEqualsKey(key: "TIER_II_STATUSCODE")) {
+                return NSMutableDictionary()
+            }
+        }
+        
+        if !("\"404\"" == valueforEqualsKey(key: "TIER_II_STATUSCODE")) && ("\"OK\"" == valueforEqualsKey(key: "TIER_II_STATUS")) {
+            return NSMutableDictionary()
+        }
+        
+        
+        dict[MESSAGE_TITLE_KEY] = "Info"
+        //[dict setObject:@"An error has occurred. Please try again." forKey:MESSAGE_DESC_KEY];
+        dict[MESSAGE_DESC_KEY] = NSLocalizedString("An error has occurred. Please try again.", comment: "Es ist ein Fehler aufgetreten.\nBitte versuchen sie es noch einmal.")
+
+        
+        return dict
+        
+    }
+    func valueforEqualsKey (key: String) -> String {
+        let prefix: String = "\(key)="
+        for line in lines.reverseObjectEnumerator() {
+            if (line as! String).hasPrefix(prefix) {
+                let elements: [String] = (line as! String).components(separatedBy:  "=")
+                return elements[1]
+            }
+        }
+        return ""
+    }
+
     func isDropshipAllowed() -> Bool {
         let dropShipAllowed: String = self.valueforSeparatedKey(key:"ISDROPSHIPALLOWED")
         if dropShipAllowed.compare("true", options: .caseInsensitive) == .orderedSame {

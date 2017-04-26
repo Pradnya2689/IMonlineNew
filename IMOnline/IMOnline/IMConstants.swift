@@ -39,6 +39,8 @@ struct Constants {
     /// Stage 1 DEV
     static let HOST_URL = "https://mobility-stg.ingrammicro.com"
     
+    static let NOTIFICATION_READY_FOR_SEARCH = "productGroupsInitialzed"
+    
     
     static let URL_GET_COUNTRY_LIST  = "\(HOST_URL)/Dispatcher/Countrylist/"
     

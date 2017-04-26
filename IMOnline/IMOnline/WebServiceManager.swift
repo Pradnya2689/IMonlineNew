@@ -24,6 +24,8 @@ class WebServiceManager: NSObject {
     
     var countryArr = NSMutableArray()
     var isOutagePageVisible:Bool!
+    
+    var outageHtmlData: String = ""
 //    var user:IMUser!
 //    var countrySelection:IMCountry!
     var saveID:NSString!
@@ -339,9 +341,6 @@ class WebServiceManager: NSObject {
         
         urlRequest.httpMethod = httpMethod
         
-      //  let parameters = "username:pradnya.dongre@ingrammicro.com\npassword:1Loveingram"
-        
-       // urlRequest.httpBody = parameters.data(using: String.Encoding.utf8)
         
         urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
         
@@ -349,15 +348,99 @@ class WebServiceManager: NSObject {
             .responseString { response in
                 print("Response String: \(response.result.value)")
                 let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
-                successBlock(parser.response as String)
+               // successBlock(parser.response as String)
                 
+                var validSession: Bool = true
                 
-               //                var arr : NSArray = []
-//                arr = parser.myArrayFunc() as NSArray
-//                
-//                 successBlock(arr as NSArray)
-//               print(arr)
+                if (self.countrySelection.environmentType == Constants.ENV_DACH)
+                {
+                    //                    var location: String? = (request.responseHeaders()["Location"] as? String)
+                    //                    if request.responseStatusCode() == 302 && location != nil
+                    //                    {
+                    //                        validSession = false
+                    //                    }
+                }
+                else if (self.countrySelection.environmentType == Constants.ENV_ENDEAVOUR)
+                {
+                    let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                    let res = parser.response as String
+                    
+                    
+                    if parser.isOutageAvailable() && !self.isOutagePageVisible {
+                        self.isOutagePageVisible = true
+                        self.user.isOutage = true
+                                            self.outageHtmlData = (parser.outageResponse() as String)
+                       // failedBlock(self.outageHtmlData, true)
+                                              //  failedBlock(outageHtmlData, true)
+                    }
+                    
+                    if self.user.sessionCookie != nil {
+                        var now = Date()
+                        //                        DLog("exptime:%f now:%f", user.sessionCookie.expiresDate.timeIntervalSince1970, now.timeIntervalSince1970)
+                            var elapsedTime: TimeInterval = self.user.sessionCookie.expiresDate!.timeIntervalSince1970 - now.timeIntervalSince1970
+                                              self.user.remainingTime = elapsedTime
+                                                if elapsedTime < 0
+                                                {
+                                                    validSession = false
+                                                }
+                        
+                     //   var messageDict: [String: String] = [:]
+                        var messageDict: NSMutableDictionary = parser.validateEndeavourSession(urlString)
+                        if messageDict != nil {
+                          
+                            var title: String? = messageDict.value(forKey: MESSAGE_TITLE_KEY) as! String?
+                            var message: String? = messageDict.value(forKey: MESSAGE_DESC_KEY) as! String?
+                        
+                            var alertView = UIAlertView(title: title!, message: message!, delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
+                            var orderService: String = "Order"
+                            var basketListService: String = "Basket/List/?"
+                            var range: NSRange = (urlString as NSString).range(of: orderService, options: .caseInsensitive)
+                            var rangeBasket: NSRange = (urlString as NSString).range(of: basketListService, options: .caseInsensitive)
+                            if range.location == NSNotFound {
+                                if rangeBasket.location == NSNotFound {
+                                    alertView.show()
+                                }
+                            }
+                            // [alertView show];//Temporarily hiding error alert messages
+                        }
+                    }
+                    
+                    
+                }
                 
+                if !validSession {
+                    // session has expired, present login view modally
+                    let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                    if showLoginViewIfSessionInvalid && !parser.isOutageAvailable() && !self.user.isOutage!
+                    {
+                        if #available(iOS 10.0, *) {
+                            (UIApplication.shared.delegate as? AppDelegate)?.showModalLogin(withSuccessBlock: {() -> Void in
+                                (UIApplication.shared.delegate as? AppDelegate)?.hideModalLogin()
+ 
+                                self.performCall(baseURL, parameters: parameters, successBlock: successBlock, failedBlock: failedBlock, showLoginViewIfSessionInvalid: false)
+                                return
+                            }, failedBlock: failedBlock)
+                        } else {
+                            OperationQueue.main.addOperation {() -> Void in
+                                failedBlock()
+                            }
+                        }
+                    }
+                    else {
+                        OperationQueue.main.addOperation {() -> Void in
+                            failedBlock()
+                        }
+                    }
+                }
+                else {
+                    var responseString = parser.response as String
+                    OperationQueue.main.addOperation {() -> Void in
+                        successBlock(responseString)
+                    }
+
+                }
+
+
             }
             .responseJSON { response in
                 print("Response JSON: \(response.result.value)")
@@ -367,6 +450,49 @@ class WebServiceManager: NSObject {
         
         
     }
+    
+    
+    func authorisationParameters() -> String
+    {
+        return "CCD=\(user.countryCode)&LANG=\(user.language)&BNR=\(user.bnr)&KNR=\(user.customerNumber)&UID=\(user.userId)&SID=\(user.sessionId)&RESSEP=%%3B&TS=\(IMHelper.timestamp)"
+    }
+    
+    
+    func performCall(_ baseURL: String, parameters: [AnyHashable: Any], successBlock: @escaping (_ response: String) -> Void, failedBlock: @escaping () -> Void, showLoginViewIfSessionInvalid: Bool) {
+        
+        var addedParameters = [AnyHashable: Any]()
+        for (k, v) in parameters { addedParameters.updateValue(v, forKey: k) }
+        addedParameters["AGENT"] = "iOS"
+        addedParameters["APPVERSION"] = IMHelper.empty(forNil: IMHelper.appVersion())
+        addedParameters["DEVICE"] = IMHelper.empty(forNil: IMHelper.deviceModel())
+        addedParameters["OSVERSION"] = IMHelper.empty(forNil: IMHelper.currentOS())
+       //addedParameters["CONNECTIONTYPE"] = IMHelper.empty(forNil: IMHelper.connectionType())
+        let authorisationParameters: String = self.authorisationParameters()
+        let serviceParameters: String = self.serviceParameters(fromDictionary: addedParameters as! [AnyHashable : String])
+        let urlString: String = "\(baseURL)?\(authorisationParameters)\(serviceParameters)"
+        
+        let url = URL(string: urlString)!
+        var urlRequest = URLRequest(url: url)
+        
+        
+       // urlRequest.httpMethod = ""
+        
+        
+        urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
+        
+        Alamofire.request(urlRequest)
+            .responseString{response in
+                print("Response String: \(response.result.value)")
+                let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
+        }
+            .responseJSON { response in
+                print("Response JSON: \(response.result.value)")
+        }
+        }
+        
+        
+   // }
+        
     
     func authorisationParametersREST() -> String {
     

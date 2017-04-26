@@ -30,7 +30,8 @@ class IMHelper: NSObject {
     }
 
   class  func setCookie(domain: String, path: String,name:String,value:String,secure:Bool,expires:Date,url:String) {
-        let cookieProps: [HTTPCookiePropertyKey : Any] = [
+    print("domain \(domain) path \(path)  name \(name)  value \(value) secure \(secure)  expires \(expires)  url \(url)")
+    let cookieProps: [HTTPCookiePropertyKey : Any] = [
             HTTPCookiePropertyKey.domain: "mobility-stg.ingrammicro.com",
             HTTPCookiePropertyKey.path: "/",
             HTTPCookiePropertyKey.name: "IMGlobalWebAuthCookieMobile",
@@ -43,6 +44,7 @@ class IMHelper: NSObject {
             
             print(cookie)
             HTTPCookieStorage.shared.setCookie(cookie)
+            WebServiceManager.sharedInstance.user.sessionCookie = cookie
         }
         
     }
@@ -71,7 +73,7 @@ class IMHelper: NSObject {
                     dict.setValue("/", forKey: "path")
                     // newcookie = cookie
                     newcookie = HTTPCookie.init(properties: dict as! [HTTPCookiePropertyKey : Any])
-                    cookieArray.append(newcookie)
+                    cookieArray.append(newcookie!)
                     //cookieArray.add(newcookie)
                 }
                 
@@ -106,33 +108,34 @@ class IMHelper: NSObject {
     }
     class func getURIforContractName(_ _name: String) -> String {
        // DLog("look for contract %@", _name)
+        if let cnt = WebServiceManager.sharedInstance.operationss{
         for op: IMOperation in WebServiceManager.sharedInstance.operationss as! [IMOperation] {
             if (op.contractName == _name) && (op.appVersion == IMHelper.appVersion()) {
                // DLog("[* found operation '%@' for Appversion %@]", op.contractName, op.appVersion)
                 return op.contractURI
             }
-        }
+            }}
         return ""
     }
     class func documentsDirectory() -> String {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
-   class func fetchSessionCookie(request:HTTPURLResponse) -> HTTPCookie{
-        var cookie : HTTPCookie!
-        
-        let array = NSArray.init(object: request.allHeaderFields) as! NSArray
-        var selectedCountry = "MX"
-        for cookie in array{
-            
-            var textRange, altCookie : NSRange!;
-            //textRange =
-        }
-        
-        
-        return cookie;
-    
-        
-    }
+//   class func fetchSessionCookie(request:HTTPURLResponse) -> HTTPCookie{
+//        var cookie : HTTPCookie!
+//        
+//        let array = NSArray.init(object: request.allHeaderFields) as! NSArray
+//        var selectedCountry = "MX"
+//        for cookie in array{
+//            
+//            var textRange, altCookie : NSRange!;
+//            //textRange =
+//        }
+//        
+//        
+//        return cookie;
+//    
+//        
+//    }
     class func trimString(_ _str: String) -> String {
         return _str.trimmingCharacters(in: CharacterSet.whitespaces)
     }

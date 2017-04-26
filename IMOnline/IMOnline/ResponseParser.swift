@@ -173,9 +173,21 @@ class ResponseParser: NSObject
         return funcSet as! Array<Any>
     }
 
-    
+    func valueforEqualsKey (key: String) -> String {
+        let prefix: String = "\(key)="
+        for line in lines.reverseObjectEnumerator() {
+            if (line as! String).hasPrefix(prefix) {
+                let elements: [String] = (line as! String).components(separatedBy:"=")
+                return elements[1]
+            }
+        }
+        return ""
+    }
+
+
     func isOutageAvailable() -> Bool {
-        let outageAvailable = value(forKey: "TIER_I_STATUS") as! String
+        //let outageAvailable = value(forKey: "TIER_I_STATUS") as! String
+        let outageAvailable = valueforEqualsKey(key: "TIER_I_STATUS")
         if (outageAvailable == "\"ServiceUnavailable\"") {
             return true
         }

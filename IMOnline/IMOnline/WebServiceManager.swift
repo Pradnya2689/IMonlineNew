@@ -29,12 +29,12 @@ class WebServiceManager: NSObject {
     var saveID:NSString!
     var securityCode:NSString!
     var resendCode:NSString!
-    var operationss:NSArray!
+    var operationss:NSArray?
     var productGroups:ProductGroups!
     var numberOfGroups3:Int!
    // var productGroups:ProductGroup!
     var outageHtmlData:NSMutableString!
-    
+    var isOutageAvailable:Bool!
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
         
@@ -107,7 +107,7 @@ class WebServiceManager: NSObject {
                 print("Response String: \(response.result.value)")
                 let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
                 print(parser.lines)
-                let sessionCookie = IMHelper.fetchSessionCookie(request:  response.response!)
+               // let sessionCookie = IMHelper.fetchSessionCookie(request:  response.response!)
                 let allCookies = IMHelper.fetchCookieArray(response: response.response! )
                 let cookval = allCookies.first!
                 print(allCookies)
@@ -118,18 +118,18 @@ class WebServiceManager: NSObject {
                     self.isOutagePageVisible = true
                     failedBlock()
                 }
-                if self.user != nil && sessionCookie != nil {
-                    self.user.sessionCookie = sessionCookie
+                if self.user != nil  {
+                   // self.user.sessionCookie = sessionCookie
                     self.user.allCookies = allCookies
                 }
                 var message = parser.validateLogin()
-                if(message == nil){
+                if(message == ""){
                 self.user .remember()
                // let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iOS&APPVERSION=3.0&CONNECTIONTYPE=WIFI&DEVICE=iPhone&OSVERSION=10.2&uid=pradnya.dongre@ingrammicro.com&lang=EN&country=MX")!
                     
                     var paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&uid=%@&lang=%@&country=%@"
                     var settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr), "iOS", IMHelper.appVersion(),
-                                              // IMHelper.connectionType(),
+                    "WIFI",//IMHelper.connectionType(),
                         IMHelper.deviceModel(),
                         IMHelper.currentOS(),
                         self.user.userId!,
@@ -142,7 +142,7 @@ class WebServiceManager: NSObject {
                 urlRequest.httpShouldHandleCookies = true
                 urlRequest.addValue("0", forHTTPHeaderField: "Content-Length")
                 urlRequest.httpShouldHandleCookies = true
-            
+                print("urlstr \(urlRequest)")
                 Alamofire.request(urlRequest)
                     .responseString { response in
                         print("Response String: \(response.result.value)")
@@ -180,17 +180,88 @@ class WebServiceManager: NSObject {
                             }
                             
                             self.loadWheelData()
+                            
+                            
+                            if self.user.isStatesAvailable! {
+                                DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+                                    self.loadStates()//pending
+                                })
+                            }
+                            //block()
+                        }else{
+                            //DLog("loginUserWithCompletionBlock settings canLogin says, user has no rights")
+                            if settingsParser.isOutageAvailable() && !self.isOutageAvailable {
+                                var outageResponse: String = settingsParser.outageResponse()
+                                self.isOutageAvailable = true
+                                failedBlock()
+                            }
+                            else if !settingsParser.isOutageAvailable() {
+                               // failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
+                            }
+                            
                         }
-                        
+                        if(response.result.isFailure){
+                            var settingsParser = ResponseParser(responseStr: response.result.value as! NSString)
+                            if settingsParser.isOutageAvailable() {
+                                var outageResponse: String = settingsParser.outageResponse()
+                                self.isOutageAvailable = true
+                                //failedBlock(outageResponse, true)
+                            }
+                            else if !settingsParser.isOutageAvailable() {
+                               // failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
+                            }
                         }
+                        }
+                    
+                    
+                }
+                if((response.error) == nil){
+                    var settingsParser = ResponseParser(responseStr: response.result.value as! NSString)
+                    if settingsParser.isOutageAvailable() && !self.isOutageAvailable {
+                        self.isOutageAvailable = true
+                        var outageResponse: String = settingsParser.outageResponse()
+                        //failedBlock(outageResponse, true)
+                    }
+                    else if !settingsParser.isOutageAvailable() {
+                       // failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
+                    }
+                    
+
                 }
         }
             .responseJSON { response in
                 print("Response JSON: \(response.result.value)")
         }
+            
+            
     }
    
-    
+    func loadStates() {
+        var productGroupsSavedAtDate: Date? = UserDefaults.standard.object(forKey: Constants.DEFAULTS_KEY_PRODUCTGROUPS_REMEMBERED_AT_DATE) as! Date?
+        if (productGroupsSavedAtDate == nil || Date().timeIntervalSince(productGroupsSavedAtDate!) > Double(Constants.PRODUCTGROUPS_TIMEOUT_IN_SECONDS)   || UserDefaults.standard.bool(forKey: "updateCache")) {
+//            var parameters: NSDictionary = [
+//                WebServiceManager.sharedInstance.countrySelection.countryId : IMHelper.empty(forNil: user.language!)
+//            ]
+            let url = URL(string: IMHelper.getURIforContractName("GetStatesList"))!
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = "GET"
+            
+            let parameters = "USA = en"
+            
+            urlRequest.httpBody = parameters.data(using: String.Encoding.utf8)
+            
+            //urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
+            
+            Alamofire.request(urlRequest)
+                .responseJSON { response in
+                    print("Response JSON: \(response.result.value)")
+            }
+            
+            
+            //var plainPart: NSDictionary = [kSKPSMTPPartContentTypeKey: "text/plain; charset=UTF-8", kSKPSMTPPartMessageKey: self.data , kSKPSMTPPartContentTransferEncodingKey : "8bit"]
+        }
+        
+    }
     func loadWheelData() {
         WebServiceManager.sharedInstance.fetchVendorsGroups(withCompletionBlock: {(_ wheelData: [Any]) -> Void in
         }, failedBlock: {() -> Void in

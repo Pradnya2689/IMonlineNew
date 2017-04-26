@@ -25,7 +25,7 @@ class WebServiceManager: NSObject {
     var countryArr = NSMutableArray()
     var isOutagePageVisible:Bool!
     
-    var outageHtmlData: String = ""
+    //var outageHtmlData: String = ""
 //    var user:IMUser!
 //    var countrySelection:IMCountry!
     var saveID:NSString!

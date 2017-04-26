@@ -29,7 +29,8 @@ struct Constants {
     
     static let ANY_GROUP = -1
     
-     
+   static let NOTIFICATION_READY_FOR_SEARCH = "productGroupsInitialzed"
+    // static let DEFAULTS_KEY_PRODUCTGROUPS_REMEMBERED_AT_DATE = "productGroupsRememberedAtDate"
     
     
     

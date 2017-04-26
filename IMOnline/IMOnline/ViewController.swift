@@ -141,7 +141,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
 
     }
     func loginService(userid:String,password:String){
-        var user = IMUser.sharedInstance as! IMUser
+        var user = WebServiceManager.sharedInstance.user
         
         user.userId = userid
         user.password = password

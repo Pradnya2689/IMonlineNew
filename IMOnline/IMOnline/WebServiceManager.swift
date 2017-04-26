@@ -18,7 +18,7 @@ import Alamofire
 class WebServiceManager: NSObject {
     static let sharedInstance = WebServiceManager()
     var countrySelection = IMCountry()
-    var user = IMUser()
+    var user : IMUser = WebServiceManager.sharedInstance.user
     var hersteller = NSMutableArray()
     var operations = [Any]()
     
@@ -28,14 +28,14 @@ class WebServiceManager: NSObject {
     //var outageHtmlData: String = ""
 //    var user:IMUser!
 //    var countrySelection:IMCountry!
-    var saveID:NSString!
-    var securityCode:NSString!
-    var resendCode:NSString!
+    var saveID:NSString = "false"
+    var securityCode:NSString = ""
+    var resendCode:NSString = "false"
     var operationss:NSArray?
     var productGroups:ProductGroups!
     var numberOfGroups3:Int!
    // var productGroups:ProductGroup!
-    var outageHtmlData:NSMutableString!
+    var outageHtmlData:String!
     var isOutageAvailable:Bool!
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
@@ -94,12 +94,32 @@ class WebServiceManager: NSObject {
     }
         func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
         
-        let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Session/Login/?DEVICE=iPhone&AGENT=iOS&OSVERSION=10.2&CONNECTIONTYPE=WIFI&APPVERSION=3.0&lang=EN&country=MX&deviceid=ABD979BE-11F6-487F-AAE1-EECE1A5144A1&saveid=false&securitycode=&resendcode=false")!
+            
+            
+            var paramStr: String = "?DEVICE=%@&AGENT=%@&OSVERSION=%@&CONNECTIONTYPE=%@&APPVERSION=%@&lang=%@&country=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
+            
+            var loginPath = String(format: IMHelper.getURIforContractName("DoLogin") + (paramStr),
+                                   "iPhone",
+                                   "iOS",
+                                   IMHelper.currentOS(),
+                                   "WIFI",
+                                   IMHelper.appVersion(),
+                                   WebServiceManager.sharedInstance.countrySelection.languageCode,
+                                   WebServiceManager.sharedInstance.countrySelection.countryId,
+                                   "ABD979BE-11F6-487F-AAE1-EECE1A5144A1",
+                                   WebServiceManager.sharedInstance.saveID,
+                                    WebServiceManager.sharedInstance.securityCode,
+                                    WebServiceManager.sharedInstance.resendCode)
+
+            
+            
+        let url = URL(string:loginPath)!
+            print(url)
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         
-        let parameters = "username:pradnya.dongre@ingrammicro.com\npassword:1Loveingram"
-        
+        let parameters = "username:\(WebServiceManager.sharedInstance.user.userId!)\npassword:\(WebServiceManager.sharedInstance.user.password!)"
+        print(parameters)
         urlRequest.httpBody = parameters.data(using: String.Encoding.utf8)
         
         urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
@@ -120,7 +140,8 @@ class WebServiceManager: NSObject {
                     self.isOutagePageVisible = true
                     failedBlock()
                 }
-                if self.user != nil  {
+                if self.user != nil
+                {
                    // self.user.sessionCookie = sessionCookie
                     self.user.allCookies = allCookies
                 }
@@ -369,7 +390,7 @@ class WebServiceManager: NSObject {
                     if parser.isOutageAvailable() && !self.isOutagePageVisible {
                         self.isOutagePageVisible = true
                         self.user.isOutage = true
-                                            self.outageHtmlData = (parser.outageResponse() as String)
+                        self.outageHtmlData = (parser.outageResponse() as String)
                        // failedBlock(self.outageHtmlData, true)
                                               //  failedBlock(outageHtmlData, true)
                     }

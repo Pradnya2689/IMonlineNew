@@ -157,6 +157,21 @@ class IMHelper: NSObject {
         }
         return false
     }
+    
+    class func getUUID() -> String {
+//        var anyStoringError: Error? = nil
+//        let storedValue: String? = try? SFHFKeychainUtils.getPasswordForUsername("User Name", andServiceName: "Ingram")
+//        if storedValue != nil {
+//            return storedValue!
+//        }
+//        else {
+//            let theUUID: CFUUIDRef = CFUUIDCreate(nil)
+//            let string: CFString = CFUUIDCreateString(nil, theUUID)
+//            return (string as? String)!
+//        }
+        
+    return ""
+    }
    }
 
 extension String {

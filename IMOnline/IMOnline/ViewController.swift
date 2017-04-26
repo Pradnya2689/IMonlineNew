@@ -140,13 +140,16 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         }
 
     }
+    func preferedLanguage() -> String {
+        return NSLocale.preferredLanguages[0]
+    }
     func loginService(userid:String,password:String){
         var user = WebServiceManager.sharedInstance.user
         
         user.userId = userid
         user.password = password
-        user.language = "EN"
-        user.countryCode = "MX"
+        user.language = preferedLanguage()
+        user.countryCode = WebServiceManager.sharedInstance.countrySelection.countryId
         
         
         //For endavour contry

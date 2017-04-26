@@ -39,13 +39,13 @@ struct Constants {
     /// Stage 1 DEV
     static let HOST_URL = "https://mobility-stg.ingrammicro.com"
     
-    static let NOTIFICATION_READY_FOR_SEARCH = "productGroupsInitialzed"
+    //static let NOTIFICATION_READY_FOR_SEARCH = "productGroupsInitialzed"
     
     
     static let URL_GET_COUNTRY_LIST  = "\(HOST_URL)/Dispatcher/Countrylist/"
     
     // Stage 2 DEV
-    //static let HOST_URL = "https://mobility-stg2.ingrammicro.com"
+   // static let HOST_URL = "https://mobility-stg2.ingrammicro.com"
     
     // Stage 3 DEV
     //static let HOST_URL = "https://mobility-stg3.ingrammicro.com"

@@ -338,16 +338,16 @@ class ResponseParser: NSObject
         return dict
         
     }
-    func valueforEqualsKey (key: String) -> String {
-        let prefix: String = "\(key)="
-        for line in lines.reverseObjectEnumerator() {
-            if (line as! String).hasPrefix(prefix) {
-                let elements: [String] = (line as! String).components(separatedBy:  "=")
-                return elements[1]
-            }
-        }
-        return ""
-    }
+//    func valueforEqualsKey (key: String) -> String {
+//        let prefix: String = "\(key)="
+//        for line in lines.reverseObjectEnumerator() {
+//            if (line as! String).hasPrefix(prefix) {
+//                let elements: [String] = (line as! String).components(separatedBy:  "=")
+//                return elements[1]
+//            }
+//        }
+//        return ""
+//    }
 
     func isDropshipAllowed() -> Bool {
         let dropShipAllowed: String = self.valueforSeparatedKey(key:"ISDROPSHIPALLOWED")

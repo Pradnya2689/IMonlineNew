@@ -45,6 +45,8 @@ class IMUser: NSObject {
     var ads_ImpressionList:NSMutableArray!
     var currency: NSString!
     var currencyCultureForPage:NSMutableArray!
+    
+    var remainingTime = TimeInterval()
     override init() {
         
 //        if super.init() {

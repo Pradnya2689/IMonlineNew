@@ -46,6 +46,16 @@ class IMHelper: NSObject {
         }
         
     }
+    
+    class func timestamp() -> String {
+        var dateFormatter: DateFormatter?
+        if dateFormatter == nil {
+            dateFormatter = DateFormatter()
+            dateFormatter?.dateFormat = "yyyyMMddHHmmss"
+        }
+        return (dateFormatter?.string(from: Date()))!
+    }
+    
    class func fetchCookieArray(response:HTTPURLResponse) -> [HTTPCookie]{
         var cookieArray = [HTTPCookie]()
         

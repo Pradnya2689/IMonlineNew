@@ -67,6 +67,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    func showModalLogin(withSuccessBlock successBlock: @escaping (_: Void) -> Void, failedBlock: @escaping (_: Void) -> Void) {
+        //before touch id
+        /*LoginViewController *loginViewController = [[[LoginViewController alloc] init] autorelease];
+         loginViewController.successBlock = successBlock;
+         loginViewController.failedBlock = failedBlock;
+         [self.viewController pushViewController:loginViewController animated:YES];
+         */
+        //navigate to new login screen
+    }
+    
+    func hideModalLogin() {
+       // viewController.popViewController(animated: true)
+    }
+
 
     // MARK: - Core Data stack
 

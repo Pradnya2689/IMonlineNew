@@ -26,6 +26,7 @@ class IMHelper: NSObject {
     }
     
     class func empty(forNil s: String) -> String {
+        
         return (s.characters.count == 0) ? "" : s
     }
 
@@ -130,7 +131,7 @@ class IMHelper: NSObject {
     class func documentsDirectory() -> String {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
-//   class func fetchSessionCookie(request:HTTPURLResponse) -> HTTPCookie{
+   class func fetchSessionCookie(request:HTTPURLResponse) -> HTTPCookie{
 //        var cookie : HTTPCookie!
 //        
 //        let array = NSArray.init(object: request.allHeaderFields) as! NSArray
@@ -143,9 +144,37 @@ class IMHelper: NSObject {
 //        
 //        
 //        return cookie;
-//    
-//        
-//    }
+    let _cookiesAr = NSArray.init(object: request.allHeaderFields) as! [HTTPCookie]
+    var cookie: HTTPCookie?
+    var selectedCountry: String = WebServiceManager.sharedInstance.countrySelection.countryId
+    var resAr = NSMutableArray()
+    for cookie:HTTPCookie in _cookiesAr{
+        var textRange = NSRange()
+        textRange = (cookie.name as NSString).range(of: "SMIDENTITY")
+        if (textRange.location != NSNotFound) {
+          //  DLog("%@", cookie.properties)
+            if cookie.domain.hasPrefix(".ingrammicro.com") {
+                var val: String? = extractCookieVal(path: cookie.domain, name: "smsession")
+                var cookieProperties = [AnyHashable: Any]()
+                cookieProperties[HTTPCookiePropertyKey.name] = "SMSESSION"
+                cookieProperties[HTTPCookiePropertyKey.value] = val
+                cookieProperties[HTTPCookiePropertyKey.domain] = ".ingrammicro.com"
+                cookieProperties[HTTPCookiePropertyKey.path] = "/"
+                cookieProperties[HTTPCookiePropertyKey.version] = "0"
+                cookieProperties[HTTPCookiePropertyKey.expires] = Date().addingTimeInterval(2629743)
+                var _cookie = HTTPCookie(properties: cookieProperties as! [HTTPCookiePropertyKey : Any])
+                resAr.add(cookie)
+                break
+            }
+        }
+        else {
+            resAr.add(cookie)
+        }
+        
+        
+    }
+    return cookie!
+    }
     class func trimString(_ _str: String) -> String {
         return _str.trimmingCharacters(in: CharacterSet.whitespaces)
     }

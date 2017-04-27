@@ -59,8 +59,9 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchTextField.addTarget(self, action: Selector(("textFieldDidChange11")), for: UIControlEvents.allEditingEvents)
-
+        searchTextField.addTarget(self, action: #selector(CountrySearchViewController.textFieldDidChange11), for: UIControlEvents.allEditingEvents)
+      // let api = ApiHandler.sharedInstance
+    // let wc = WebServiceManager.sharedInstance
         WebServiceManager.sharedInstance.fetchCountries(withCompletionBlock: {(_ _countries: [Any]) -> Void in
             print(_countries)
 
@@ -239,9 +240,9 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         print(co.countryId)
         WebServiceManager.sharedInstance.countrySelection = countryArray[indexPath.row] as! IMCountry
         WebServiceManager.sharedInstance.user.countryCode = WebServiceManager.sharedInstance.countrySelection.countryId
-       selectedContryCode = WebServiceManager.sharedInstance.user.countryCode!
+       selectedContryCode = WebServiceManager.sharedInstance.countrySelection.countryId
       //print(WebServiceManager.sharedInstance.countrySelection.name)
-        print(WebServiceManager.sharedInstance.user.countryCode!)
+        print(WebServiceManager.sharedInstance.user.countryCode ?? "")
         print(selectedContryCode)
         
        

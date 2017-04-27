@@ -9,7 +9,7 @@
 import UIKit
 
 class IMUser: NSObject {
-     static let sharedInstance = IMUser()
+     //static let sharedInstance = IMUser()
     
     var countryCode:String?
     var language:String?
@@ -17,7 +17,7 @@ class IMUser: NSObject {
     var bnr : String?
     var customerNumber : String?
     var password : String?
-    var sessionId : String?
+    var sessionId : String? = ""
     // var countryCode : String?
     var sessionCookie:HTTPCookie!
     var allCookies:[HTTPCookie]!

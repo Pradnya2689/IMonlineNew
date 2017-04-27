@@ -18,7 +18,7 @@ import Alamofire
 class WebServiceManager: NSObject {
     static let sharedInstance = WebServiceManager()
     var countrySelection = IMCountry()
-    var user : IMUser = WebServiceManager.sharedInstance.user
+    var user = IMUser()
     var hersteller = NSMutableArray()
     var operations = [Any]()
     
@@ -37,6 +37,14 @@ class WebServiceManager: NSObject {
    // var productGroups:ProductGroup!
     var outageHtmlData:String!
     var isOutageAvailable:Bool!
+    
+    private override init() {
+        print("inside webservice")
+    }
+    
+    
+    
+    
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
         
@@ -142,7 +150,7 @@ class WebServiceManager: NSObject {
                 }
                 if self.user != nil
                 {
-                   // self.user.sessionCookie = sessionCookie
+                    self.user.sessionCookie = cookval
                     self.user.allCookies = allCookies
                 }
                 var message = parser.validateLogin()
@@ -155,7 +163,7 @@ class WebServiceManager: NSObject {
                     "WIFI",//IMHelper.connectionType(),
                         IMHelper.deviceModel(),
                         IMHelper.currentOS(),
-                        self.user.userId!,
+                        (self.user.userId)!,
                         WebServiceManager.sharedInstance.countrySelection.languageCode,
                         WebServiceManager.sharedInstance.countrySelection.countryId)
                     
@@ -205,7 +213,7 @@ class WebServiceManager: NSObject {
                             self.loadWheelData()
                             
                             
-                            if self.user.isStatesAvailable! {
+                            if (self.user.isStatesAvailable)! {
                                 DispatchQueue.global(qos: .default).async(execute: {() -> Void in
                                     self.loadStates()//pending
                                 })
@@ -301,8 +309,8 @@ class WebServiceManager: NSObject {
             productGroups = ProductGroups(string: productGroupsAsText!)
             return
         }
-        
-        var parameters: [AnyHashable: Any] = [
+        print(user.sessionId)
+        var parameters: NSDictionary = [
             IMHelper.empty(forNil: user.sessionId!) : IMHelper.empty(forNil: user.userId!),
             WebServiceManager.sharedInstance.countrySelection.countryId : IMHelper.empty(forNil: user.language!),
             "search" : "ALL"
@@ -410,16 +418,27 @@ class WebServiceManager: NSObject {
                         if messageDict != nil {
                           
                             var title: String? = messageDict.value(forKey: MESSAGE_TITLE_KEY) as! String?
-                            var message: String? = messageDict.value(forKey: MESSAGE_DESC_KEY) as! String?
-                        
-                            var alertView = UIAlertView(title: title!, message: message!, delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
+                            var message: String?=""
+                            if let a = messageDict.value(forKey: MESSAGE_DESC_KEY) as? String{
+                                message = a
+                            }
+                            
+                            
                             var orderService: String = "Order"
                             var basketListService: String = "Basket/List/?"
                             var range: NSRange = (urlString as NSString).range(of: orderService, options: .caseInsensitive)
                             var rangeBasket: NSRange = (urlString as NSString).range(of: basketListService, options: .caseInsensitive)
                             if range.location == NSNotFound {
                                 if rangeBasket.location == NSNotFound {
-                                    alertView.show()
+                                    if((message?.characters.count)! > 0){
+                                        var alertView = UIAlertView(title: title!, message: message!, delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
+                                        alertView.show()
+                                    }
+                                    else{
+//                                        var alertView = UIAlertView(title: title!, message: "", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
+//                                        alertView.show()
+                                    }
+                                    
                                 }
                             }
                             // [alertView show];//Temporarily hiding error alert messages
@@ -432,7 +451,7 @@ class WebServiceManager: NSObject {
                 if !validSession {
                     // session has expired, present login view modally
                     let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
-                    if showLoginViewIfSessionInvalid && !parser.isOutageAvailable() && !self.user.isOutage!
+                    if showLoginViewIfSessionInvalid && !parser.isOutageAvailable() && !(self.user.isOutage!)
                     {
                         if #available(iOS 10.0, *) {
                             (UIApplication.shared.delegate as? AppDelegate)?.showModalLogin(withSuccessBlock: {() -> Void in

@@ -144,7 +144,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         return NSLocale.preferredLanguages[0]
     }
     func loginService(userid:String,password:String){
-        var user = WebServiceManager.sharedInstance.user
+        var user : IMUser! = WebServiceManager.sharedInstance.user
         
         user.userId = userid
         user.password = password

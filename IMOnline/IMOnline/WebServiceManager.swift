@@ -154,7 +154,8 @@ class WebServiceManager: NSObject {
                     self.user.allCookies = allCookies
                 }
                 var message = parser.validateLogin()
-                if(message == ""){
+                if(message == "")
+                {
                 self.user .remember()
                // let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iOS&APPVERSION=3.0&CONNECTIONTYPE=WIFI&DEVICE=iPhone&OSVERSION=10.2&uid=pradnya.dongre@ingrammicro.com&lang=EN&country=MX")!
                     
@@ -178,7 +179,7 @@ class WebServiceManager: NSObject {
                     .responseString { response in
                         print("Response String: \(response.result.value)")
                         let settingsParser = ResponseParser.init(responseStr: response.result.value as! NSString)
-                        //  Converted with Swiftify v1.0.6314 - https://objectivec2swift.com/
+                      
                         
                             //self.user.remember()
                         if settingsParser.isOutageAvailable() && !self.isOutagePageVisible {
@@ -215,11 +216,14 @@ class WebServiceManager: NSObject {
                             
                             if (self.user.isStatesAvailable)! {
                                 DispatchQueue.global(qos: .default).async(execute: {() -> Void in
-                                    self.loadStates()//pending
+                                   //pending
                                 })
                             }
+                            
+                            
                             //block()
                         }else{
+                             self.loadStates()
                             //DLog("loginUserWithCompletionBlock settings canLogin says, user has no rights")
                             if settingsParser.isOutageAvailable() && !self.isOutageAvailable {
                                 var outageResponse: String = settingsParser.outageResponse()
@@ -269,7 +273,7 @@ class WebServiceManager: NSObject {
    
     func loadStates() {
         var productGroupsSavedAtDate: Date? = UserDefaults.standard.object(forKey: Constants.DEFAULTS_KEY_PRODUCTGROUPS_REMEMBERED_AT_DATE) as! Date?
-        if (productGroupsSavedAtDate == nil || Date().timeIntervalSince(productGroupsSavedAtDate!) > Double(Constants.PRODUCTGROUPS_TIMEOUT_IN_SECONDS)   || UserDefaults.standard.bool(forKey: "updateCache")) {
+//        if (productGroupsSavedAtDate == nil || Date().timeIntervalSince(productGroupsSavedAtDate!) > Double(Constants.PRODUCTGROUPS_TIMEOUT_IN_SECONDS)   || UserDefaults.standard.bool(forKey: "updateCache")) {
 //            var parameters: NSDictionary = [
 //                WebServiceManager.sharedInstance.countrySelection.countryId : IMHelper.empty(forNil: user.language!)
 //            ]
@@ -286,11 +290,12 @@ class WebServiceManager: NSObject {
             Alamofire.request(urlRequest)
                 .responseJSON { response in
                     print("Response JSON: \(response.result.value)")
+                   var jsonObjects: [AnyHashable: Any] = response.result.value as! [AnyHashable : Any]
             }
             
             
             //var plainPart: NSDictionary = [kSKPSMTPPartContentTypeKey: "text/plain; charset=UTF-8", kSKPSMTPPartMessageKey: self.data , kSKPSMTPPartContentTransferEncodingKey : "8bit"]
-        }
+     //   }
         
     }
     func loadWheelData() {

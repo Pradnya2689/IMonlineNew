@@ -37,7 +37,7 @@ struct Constants {
     //pragma mark base url's
     
     /// Stage 1 DEV
-    static let HOST_URL = "https://mobility-stg.ingrammicro.com"
+   // static let HOST_URL = "https://mobility-stg.ingrammicro.com"
     
     //static let NOTIFICATION_READY_FOR_SEARCH = "productGroupsInitialzed"
     
@@ -51,7 +51,7 @@ struct Constants {
     //static let HOST_URL = "https://mobility-stg3.ingrammicro.com"
     
     //Prod Chicago
-    //static let HOST_URL = "https://mobile-ch.ingrammicro.com"
+    static let HOST_URL = "https://mobile-ch.ingrammicro.com"
     
     //ab 29.10.12 verfügbar #define HOST_URL @"https://mobile.ingrammicro.com"
     //static let HOST_URL = "https://mobile-ff.ingrammicro.com"

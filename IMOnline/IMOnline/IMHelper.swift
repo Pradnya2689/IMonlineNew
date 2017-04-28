@@ -33,10 +33,10 @@ class IMHelper: NSObject {
   class  func setCookie(domain: String, path: String,name:String,value:String,secure:Bool,expires:Date,url:String) {
     print("domain \(domain) path \(path)  name \(name)  value \(value) secure \(secure)  expires \(expires)  url \(url)")
     let cookieProps: [HTTPCookiePropertyKey : Any] = [
-            HTTPCookiePropertyKey.domain: "mobility-stg.ingrammicro.com",
+            HTTPCookiePropertyKey.domain: domain,
             HTTPCookiePropertyKey.path: "/",
-            HTTPCookiePropertyKey.name: "IMGlobalWebAuthCookieMobile",
-            HTTPCookiePropertyKey.value: "pradnyadongre2",
+            HTTPCookiePropertyKey.name: name,
+            HTTPCookiePropertyKey.value: value,
             HTTPCookiePropertyKey.secure: false,
             HTTPCookiePropertyKey.expires: expires
         ]

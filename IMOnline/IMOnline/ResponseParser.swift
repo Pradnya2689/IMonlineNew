@@ -409,5 +409,44 @@ class ResponseParser: NSObject
                 }
                 return filters
             }
+    
+    
+    func sessionId() -> String {
+        if lines.count == 0 {
+            return ""
+        }
+        let firstLine: String? = (lines[0] as? String)
+        let elements: [String]? = firstLine?.components(separatedBy: ";")
+        if (elements?.count)! < 2 {
+            return ""
+        }
+        return (elements?[1])!
+    }
+    func validateLegacyLogin() -> String {
+        if lines.count == 0 {
+            return ""
+        }
+        let firstLine: String? = (lines[0] as? String)
+        let elements: [String]? = firstLine?.components(separatedBy: ";")
+        if (elements?.count)! < 2 {
+            return "error login"
+        }
+        if !("200" == elements?[0]) && ("OK" == elements?[1]) {
+            var errorDisc: String? = (lines[6] as? String)
+            var errorDiscStrElements: [String]? = errorDisc?.components(separatedBy: "=")
+            var errorDiscription: String = ""
+            if (errorDiscStrElements?.count)! > 0 {
+                errorDiscription = (errorDiscStrElements?[1])!
+            }
+            var errorCodeStr: String? = (lines[10] as? String)
+            if (errorCodeStr! as NSString).range(of: "9999").location != NSNotFound {
+                return "\(errorDiscription),\(errorCodeStr)"
+            }
+            return getLoginErrMessage(_errStr: (elements?[1] as? NSString)! ) as String
+        }
+
+        return ""
+    }
+
 }
 

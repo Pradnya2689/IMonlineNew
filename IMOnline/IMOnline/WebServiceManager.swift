@@ -41,9 +41,7 @@ class WebServiceManager: NSObject {
     private override init() {
         print("inside webservice")
     }
-    
-    
-    
+
     
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
@@ -100,11 +98,9 @@ class WebServiceManager: NSObject {
         
         
     }
-        func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
-        
-            
-            
-            var paramStr: String = "?DEVICE=%@&AGENT=%@&OSVERSION=%@&CONNECTIONTYPE=%@&APPVERSION=%@&lang=%@&country=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
+    
+    func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
+           var paramStr: String = "?DEVICE=%@&AGENT=%@&OSVERSION=%@&CONNECTIONTYPE=%@&APPVERSION=%@&lang=%@&country=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
             
             var loginPath = String(format: IMHelper.getURIforContractName("DoLogin") + (paramStr),
                                    "iPhone",
@@ -119,8 +115,6 @@ class WebServiceManager: NSObject {
                                     WebServiceManager.sharedInstance.securityCode,
                                     WebServiceManager.sharedInstance.resendCode)
 
-            
-            
         let url = URL(string:loginPath)!
             print(url)
         var urlRequest = URLRequest(url: url)
@@ -271,6 +265,225 @@ class WebServiceManager: NSObject {
             
     }
    
+    func loginUserLegacy(withCompletionBlock block: @escaping (_: Void) -> Void, failedBlock: @escaping (_ errorMessage: String, _ isOutage: Bool) -> Void) {
+    
+        fetchSessionForLegacy(withCompletionBlock: {
+            var paramStr: String = "?DEVICE=%@&AGENT=%@&OSVERSION=%@&CONNECTIONTYPE=%@&APPVERSION=%@&lang=%@&country=%@&sid=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
+            var loginPath = String(format: IMHelper.getURIforContractName("DoLogin") + (paramStr), "iPhone", "iOS",
+                IMHelper.currentOS(),
+                "WIFI",//IMHelper.connectionType(),
+                IMHelper.appVersion(),
+                WebServiceManager.sharedInstance.countrySelection.languageCode,
+                WebServiceManager.sharedInstance.countrySelection.countryId,
+                IMHelper.empty(forNil: self.user.sessionId!))
+
+            let url = URL(string:loginPath)!
+            print(url)
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = "POST"
+            
+            let parameters = "username:\(WebServiceManager.sharedInstance.user.userId!)\npassword:\(WebServiceManager.sharedInstance.user.password!)"
+            print(parameters)
+            urlRequest.httpBody = parameters.data(using: String.Encoding.utf8)
+            
+            urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
+            
+            Alamofire.request(urlRequest)
+                .responseString { response in
+                    print("Response String: \(response.result.value)")
+                    let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                    if parser.isOutageAvailable() && !self.isOutageAvailable {
+                        self.isOutageAvailable = true
+                        self.outageHtmlData = "\(parser.outageResponse())"
+                        self.user.isOutage = true
+                        failedBlock(self.outageHtmlData, true)
+                    }
+                    var message: String = parser.validateLegacyLogin()
+                    if(message == ""){
+                        self.user.remember()
+                        
+                        var paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&ccd=%@&bnr=%@&knr=%@&uid=%@&sid=%@&lang=%@&country=%@"
+                        var settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr),
+                            "iOS",
+                            IMHelper.appVersion(),
+                            "WIFI",//IMHelper.connectionType(),
+                            IMHelper.deviceModel(),
+                            IMHelper.currentOS(),
+                            self.user.language!,
+                            self.user.bnr!,
+                            self.user.customerNumber!,
+                            self.user.userId!,
+                            self.user.sessionId!,
+                            WebServiceManager.sharedInstance.countrySelection.languageCode,
+                            WebServiceManager.sharedInstance.countrySelection.countryId)
+                        
+                        var urlRequest = URLRequest(url: URL(string:settingsPath)!)
+                        urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
+                        urlRequest.httpMethod = "GET"
+                        urlRequest.httpShouldHandleCookies = true
+                        urlRequest.addValue("0", forHTTPHeaderField: "Content-Length")
+                        urlRequest.httpShouldHandleCookies = true
+                        print("urlstr \(urlRequest)")
+                        Alamofire.request(urlRequest)
+                            .responseString { response in
+                                print("Response String: \(response.result.value)")
+                                 let settingsParser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                                if settingsParser.isOutageAvailable() && !self.isOutageAvailable {
+                                    self.isOutageAvailable = true
+                                    self.outageHtmlData = "\(settingsParser.outageResponse())"
+                                    self.user.isOutage = true
+                                    failedBlock(self.outageHtmlData, true)
+                                }
+                                
+                                if settingsParser.canLogin(){
+                                    self.user.canAccessTracking = settingsParser.canAccessTracking()
+                                    self.user.canOrder = settingsParser.canOrder()
+                                    self.user.isAdmin = settingsParser.isAdmin()
+                                    self.user.isStatesAvailable = settingsParser.isStatesAvailable()
+                                    //amit.p
+                                    self.user.isDropShipAllowed = settingsParser.isDropshipAllowed()
+                                    //46276 Amit.p
+                                    //Amit.p:44926
+                                    self.user.currency = WebServiceManager.sharedInstance.countrySelection.currencySymbol as NSString!
+                                    //[IMHelper currentCurrency];
+                                    self.user.searchFilters = settingsParser.searchFilters() as NSArray!
+                                    settingsParser.cultureSettings()
+                                    
+                                    
+                                    if !(UserDefaults.standard.string(forKey: "selectedCountry") == WebServiceManager.sharedInstance.countrySelection.countryId) || !(UserDefaults.standard.string(forKey: "loginUserId") == WebServiceManager.sharedInstance.user.userId) {
+                                        UserDefaults.standard.set(true, forKey: "updateCache")
+                                        UserDefaults.standard.set(WebServiceManager.sharedInstance.countrySelection.countryId, forKey: "selectedCountry")
+                                        UserDefaults.standard.set(WebServiceManager.sharedInstance.user.userId, forKey: "loginUserId")
+                                        UserDefaults.standard.set(nil, forKey: "setDeliveryway")
+                                        self.user.defaultUserSetting()
+                                        //uttam.b Ticket 54178:Switching User or coutry should refresh right data
+                                    }
+                                    else {
+                                        UserDefaults.standard.set(false, forKey: "updateCache")
+                                    }
+                                    self.loadWheelData()
+                                }else {
+                                    if parser.isOutageAvailable() && !self.isOutageAvailable {
+                                        self.isOutageAvailable = true
+                                        self.outageHtmlData = "\(parser.outageResponse())"
+                                        self.user.isOutage = true
+                                        failedBlock(self.outageHtmlData, true)
+                                    }
+                                    else if !parser.isOutageAvailable() {
+                                        if parser.isOutageAvailable() {
+                                            self.isOutageAvailable = true
+                                            self.outageHtmlData = "\(parser.outageResponse())"
+                                            failedBlock(self.outageHtmlData, true)
+                                        }
+                                        else {
+                                            failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
+                                        }
+                                    }
+//                                    failedBlock
+//                                    if parser.isOutageAvailable() && !isOutageAvailable {
+//                                        isOutageAvailable = true
+//                                        outageHtmlData = "\(parser.outageResponse())"
+//                                        failedBlock(outageHtmlData, true)
+//                                    }
+//                                    else if !parser.isOutageAvailable() {
+//                                        failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
+//                                    }
+                                    
+                                }
+ 
+                                }
+
+                    }else {
+                        if parser.isOutageAvailable() && !self.isOutageAvailable {
+                            self.isOutageAvailable = true
+                            self.user.isOutage = true
+                            self.outageHtmlData = "\(parser.outageResponse())"
+                            failedBlock(self.outageHtmlData, true)
+                        }
+                        else if !parser.isOutageAvailable() && !self.user.isOutage! {
+                            failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
+                        }
+                        
+                    }
+                    }
+           // }
+            
+            
+        }, failedBlock: {_,_ in })
+    }
+    
+    
+
+    func fetchSessionForLegacy(withCompletionBlock successBlock: @escaping (_: Void) -> Void, failedBlock: @escaping (_ errorMessage: String, _ isOutage: Bool) -> Void) {
+        
+        var paramStr: String = "?DEVICE=%@&AGENT=%@&OSVERSION=%@&CONNECTIONTYPE=%@&APPVERSION=%@&country=%@&uid=%@&lang=%@"
+        var sessionPath = String(format: IMHelper.getURIforContractName("CreateSession") + (paramStr), IMHelper.empty(forNil: IMHelper.deviceModel()),
+                                 "iOS",
+                                 IMHelper.empty(forNil: IMHelper.currentOS()),
+                                 "WIFI",//IMHelper.empty(forNil: IMHelper.connectionType()),
+                                 IMHelper.empty(forNil: IMHelper.appVersion()),
+                                 WebServiceManager.sharedInstance.countrySelection.countryId,
+                                 IMHelper.empty(forNil: user.userId!),
+                                 IMHelper.empty(forNil: user.language!))
+        
+
+        let url = URL(string:sessionPath)!
+        print(url)
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "PUT"
+        
+        //let parameters = "username:\(WebServiceManager.sharedInstance.user.userId!)\npassword:\(WebServiceManager.sharedInstance.user.password!)"
+       // print(parameters)
+       // urlRequest.httpBody = parameters.data(using: String.Encoding.utf8)
+        
+        
+        urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
+        
+        Alamofire.request(urlRequest)
+            .responseString { response in
+                print("Response String: \(response.result.value)")
+                let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                
+                if parser.isOutageAvailable() && !self.isOutageAvailable {
+                    self.isOutageAvailable = true
+                    self.outageHtmlData = "\(parser.outageResponse())"
+                    self.user.isOutage = true
+                    failedBlock(self.outageHtmlData, true)
+                }
+               else if parser.successREST() {
+                    self.user.sessionId = parser.sessionId()
+                    if self.user.sessionId != nil {
+                        successBlock()
+                    }
+                    else {
+                        if parser.isOutageAvailable() {
+                            self.isOutageAvailable = true
+                            self.outageHtmlData = "\(parser.outageResponse())"
+                            self.user.isOutage = true
+                            failedBlock(self.outageHtmlData, true)
+                        }
+                        else if !parser.isOutageAvailable() {
+                           // DLog("fetchSessionWithCompletionBlock could not parse the sessionId in the response")
+                            failedBlock("", false)
+                        }
+                    }
+                }
+                else {
+                   // DLog("fetchSessionWithCompletionBlock failed to parse the response")
+                    if parser.isOutageAvailable() {
+                        self.isOutageAvailable = true
+                        self.outageHtmlData = "\(parser.outageResponse())"
+                        self.user.isOutage = true
+                        failedBlock(self.outageHtmlData, true)
+                    }
+                    else if !parser.isOutageAvailable() {
+                        failedBlock("", false)
+                    }
+                    
+                }
+
+        }
+    }
     func loadStates() {
         var productGroupsSavedAtDate: Date? = UserDefaults.standard.object(forKey: Constants.DEFAULTS_KEY_PRODUCTGROUPS_REMEMBERED_AT_DATE) as! Date?
 //        if (productGroupsSavedAtDate == nil || Date().timeIntervalSince(productGroupsSavedAtDate!) > Double(Constants.PRODUCTGROUPS_TIMEOUT_IN_SECONDS)   || UserDefaults.standard.bool(forKey: "updateCache")) {

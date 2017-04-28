@@ -150,7 +150,12 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         user.password = password
         user.language = preferedLanguage()
         user.countryCode = WebServiceManager.sharedInstance.countrySelection.countryId
-        
+        if WebServiceManager.sharedInstance.countrySelection != nil && (!(WebServiceManager.sharedInstance.countrySelection.environmentType == Constants.ENV_DACH)) {
+            // user.userId = self.userIdLabelLegacy.text;////Check it and include in login UI
+            user.bnr = ""
+            user.countryCode = ""
+            user.customerNumber = ""
+        }
         
         //For endavour contry
         if("E" == Constants.ENV_ENDEAVOUR){
@@ -167,6 +172,52 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         }, failedBlock: {() -> Void in
         })
     }
+    
+    func getVisibleElements(byFunctions _functions: [IMFunctionList]) -> NSMutableArray {
+        /*
+         PRODUCTSEARCH
+         SCANNER
+         TRACKING
+         BASKET
+         */
+        var functionMap = NSMutableDictionary()
+        functionMap["ORDER"] = [Constants.BASKET_BTN]
+        functionMap["TRACKING"] = [Constants.TRACKING_BTN]
+        functionMap["SCANNER"] = [Constants.SCANNER_BTN]
+        //amit.p 46192
+        var visibleItems: NSMutableArray = [Constants.SEARCH_BTN]
+        for  funcs : IMFunctionList in (_functions as? [IMFunctionList])!{
+            if (functionMap.object(forKey: funcs.groupName) != nil) {
+                var elements: NSArray? = (functionMap[ funcs.groupName] as? NSArray)
+                //                DLog(@"->found function for %@",func.groupName );
+                for en in elements! {
+                    visibleItems.add(en as! String)
+                    //                    DLog(@"+ add element for %@ to menu",func.groupName );
+                }
+            }
+        }
+        if visibleItems.count > 3 {
+            if (visibleItems as NSArray).index(of: "SCANNER") != NSNotFound {
+                var indexScanner: Int = (visibleItems as NSArray).index(of: "SCANNER")
+                var el1: String? = (visibleItems[indexScanner] as? String)
+                visibleItems[indexScanner] = visibleItems[3]
+                visibleItems[3] = el1
+            }
+            if (visibleItems as NSArray).index(of: "BASKET") != NSNotFound && (visibleItems as NSArray).index(of: "TRACKING") != NSNotFound {
+                var index1: Int = (visibleItems as NSArray).index(of: "BASKET")
+                var index2: Int = (visibleItems as NSArray).index(of: "TRACKING")
+                if index1 > index2 {
+                    var el: String? = (visibleItems[index1] as? String)
+                    visibleItems[index1] = visibleItems[index2]
+                    visibleItems[index2] = el
+                }
+            }
+        }
+        return visibleItems;
+    }
+    
+    
+    
     func showAlert(messageToShow:String){
         let alertView:UIAlertView = UIAlertView()
         alertView.title = ""

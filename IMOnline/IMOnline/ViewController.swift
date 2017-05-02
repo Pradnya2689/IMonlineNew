@@ -11,7 +11,7 @@ import UIKit
 let screenSize: CGRect = UIScreen.main.bounds
 let screenWidth = screenSize.width
 let screenHeight = screenSize.height
-
+var selectedcountry = NSString()
 
 class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate {
     
@@ -24,7 +24,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     @IBOutlet weak var usernameTF: UITextField!
     @IBOutlet weak var forgotPassBtn: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
-    var selectedcountry = NSString()
+    
     
     @IBAction func countryBtnAction(_ sender: UIButton) {
         
@@ -108,10 +108,12 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         self.loginScrollView.contentInset = UIEdgeInsets.zero
         self.loginScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.countryBtn.setTitle("", for: UIControlState.normal)
         self.countryBtn.setTitle(selectedcountry as String, for: UIControlState.normal)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+       
         registerKeyboardNotifications()
     }
     
@@ -175,15 +177,15 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
          TRACKING
          BASKET
          */
-        var functionMap = NSMutableDictionary()
+        let functionMap = NSMutableDictionary()
         functionMap["ORDER"] = [Constants.BASKET_BTN]
         functionMap["TRACKING"] = [Constants.TRACKING_BTN]
         functionMap["SCANNER"] = [Constants.SCANNER_BTN]
         //amit.p 46192
-        var visibleItems: NSMutableArray = [Constants.SEARCH_BTN]
+        let visibleItems: NSMutableArray = [Constants.SEARCH_BTN]
         for  funcs : IMFunctionList in (_functions as? [IMFunctionList])!{
             if (functionMap.object(forKey: funcs.groupName) != nil) {
-                var elements: NSArray? = (functionMap[ funcs.groupName] as? NSArray)
+                let elements: NSArray? = (functionMap[ funcs.groupName] as? NSArray)
                 //                DLog(@"->found function for %@",func.groupName );
                 for en in elements! {
                     visibleItems.add(en as! String)
@@ -193,16 +195,16 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         }
         if visibleItems.count > 3 {
             if (visibleItems as NSArray).index(of: "SCANNER") != NSNotFound {
-                var indexScanner: Int = (visibleItems as NSArray).index(of: "SCANNER")
-                var el1: String? = (visibleItems[indexScanner] as? String)
+                let indexScanner: Int = (visibleItems as NSArray).index(of: "SCANNER")
+                let el1: String? = (visibleItems[indexScanner] as? String)
                 visibleItems[indexScanner] = visibleItems[3]
                 visibleItems[3] = el1
             }
             if (visibleItems as NSArray).index(of: "BASKET") != NSNotFound && (visibleItems as NSArray).index(of: "TRACKING") != NSNotFound {
-                var index1: Int = (visibleItems as NSArray).index(of: "BASKET")
-                var index2: Int = (visibleItems as NSArray).index(of: "TRACKING")
+                let index1: Int = (visibleItems as NSArray).index(of: "BASKET")
+                let index2: Int = (visibleItems as NSArray).index(of: "TRACKING")
                 if index1 > index2 {
-                    var el: String? = (visibleItems[index1] as? String)
+                    let el: String? = (visibleItems[index1] as? String)
                     visibleItems[index1] = visibleItems[index2]
                     visibleItems[index2] = el
                 }

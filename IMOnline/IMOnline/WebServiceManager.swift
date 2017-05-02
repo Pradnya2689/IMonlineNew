@@ -52,8 +52,6 @@ class WebServiceManager: NSObject {
         ]
         self.performRESTCall(baseURL: Constants.URL_GET_COUNTRY_LIST, httpMethod: "GET", parameters: params as! [NSObject : AnyObject], successBlock: {(_ responseText: String) -> Void in
             print(successBlock)
-            //let stringdemo = responseText as
-            //let parser = ResponseParser.init(responseStr: successBlock as! String as NSString)
             
             let parser = ResponseParser.init(responseStr: responseText as NSString )
             var arr : NSArray = []
@@ -69,11 +67,8 @@ class WebServiceManager: NSObject {
         
         
     }
-   
     
     func fetchFunctionList(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
-        
-        
         
         let params: [AnyHashable: Any]? = [
             "LANGCODE" : (NSLocale.preferredLanguages[0])
@@ -100,9 +95,9 @@ class WebServiceManager: NSObject {
     }
     
     func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
-           var paramStr: String = "?DEVICE=%@&AGENT=%@&OSVERSION=%@&CONNECTIONTYPE=%@&APPVERSION=%@&lang=%@&country=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
+           let paramStr: String = "?DEVICE=%@&AGENT=%@&OSVERSION=%@&CONNECTIONTYPE=%@&APPVERSION=%@&lang=%@&country=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
             
-            var loginPath = String(format: IMHelper.getURIforContractName("DoLogin") + (paramStr),
+            let loginPath = String(format: IMHelper.getURIforContractName("DoLogin") + (paramStr),
                                    "iPhone",
                                    "iOS",
                                    IMHelper.currentOS(),
@@ -147,13 +142,13 @@ class WebServiceManager: NSObject {
                     self.user.sessionCookie = cookval
                     self.user.allCookies = allCookies
                 }
-                var message = parser.validateLogin()
+                let message = parser.validateLogin()
                 if(message == ""){
                 self.user .remember()
                // let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iOS&APPVERSION=3.0&CONNECTIONTYPE=WIFI&DEVICE=iPhone&OSVERSION=10.2&uid=pradnya.dongre@ingrammicro.com&lang=EN&country=MX")!
                     
-                    var paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&uid=%@&lang=%@&country=%@"
-                    var settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr), "iOS", IMHelper.appVersion(),
+                    let paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&uid=%@&lang=%@&country=%@"
+                    let settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr), "iOS", IMHelper.appVersion(),
                     "WIFI",//IMHelper.connectionType(),
                         IMHelper.deviceModel(),
                         IMHelper.currentOS(),
@@ -216,7 +211,7 @@ class WebServiceManager: NSObject {
                         }else{
                             //DLog("loginUserWithCompletionBlock settings canLogin says, user has no rights")
                             if settingsParser.isOutageAvailable() && !self.isOutageAvailable {
-                                var outageResponse: String = settingsParser.outageResponse()
+                                let outageResponse: String = settingsParser.outageResponse()
                                 self.isOutageAvailable = true
                                 failedBlock()
                             }
@@ -226,9 +221,9 @@ class WebServiceManager: NSObject {
                             
                         }
                         if(response.result.isFailure){
-                            var settingsParser = ResponseParser(responseStr: response.result.value as! NSString)
+                            let settingsParser = ResponseParser(responseStr: response.result.value as! NSString)
                             if settingsParser.isOutageAvailable() {
-                                var outageResponse: String = settingsParser.outageResponse()
+                                let outageResponse: String = settingsParser.outageResponse()
                                 self.isOutageAvailable = true
                                 //failedBlock(outageResponse, true)
                             }
@@ -241,10 +236,10 @@ class WebServiceManager: NSObject {
                     
                 }
                 if((response.error) == nil){
-                    var settingsParser = ResponseParser(responseStr: response.result.value as! NSString)
+                    let settingsParser = ResponseParser(responseStr: response.result.value as! NSString)
                     if settingsParser.isOutageAvailable() && !self.isOutageAvailable {
                         self.isOutageAvailable = true
-                        var outageResponse: String = settingsParser.outageResponse()
+                        let outageResponse: String = settingsParser.outageResponse()
                         //failedBlock(outageResponse, true)
                     }
                     else if !settingsParser.isOutageAvailable() {
@@ -294,12 +289,12 @@ class WebServiceManager: NSObject {
                         self.user.isOutage = true
                         failedBlock(self.outageHtmlData, true)
                     }
-                    var message: String = parser.validateLegacyLogin()
+                    let message: String = parser.validateLegacyLogin()
                     if(message == ""){
                         self.user.remember()
                         
-                        var paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&ccd=%@&bnr=%@&knr=%@&uid=%@&sid=%@&lang=%@&country=%@"
-                        var settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr),
+                        let paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&ccd=%@&bnr=%@&knr=%@&uid=%@&sid=%@&lang=%@&country=%@"
+                        let settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr),
                             "iOS",
                             IMHelper.appVersion(),
                             "WIFI",//IMHelper.connectionType(),

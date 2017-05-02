@@ -27,19 +27,31 @@ struct Constants {
     static let SESSION_COOKIE_NAME = ".ASPXAUTHMobile"
     static let US_SESSION_COOKIE_NAME = "IMGlobalWebAuthCookieMobile"
     
+    static let ANY_GROUP = -1
+    
+   static let NOTIFICATION_READY_FOR_SEARCH = "productGroupsInitialzed"
+    // static let DEFAULTS_KEY_PRODUCTGROUPS_REMEMBERED_AT_DATE = "productGroupsRememberedAtDate"
+    
+    
+    
     //pragma mark base url's
     
     /// Stage 1 DEV
-    static let HOST_URL = "https://mobility-stg.ingrammicro.com"
+   // static let HOST_URL = "https://mobility-stg.ingrammicro.com"
+    
+    //static let NOTIFICATION_READY_FOR_SEARCH = "productGroupsInitialzed"
+    
+    
+    static let URL_GET_COUNTRY_LIST  = "\(HOST_URL)/Dispatcher/Countrylist/"
     
     // Stage 2 DEV
-    //static let HOST_URL = "https://mobility-stg2.ingrammicro.com"
+   // static let HOST_URL = "https://mobility-stg2.ingrammicro.com"
     
     // Stage 3 DEV
     //static let HOST_URL = "https://mobility-stg3.ingrammicro.com"
     
     //Prod Chicago
-    //static let HOST_URL = "https://mobile-ch.ingrammicro.com"
+    static let HOST_URL = "https://mobile-ch.ingrammicro.com"
     
     //ab 29.10.12 verfügbar #define HOST_URL @"https://mobile.ingrammicro.com"
     //static let HOST_URL = "https://mobile-ff.ingrammicro.com"
@@ -80,7 +92,7 @@ struct Constants {
     /////////////////////////////////////////////////////////////
     
     static let URL_GET_FUNCTION_LIST = "\(HOST_URL)/Dispatcher/Functionlist/"
-    static let URL_GET_COUNTRY_LIST = "\(HOST_URL)/Dispatcher/Countrylist/"
+    static let URL_GET_COUNTRY_LIST1 = "\(HOST_URL)/Dispatcher/Countrylist/"
     
     static let SEARCH_BTN = "SEARCH"
     static let BASKET_BTN = "BASKET"

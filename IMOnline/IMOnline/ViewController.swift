@@ -13,7 +13,7 @@ import LocalAuthentication
 let screenSize: CGRect = UIScreen.main.bounds
 let screenWidth = screenSize.width
 let screenHeight = screenSize.height
-
+var selectedcountry = NSString()
 
 class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate {
     
@@ -48,7 +48,8 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-       
+       print(selectedcountry)
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(_:)))
         tap.delegate = self
         view.addGestureRecognizer(tap)
@@ -113,9 +114,12 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         self.loginScrollView.contentInset = UIEdgeInsets.zero
         self.loginScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        self.countryBtn.setTitle("", for: UIControlState.normal)
+        self.countryBtn.setTitle(selectedcountry as String, for: UIControlState.normal)
+    }
     override func viewWillAppear(_ animated: Bool) {
-        
+       
         registerKeyboardNotifications()
     }
     
@@ -143,11 +147,86 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
             
             WebServiceManager.sharedInstance.loginWebservice()
         }
-        
+
+    }
+    func preferedLanguage() -> String {
+        return NSLocale.preferredLanguages[0]
     }
     func loginService(userid:String,password:String){
+        var user : IMUser! = WebServiceManager.sharedInstance.user
         
+        user.userId = userid
+        user.password = password
+        user.language = preferedLanguage()
+        user.countryCode = WebServiceManager.sharedInstance.countrySelection.countryId
+        if WebServiceManager.sharedInstance.countrySelection != nil && (!(WebServiceManager.sharedInstance.countrySelection.environmentType == Constants.ENV_DACH)) {
+            // user.userId = self.userIdLabelLegacy.text;////Check it and include in login UI
+            user.bnr = ""
+            user.countryCode = ""
+            user.customerNumber = ""
+        }
+        
+        //For endavour contry
+        if("E" == Constants.ENV_ENDEAVOUR){
+            
+        }
+        
+        else if("L" == Constants.ENV_LEGACY)
+        {
+        
+        }
+        
+        WebServiceManager.sharedInstance.loginWebservice(withCompletionBlock: { (_: [Any]) in
+            
+        }, failedBlock: {() -> Void in
+        })
     }
+    
+    func getVisibleElements(byFunctions _functions: [IMFunctionList]) -> NSMutableArray {
+        /*
+         PRODUCTSEARCH
+         SCANNER
+         TRACKING
+         BASKET
+         */
+        let functionMap = NSMutableDictionary()
+        functionMap["ORDER"] = [Constants.BASKET_BTN]
+        functionMap["TRACKING"] = [Constants.TRACKING_BTN]
+        functionMap["SCANNER"] = [Constants.SCANNER_BTN]
+        //amit.p 46192
+        let visibleItems: NSMutableArray = [Constants.SEARCH_BTN]
+        for  funcs : IMFunctionList in (_functions as? [IMFunctionList])!{
+            if (functionMap.object(forKey: funcs.groupName) != nil) {
+                let elements: NSArray? = (functionMap[ funcs.groupName] as? NSArray)
+                //                DLog(@"->found function for %@",func.groupName );
+                for en in elements! {
+                    visibleItems.add(en as! String)
+                    //                    DLog(@"+ add element for %@ to menu",func.groupName );
+                }
+            }
+        }
+        if visibleItems.count > 3 {
+            if (visibleItems as NSArray).index(of: "SCANNER") != NSNotFound {
+                let indexScanner: Int = (visibleItems as NSArray).index(of: "SCANNER")
+                let el1: String? = (visibleItems[indexScanner] as? String)
+                visibleItems[indexScanner] = visibleItems[3]
+                visibleItems[3] = el1
+            }
+            if (visibleItems as NSArray).index(of: "BASKET") != NSNotFound && (visibleItems as NSArray).index(of: "TRACKING") != NSNotFound {
+                let index1: Int = (visibleItems as NSArray).index(of: "BASKET")
+                let index2: Int = (visibleItems as NSArray).index(of: "TRACKING")
+                if index1 > index2 {
+                    let el: String? = (visibleItems[index1] as? String)
+                    visibleItems[index1] = visibleItems[index2]
+                    visibleItems[index2] = el
+                }
+            }
+        }
+        return visibleItems;
+    }
+    
+    
+    
     func showAlert(messageToShow:String){
         let alertView:UIAlertView = UIAlertView()
         alertView.title = ""

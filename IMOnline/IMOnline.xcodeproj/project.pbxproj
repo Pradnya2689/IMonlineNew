@@ -8,7 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		4C3BA43A1E9E6FDD00D0ECEB /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */; };
+		4C6B0C9E1EA7A7150005E6E1 /* ProductGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B0C9D1EA7A7150005E6E1 /* ProductGroup.swift */; };
+		4C8798BE1EA77E1A00D1AB91 /* IMGroupCombDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8798BA1EA77E1A00D1AB91 /* IMGroupCombDTO.swift */; };
+		4C8798BF1EA77E1A00D1AB91 /* IMGroupDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8798BB1EA77E1A00D1AB91 /* IMGroupDTO.swift */; };
+		4C8798C01EA77E1A00D1AB91 /* IMProductGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8798BC1EA77E1A00D1AB91 /* IMProductGroup.swift */; };
+		4C8798C31EA78C2A00D1AB91 /* IMGroupCombi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8798C21EA78C2A00D1AB91 /* IMGroupCombi.swift */; };
+		4C8798C51EA795A400D1AB91 /* IMSearchPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8798C41EA795A400D1AB91 /* IMSearchPredicate.swift */; };
 		4CA7AE681E9E4C6000E0DCBB /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */; };
+		4CD077621EA4BCE1000F2780 /* IMHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD077611EA4BCE1000F2780 /* IMHelper.swift */; };
+		4CD077641EA4F0E5000F2780 /* IMOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD077631EA4F0E5000F2780 /* IMOperation.swift */; };
 		4CD376C41E9B68DB005C0D7A /* IMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD376C31E9B68DB005C0D7A /* IMConstants.swift */; };
 		4CD376C61E9B949E005C0D7A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD376C51E9B949E005C0D7A /* SplashViewController.swift */; };
 		4CD376CA1E9BBA49005C0D7A /* ContryApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD376C91E9BBA49005C0D7A /* ContryApiModel.swift */; };
@@ -31,6 +39,9 @@
 		C3CD10161E979381002920A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD10111E979301002920A0 /* Roboto-Regular.ttf */; };
 		C3CD10171E979381002920A0 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3CD10121E979301002920A0 /* Roboto-Thin.ttf */; };
 		C3CD10191E97C7F6002920A0 /* CountrySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */; };
+		D914E0581EA7968600D82BAD /* IMFunctionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914E0571EA7968600D82BAD /* IMFunctionList.swift */; };
+		D96D366E1EA4AC20000AEE8F /* IMCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96D366D1EA4AC20000AEE8F /* IMCountry.swift */; };
+		D98FEB6D1E9FA98700B4C03C /* IMUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98FEB6C1E9FA98700B4C03C /* IMUser.swift */; };
 		E27D3D9154E3A6324638FC94 /* Pods_IMOnline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4939C1B2DB307499970360BF /* Pods_IMOnline.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +68,15 @@
 		39B8756E2DCE633A3D4F905D /* Pods-IMOnlineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineUITests/Pods-IMOnlineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4939C1B2DB307499970360BF /* Pods_IMOnline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMOnline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceManager.swift; sourceTree = "<group>"; };
+		4C6B0C9D1EA7A7150005E6E1 /* ProductGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductGroup.swift; sourceTree = "<group>"; };
+		4C8798BA1EA77E1A00D1AB91 /* IMGroupCombDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMGroupCombDTO.swift; sourceTree = "<group>"; };
+		4C8798BB1EA77E1A00D1AB91 /* IMGroupDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMGroupDTO.swift; sourceTree = "<group>"; };
+		4C8798BC1EA77E1A00D1AB91 /* IMProductGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMProductGroup.swift; sourceTree = "<group>"; };
+		4C8798C21EA78C2A00D1AB91 /* IMGroupCombi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMGroupCombi.swift; sourceTree = "<group>"; };
+		4C8798C41EA795A400D1AB91 /* IMSearchPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMSearchPredicate.swift; sourceTree = "<group>"; };
 		4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
+		4CD077611EA4BCE1000F2780 /* IMHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMHelper.swift; sourceTree = "<group>"; };
+		4CD077631EA4F0E5000F2780 /* IMOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMOperation.swift; sourceTree = "<group>"; };
 		4CD376C31E9B68DB005C0D7A /* IMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMConstants.swift; sourceTree = "<group>"; };
 		4CD376C51E9B949E005C0D7A /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		4CD376C91E9BBA49005C0D7A /* ContryApiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContryApiModel.swift; sourceTree = "<group>"; };
@@ -85,6 +104,9 @@
 		C3CD10111E979301002920A0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		C3CD10121E979301002920A0 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountrySearchTableViewCell.swift; path = ../CountrySearchTableViewCell.swift; sourceTree = "<group>"; };
+		D914E0571EA7968600D82BAD /* IMFunctionList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMFunctionList.swift; sourceTree = "<group>"; };
+		D96D366D1EA4AC20000AEE8F /* IMCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMCountry.swift; path = ../IMCountry.swift; sourceTree = "<group>"; };
+		D98FEB6C1E9FA98700B4C03C /* IMUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMUser.swift; sourceTree = "<group>"; };
 		DADE172D97A8508C8F03DDA4 /* Pods-IMOnline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnline.release.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnline/Pods-IMOnline.release.xcconfig"; sourceTree = "<group>"; };
 		DF57EC905A399436F0D90F68 /* Pods-IMOnlineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMOnlineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IMOnlineUITests/Pods-IMOnlineUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E9E33374F2C38F2A290B3076 /* Pods_IMOnlineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMOnlineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,8 +157,18 @@
 		4C78154E1E9F541800F0F3D0 /* NewtWorkClasses */ = {
 			isa = PBXGroup;
 			children = (
+				4CD077631EA4F0E5000F2780 /* IMOperation.swift */,
+				4CD077611EA4BCE1000F2780 /* IMHelper.swift */,
 				4C3BA4391E9E6FDD00D0ECEB /* WebServiceManager.swift */,
 				4CA7AE671E9E4C6000E0DCBB /* ResponseParser.swift */,
+				D96D366D1EA4AC20000AEE8F /* IMCountry.swift */,
+				D98FEB6C1E9FA98700B4C03C /* IMUser.swift */,
+				4C8798BA1EA77E1A00D1AB91 /* IMGroupCombDTO.swift */,
+				4C8798BB1EA77E1A00D1AB91 /* IMGroupDTO.swift */,
+				4C8798BC1EA77E1A00D1AB91 /* IMProductGroup.swift */,
+				4C8798C21EA78C2A00D1AB91 /* IMGroupCombi.swift */,
+				4C8798C41EA795A400D1AB91 /* IMSearchPredicate.swift */,
+				4C6B0C9D1EA7A7150005E6E1 /* ProductGroup.swift */,
 			);
 			name = NewtWorkClasses;
 			sourceTree = "<group>";
@@ -200,6 +232,7 @@
 		C36024641E96219E00C72D82 = {
 			isa = PBXGroup;
 			children = (
+				D914E0571EA7968600D82BAD /* IMFunctionList.swift */,
 				C360246F1E96219E00C72D82 /* IMOnline */,
 				C36024871E96219E00C72D82 /* IMOnlineTests */,
 				C36024921E96219E00C72D82 /* IMOnlineUITests */,
@@ -336,6 +369,7 @@
 					C360246C1E96219E00C72D82 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = A8U8Q2EEBA;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					C36024831E96219E00C72D82 = {
@@ -545,16 +579,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C8798C01EA77E1A00D1AB91 /* IMProductGroup.swift in Sources */,
+				4C8798C31EA78C2A00D1AB91 /* IMGroupCombi.swift in Sources */,
+				4CD077641EA4F0E5000F2780 /* IMOperation.swift in Sources */,
 				C36024731E96219E00C72D82 /* ViewController.swift in Sources */,
 				4CD376CA1E9BBA49005C0D7A /* ContryApiModel.swift in Sources */,
+				4C8798BF1EA77E1A00D1AB91 /* IMGroupDTO.swift in Sources */,
 				C35B681D1E9F54B800260F01 /* ProductSearchViewController.swift in Sources */,
 				4CD376C41E9B68DB005C0D7A /* IMConstants.swift in Sources */,
 				C36024711E96219E00C72D82 /* AppDelegate.swift in Sources */,
 				4CA7AE681E9E4C6000E0DCBB /* ResponseParser.swift in Sources */,
+				D914E0581EA7968600D82BAD /* IMFunctionList.swift in Sources */,
 				C35B681C1E9F54B800260F01 /* ProductSearchViewCell.swift in Sources */,
+				D98FEB6D1E9FA98700B4C03C /* IMUser.swift in Sources */,
 				C36024791E96219E00C72D82 /* IMOnline.xcdatamodeld in Sources */,
+				D96D366E1EA4AC20000AEE8F /* IMCountry.swift in Sources */,
 				C36024A21E96836300C72D82 /* CountrySearchViewController.swift in Sources */,
+				4C6B0C9E1EA7A7150005E6E1 /* ProductGroup.swift in Sources */,
 				4C3BA43A1E9E6FDD00D0ECEB /* WebServiceManager.swift in Sources */,
+				4C8798BE1EA77E1A00D1AB91 /* IMGroupCombDTO.swift in Sources */,
+				4C8798C51EA795A400D1AB91 /* IMSearchPredicate.swift in Sources */,
+				4CD077621EA4BCE1000F2780 /* IMHelper.swift in Sources */,
 				C3CD10191E97C7F6002920A0 /* CountrySearchTableViewCell.swift in Sources */,
 				4CD376C61E9B949E005C0D7A /* SplashViewController.swift in Sources */,
 			);
@@ -656,6 +701,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -697,6 +744,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -707,12 +756,16 @@
 			baseConfigurationReference = 0C1E3CCA32AE725CAE0D9F42 /* Pods-IMOnline.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = A8U8Q2EEBA;
 				INFOPLIST_FILE = IMOnline/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -722,12 +775,15 @@
 			baseConfigurationReference = DADE172D97A8508C8F03DDA4 /* Pods-IMOnline.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = A8U8Q2EEBA;
 				INFOPLIST_FILE = IMOnline/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

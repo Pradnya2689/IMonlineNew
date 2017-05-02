@@ -252,7 +252,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
             
             let nextView = self.storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
             print(self.selectedCountryStr)
-            nextView.selectedcountry = self.selectedCountryStr as NSString
+           selectedcountry = self.selectedCountryStr as NSString
           // nextView.countryBtn.setTitle("hi", for: UIControlState.normal)
                 self.navigationController?.pushViewController(nextView, animated: true)
     

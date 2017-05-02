@@ -164,6 +164,11 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
             
         }
         
+        else if("L" == Constants.ENV_LEGACY)
+        {
+        
+        }
+        
         WebServiceManager.sharedInstance.loginWebservice(withCompletionBlock: { (_: [Any]) in
             
         }, failedBlock: {() -> Void in

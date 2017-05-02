@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="g4L-O8-TVu">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="g4L-O8-TVu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -200,10 +200,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gDM-bN-mxq">
-                                                        <rect key="frame" x="0.0" y="338" width="375" height="30"/>
+                                                        <rect key="frame" x="0.0" y="338" width="375" height="2"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mGZ-b3-kgS">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="2"/>
                                                                 <state key="normal">
                                                                     <attributedString key="attributedTitle">
                                                                         <fragment content="Forgot Your Password?">
@@ -219,6 +219,25 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1rE-a5-lUY">
+                                                        <rect key="frame" x="30" y="413" width="315" height="30"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0j-Y9-yC1">
+                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="rt1-22-tcm"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Conditions Of Use"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSJ-P2-dHh">
+                                                                <rect key="frame" x="207" y="0.0" width="108" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="108" id="icf-EL-FUF"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Contact Us"/>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.94509803921568625" green="0.96078431372549022" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -226,26 +245,30 @@
                                                     <constraint firstItem="GN3-4K-30E" firstAttribute="leading" secondItem="tjQ-Db-QXZ" secondAttribute="leading" constant="93" id="0Xk-wZ-Wuy"/>
                                                     <constraint firstItem="2Y2-ah-5zf" firstAttribute="centerX" secondItem="tjQ-Db-QXZ" secondAttribute="centerX" id="2HM-j9-Hid"/>
                                                     <constraint firstAttribute="trailing" secondItem="gDM-bN-mxq" secondAttribute="trailing" id="4SL-Wa-R34"/>
+                                                    <constraint firstItem="1rE-a5-lUY" firstAttribute="leading" secondItem="tjQ-Db-QXZ" secondAttribute="leading" constant="30" id="5fT-6C-rVw"/>
                                                     <constraint firstItem="yK3-OJ-pVD" firstAttribute="top" secondItem="bwD-dd-Tta" secondAttribute="bottom" constant="30" id="6dB-ML-owK"/>
-                                                    <constraint firstAttribute="bottom" secondItem="gDM-bN-mxq" secondAttribute="bottom" constant="64" id="9U8-QH-sUV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gDM-bN-mxq" secondAttribute="bottom" constant="120" id="9U8-QH-sUV"/>
                                                     <constraint firstItem="2Y2-ah-5zf" firstAttribute="leading" secondItem="ANS-Oh-nt5" secondAttribute="leading" id="B5y-QQ-PFT"/>
-                                                    <constraint firstAttribute="bottom" secondItem="2Y2-ah-5zf" secondAttribute="bottom" constant="303" id="F8o-Se-s3S"/>
+                                                    <constraint firstAttribute="bottom" secondItem="2Y2-ah-5zf" secondAttribute="bottom" constant="331" id="F8o-Se-s3S"/>
                                                     <constraint firstItem="gDM-bN-mxq" firstAttribute="top" secondItem="GN3-4K-30E" secondAttribute="bottom" constant="28.5" id="IXm-Ly-OK2"/>
                                                     <constraint firstAttribute="trailing" secondItem="JYt-Ct-bMH" secondAttribute="trailing" constant="8" id="K1I-dS-5Kf"/>
                                                     <constraint firstItem="2Y2-ah-5zf" firstAttribute="top" secondItem="ANS-Oh-nt5" secondAttribute="bottom" constant="8" symbolic="YES" id="OhU-oH-7qa"/>
                                                     <constraint firstItem="gDM-bN-mxq" firstAttribute="leading" secondItem="tjQ-Db-QXZ" secondAttribute="leading" id="PY2-C7-cfi"/>
                                                     <constraint firstAttribute="trailing" secondItem="ANS-Oh-nt5" secondAttribute="trailing" constant="8" id="R71-KW-doc"/>
                                                     <constraint firstAttribute="trailing" secondItem="yK3-OJ-pVD" secondAttribute="trailing" constant="8" id="TVd-7L-blW"/>
+                                                    <constraint firstAttribute="trailing" secondItem="1rE-a5-lUY" secondAttribute="trailing" constant="30" id="Tdl-af-iiD"/>
                                                     <constraint firstItem="XOs-9f-sYw" firstAttribute="leading" secondItem="tjQ-Db-QXZ" secondAttribute="leading" constant="8" id="Tn5-lv-pFz"/>
                                                     <constraint firstItem="yK3-OJ-pVD" firstAttribute="leading" secondItem="tjQ-Db-QXZ" secondAttribute="leading" constant="8" id="Vex-Oi-Vtv"/>
                                                     <constraint firstItem="2Y2-ah-5zf" firstAttribute="trailing" secondItem="ANS-Oh-nt5" secondAttribute="trailing" id="ZQv-K4-1Oy"/>
                                                     <constraint firstItem="JYt-Ct-bMH" firstAttribute="top" secondItem="XOs-9f-sYw" secondAttribute="bottom" constant="1" id="b3L-nr-SFh"/>
+                                                    <constraint firstItem="1rE-a5-lUY" firstAttribute="top" secondItem="gDM-bN-mxq" secondAttribute="bottom" constant="73" id="cwY-8a-g6N"/>
                                                     <constraint firstItem="JYt-Ct-bMH" firstAttribute="leading" secondItem="tjQ-Db-QXZ" secondAttribute="leading" constant="8" id="cxt-Zs-thk"/>
                                                     <constraint firstItem="bwD-dd-Tta" firstAttribute="leading" secondItem="tjQ-Db-QXZ" secondAttribute="leading" constant="8" id="dS8-Cn-f8Y"/>
                                                     <constraint firstItem="XOs-9f-sYw" firstAttribute="top" secondItem="yK3-OJ-pVD" secondAttribute="bottom" constant="8" id="g5c-9N-eqp"/>
                                                     <constraint firstItem="ANS-Oh-nt5" firstAttribute="top" secondItem="tjQ-Db-QXZ" secondAttribute="top" constant="70" id="g9k-zr-doE"/>
                                                     <constraint firstAttribute="trailing" secondItem="GN3-4K-30E" secondAttribute="trailing" constant="94" id="gob-rw-rFH"/>
                                                     <constraint firstAttribute="trailing" secondItem="XOs-9f-sYw" secondAttribute="trailing" constant="8" id="lDP-qs-JHT"/>
+                                                    <constraint firstAttribute="bottom" secondItem="1rE-a5-lUY" secondAttribute="bottom" constant="17" id="pYi-Ii-xQ5"/>
                                                     <constraint firstItem="ANS-Oh-nt5" firstAttribute="leading" secondItem="tjQ-Db-QXZ" secondAttribute="leading" constant="8" id="q6v-wY-L2k"/>
                                                     <constraint firstItem="GN3-4K-30E" firstAttribute="top" secondItem="JYt-Ct-bMH" secondAttribute="bottom" constant="47" id="rMw-mC-Lt4"/>
                                                     <constraint firstItem="bwD-dd-Tta" firstAttribute="top" secondItem="2Y2-ah-5zf" secondAttribute="bottom" constant="1" id="v4S-Rb-cho"/>
@@ -469,7 +492,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g4L-O8-TVu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cxi-rd-1bI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cxi-rd-1bI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

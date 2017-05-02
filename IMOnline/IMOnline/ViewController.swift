@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
+import LocalAuthentication
 
 let screenSize: CGRect = UIScreen.main.bounds
 let screenWidth = screenSize.width
@@ -24,6 +26,11 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     @IBOutlet weak var usernameTF: UITextField!
     @IBOutlet weak var forgotPassBtn: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
+    
+    var namePassString : String! = ""
+    var userCredentialsArray : [String] = []
+    var isTouchIDAuthenticated : Bool = false
+    var launchedBefore : Bool = false
     
     @IBAction func countryBtnAction(_ sender: UIButton) {
         
@@ -133,6 +140,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         if(usernameTF.text == "" && passwordTF.text == ""){
             showAlert(messageToShow: "Please enter username, password field.")
         }else{
+            
             WebServiceManager.sharedInstance.loginWebservice()
         }
         
@@ -153,6 +161,175 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    // MARK: - TouchID Functions
+    
+//    func authenticateUser(){
+//        
+//        // Get the local authentication context.
+//        let context : LAContext = LAContext()
+//        
+//        // Declare a NSError variable.
+//        var error: NSError?
+//        
+//        // Set the reason string that will appear on the authentication alert.
+//        var reasonString = "Authentication is needed to login App."
+//        
+//        // Check if the device can evaluate the policy
+//        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+//            let reason = "Identify yourself!"
+//            
+//            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
+//                [unowned self] success, authenticationError in
+//                
+//                DispatchQueue.main.async {
+//                    if success {
+//                        
+//                        self.isTouchIDAuthenticated = true
+//                        
+//                        if self.launchedBefore  {
+//                            let retrievedPassword: String? = KeychainWrapper.standard.string(forKey: "myKey")
+//                            
+//                            if(retrievedPassword != nil){
+//                                
+//                                print("SUCCESSFUL")
+//                                
+//                                var userInfoString = retrievedPassword! as String
+//                                
+//                                //userCredentialsArray = retrievedPassword componentsSeparatedByString:@"^"
+//                                
+//                                self.userCredentialsArray = retrievedPassword!.components(separatedBy: "^")
+//                                
+//                                
+//                                if(self.userCredentialsArray.count > 0)
+//                                {
+//                                    
+//                                    print(self.userCredentialsArray)
+//                                    
+////                                    let nextView = self.storyboard?.instantiateViewController(withIdentifier: "nextView") as! NextViewController
+////                                    self.navigationController?.pushViewController(nextView, animated: true)
+//                                    
+//                                }
+//                                
+//                                
+//                                
+//                            }
+//                        } else {
+//                            //if(username password not saved)
+//                            
+//                            let alertVC = UIAlertController(title: "", message: "To login with your fingerprint register your credentials.", preferredStyle: .alert)
+//                            
+//                            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+//                            alertVC.addAction(okAction)
+//                            
+//                            self.present(alertVC, animated: true, completion: nil)
+//                            
+//                            self.usernameTF.isHidden = false
+//                            self.passwordTF.isHidden = false
+//                            self.loginBtn.isEnabled = true
+//                            UserDefaults.standard.set(true, forKey: "launchedBefore")
+//                        }
+//                        
+//                        
+//                    } else {
+//                        
+//                        if let error = (authenticationError as? NSError) {
+//                            
+//                            let message = self.errorMessageForLAErrorCode(errorCode: error.code)
+//                            self.showAlertWithTitle(title: "TOUCH ID for App", message: message)
+//                            
+//                            self.usernameTF.isHidden = false
+//                            self.passwordTF.isHidden = false
+//                            self.loginBtn.isEnabled = true
+//                        }
+//                        
+//                    }
+//                }
+//            }
+//        }
+//        else{
+//            // If the security policy cannot be evaluated then show a short message depending on the error.
+//            switch error!.code{
+//                
+//            case LAError.touchIDNotEnrolled.rawValue:
+//                print("TouchID is not enrolled")
+//                
+//            case LAError.passcodeNotSet.rawValue:
+//                print("A passcode has not been set")
+//                
+//            default:
+//                // The LAError.TouchIDNotAvailable case.
+//                print("TouchID not available")
+//            }
+//            
+//            // Optionally the error description can be displayed on the console.
+//            print(error?.localizedDescription)
+//            
+//            // Show the custom alert view to allow users to enter the password.
+//            
+//            self.usernameTF.isHidden = false
+//            self.passwordTF.isHidden = false
+//            self.loginBtn.isEnabled = true
+//            
+//        }
+//        
+//    }
+//    
+//    
+//    func errorMessageForLAErrorCode( errorCode:Int ) -> String{
+//        
+//        var message = ""
+//        
+//        switch errorCode {
+//            
+//        case LAError.appCancel.rawValue:
+//            message = "Authentication was cancelled by application"
+//            
+//        case LAError.authenticationFailed.rawValue:
+//            message = "The user failed to provide valid credentials"
+//            
+//        case LAError.invalidContext.rawValue:
+//            message = "The context is invalid"
+//            
+//        case LAError.passcodeNotSet.rawValue:
+//            message = "Passcode is not set on the device"
+//            
+//        case LAError.systemCancel.rawValue:
+//            message = "Authentication was cancelled by the system"
+//            
+//        case LAError.touchIDLockout.rawValue:
+//            message = "Too many failed attempts."
+//            
+//        case LAError.touchIDNotAvailable.rawValue:
+//            message = "TouchID is not available on the device"
+//            
+//        case LAError.userCancel.rawValue:
+//            message = "The user did cancel"
+//            
+//        case LAError.userFallback.rawValue:
+//            message = "The user chose to use the fallback"
+//            
+//        default:
+//            message = "Did not find error code on LAError object"
+//            
+//        }
+//        
+//        return message
+//        
+//    }
+//    
+//    
+//    func showAlertWithTitle( title:String, message:String ) {
+//        
+//        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        
+//        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+//        alertVC.addAction(okAction)
+//        
+//        self.present(alertVC, animated: true, completion: nil)
+//        
+//    }
     
 }
 // MARK: - gradient functionality

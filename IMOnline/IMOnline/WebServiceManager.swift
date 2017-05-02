@@ -42,14 +42,12 @@ class WebServiceManager: NSObject {
         print("inside webservice")
     }
 
-    
+    // MARK: - FETCH COUNTRIES FUNCTION
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
         
-       
-        let params: [AnyHashable: Any]? = [
-            "LANGCODE" : (NSLocale.preferredLanguages[0])
-        ]
+        let params = self.preferredLanguageDictionary()
+        
         self.performRESTCall(baseURL: Constants.URL_GET_COUNTRY_LIST, httpMethod: "GET", parameters: params as! [NSObject : AnyObject], successBlock: {(_ responseText: String) -> Void in
             print(successBlock)
             
@@ -57,22 +55,18 @@ class WebServiceManager: NSObject {
             var arr : NSArray = []
             arr = parser.myArrayFunc() as NSArray
             successBlock(arr as! [Any])
-//            let parser = ResponseParser().response
-//            var arr : NSArray = []
-//                          arr = parser.myArrayFunc() as NSArray
-//            //
-//                            successBlock(arr as NSArray)
-           // successBlock = SUC
+
         }, failedBlock: failedBlock)
         
         
     }
     
+    
+    // MARK: - FETCH FUNCTIONLIST FUNCTION
     func fetchFunctionList(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
         
-        let params: [AnyHashable: Any]? = [
-            "LANGCODE" : (NSLocale.preferredLanguages[0])
-        ]
+        let params = self.preferredLanguageDictionary()
+        
         self.performRESTCall(baseURL: Constants.URL_GET_FUNCTION_LIST, httpMethod: "GET", parameters: params as! [NSObject : AnyObject], successBlock: {(_ responseText: String) -> Void in
             print(successBlock)
             //let stringdemo = responseText as
@@ -93,7 +87,7 @@ class WebServiceManager: NSObject {
         
         
     }
-    
+    // MARK: - LOGIN RELATED FUNCTIONS
     func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
            let paramStr: String = "?DEVICE=%@&AGENT=%@&OSVERSION=%@&CONNECTIONTYPE=%@&APPVERSION=%@&lang=%@&country=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
             
@@ -426,10 +420,7 @@ class WebServiceManager: NSObject {
         print(url)
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "PUT"
-        
-        //let parameters = "username:\(WebServiceManager.sharedInstance.user.userId!)\npassword:\(WebServiceManager.sharedInstance.user.password!)"
-       // print(parameters)
-       // urlRequest.httpBody = parameters.data(using: String.Encoding.utf8)
+    
         
         
         urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
@@ -580,6 +571,8 @@ class WebServiceManager: NSObject {
         }, failedBlock: failedBlock)
 
     }
+    
+     // MARK: - GENERAL NETWORK CALLS(PERFORM REST CALL)
     func performRESTCall(baseURL: String, httpMethod: String, parameters: [NSObject : AnyObject], successBlock: @escaping (_ response: String) -> Void, failedBlock: @escaping () -> Void) {
         //    NSLog(@"Received Parameters: %@",parameters);
         self.performRESTCall(baseURL, httpMethod: (httpMethod as! String), parameters: parameters, successBlock: successBlock, failedBlock: failedBlock, showLoginViewIfSessionInvalid: true)
@@ -683,13 +676,12 @@ class WebServiceManager: NSObject {
                                         alertView.show()
                                     }
                                     else{
-//                                        var alertView = UIAlertView(title: title!, message: "", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
-//                                        alertView.show()
+
                                     }
                                     
                                 }
                             }
-                            // [alertView show];//Temporarily hiding error alert messages
+                           
                         }
                     }
                     
@@ -918,11 +910,7 @@ class WebServiceManager: NSObject {
         
         let url = URL(string: urlString)!
         var urlRequest = URLRequest(url: url)
-        
-        
-       // urlRequest.httpMethod = ""
-        
-        
+     
         urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
         
         Alamofire.request(urlRequest)
@@ -948,21 +936,7 @@ class WebServiceManager: NSObject {
         let countryCode: String? = (languageDic["kCFLocaleCountryCodeKey"] as? String)
         //countryCode = "US"
         let languageCode: String? = (languageDic["kCFLocaleLanguageCodeKey"] as! String)
-        //languageCode = "en"
-//        print(IMCountry.sharedInstance.countryId)
-//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
-//        print(WebServiceManager.sharedInstance.user?.language )
-//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
-//        print(WebServiceManager.sharedInstance.user.language )
-////        print(IMUser.sharedInstance.bnr)
-        
-//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
-//        print(WebServiceManager.sharedInstance.user.language)
-//        print(WebServiceManager.sharedInstance.user.bnr)
-//        
-//        print(WebServiceManager.sharedInstance.user.customerNumber)
-//        print( WebServiceManager.sharedInstance.user.userId)
-//        print(WebServiceManager.sharedInstance.user.sessionId)
+ 
         
          return "country=\(IMHelper.empty(forNil: (WebServiceManager.sharedInstance.countrySelection.countryId)))&ccd=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.language ?? ""))&lang=\(languageCode!)&bnr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.bnr ?? ""))&knr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.customerNumber ?? ""))&uid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.userId ?? ""))&sid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.sessionId ?? ""))"
     }
@@ -978,5 +952,16 @@ class WebServiceManager: NSObject {
         }
 
                    return retval
+    }
+    
+     // MARK: - PREFFERED LOCAL LANGUAGE FUNCTIONS
+    func preferredLanguageDictionary() -> NSMutableDictionary
+    {
+    
+        
+        let params: NSMutableDictionary = [
+            "LANGCODE" : (NSLocale.preferredLanguages[0])
+        ]
+        return params
     }
 }

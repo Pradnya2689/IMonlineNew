@@ -63,10 +63,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
       // let api = ApiHandler.sharedInstance
     // let wc = WebServiceManager.sharedInstance
         WebServiceManager.sharedInstance.fetchCountries(withCompletionBlock: {(_ _countries: [Any]) -> Void in
-            print(_countries)
-
-            
-           // print(country123!)
+          
             for conty in _countries
             {
                 var country123 = (conty as? IMCountry)?.name
@@ -78,6 +75,8 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
             self.countrySearchTableView.reloadData()
             
         }, failedBlock: {() -> Void in
+            
+            print("error handling for failure pending" )
         })
 
    //self.countrySearchTableView.reloadData()

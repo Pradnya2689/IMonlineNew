@@ -15,6 +15,8 @@ class SplashViewController: UIViewController {
     
     @IBOutlet weak var imgStackView: UIStackView!
     
+    var country:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,7 +24,19 @@ class SplashViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         
+        // FETCH COUNTRY
+        let localIdentifier = Locale.current.identifier //returns identifier of your telephones country/region settings
         
+        let locale = NSLocale(localeIdentifier: localIdentifier)
+        //if u want a special identifier use that
+        //let locale = NSLocale(localeIdentifier: "en_US")
+        if let countryCode = locale.object(forKey: .countryCode) as? String {
+            
+            if let country = locale.displayName(forKey: .countryCode, value: countryCode) {
+                print(country)
+            }
+        }
+
         
     }
     

@@ -28,6 +28,8 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet var noInternetVC:UIView!
     
+      let reachability = Reachability()!
+    
     @IBAction func countryBtnAction(_ sender: UIButton) {
         
         if #available(iOS 10.0, *) {
@@ -116,13 +118,6 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: reachability)
-        NotificationCenter.default.addObserver(self, selector:  #selector(CountrySearchViewController.reachabilityChanged(_:)),name: ReachabilityChangedNotification,object: reachability)
-        do{
-            try reachability.startNotifier()
-        }catch{
-            print("could not start reachability notifier")
-        }
        
         registerKeyboardNotifications()
     }
@@ -147,8 +142,6 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
             
             
         }
-        // print("Internet Connection not Available!")
-        
         
     }
 
@@ -192,26 +185,27 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         user.language = preferedLanguage()
         user.countryCode = WebServiceManager.sharedInstance.countrySelection.countryId
         if WebServiceManager.sharedInstance.countrySelection != nil && (!(WebServiceManager.sharedInstance.countrySelection.environmentType == Constants.ENV_DACH)) {
-            // user.userId = self.userIdLabelLegacy.text;////Check it and include in login UI
-            user.bnr = ""
+             user.bnr = ""
             user.countryCode = ""
             user.customerNumber = ""
         }
         
         //For endavour contry
         if("E" == Constants.ENV_ENDEAVOUR){
-            WebServiceManager.sharedInstance.loginWebservice(withCompletionBlock: { (_: [Any]) in
-                 self.noInternetVC.isHidden = true
-            }, failedBlock: {() -> Void in
-                 self.noInternetVC.isHidden = false
-            })
-        }
+                    }
         
         else if("L" == Constants.ENV_LEGACY)
         {
         
         }
-        
+        WebServiceManager.sharedInstance.loginWebservice(withCompletionBlock: { (_: [Any]) in
+          //  self.noInternetVC.isHidden = true
+            self.showAlert(messageToShow: "Login success")
+        }, failedBlock: {(_ str: String) in
+            self.showAlert(messageToShow: str)
+           // self.noInternetVC.isHidden = false
+        })
+
        
     }
     
@@ -269,13 +263,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         alertView.show()
     }
     @IBAction func retrybtnClk(){
-        self.noInternetVC.isHidden = true
-        if(usernameTF.text == "" && passwordTF.text == ""){
-            showAlert(messageToShow: "Please enter username, password field.")
-        }else{
-            loginService(userid: usernameTF.text!, password: passwordTF.text!)
-        }
-
+  
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

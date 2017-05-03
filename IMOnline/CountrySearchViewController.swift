@@ -18,10 +18,10 @@ class siriRecogn: NSObject , SFSpeechRecognizerDelegate{
     
     static let sharedInstance = siriRecogn()
     
-     let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
-     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-     var recognitionTask: SFSpeechRecognitionTask?
-     let audioEngine = AVAudioEngine()
+    let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    var recognitionTask: SFSpeechRecognitionTask?
+    let audioEngine = AVAudioEngine()
     
 }
 
@@ -32,15 +32,13 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
     
-   let reachability = Reachability()!
+    let reachability = Reachability()!
     
     let MESSAGE_TITLE_KEY = "title"
     let MESSAGE_DESC_KEY = "description"
     
     var isCall : String = ""
     var selectedCountryStr : String = ""
-//    var countryNameAAray : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
-//    var countryNameAAray1 : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
     
     var countryNameAAray  = NSMutableArray()
     var countryNameAAray1 = NSMutableArray()
@@ -48,13 +46,13 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     var flagArray = ["Australia","Croatia","England","France","Iceland","Jordan"]
     
     @IBOutlet var noInternetVC:UIView!
-
-
+    
+    
     @IBAction func micBtnAction(_ sender: UIButton) {
-
+        
         if #available(iOS 10.0, *){
             
-             startRecording()
+            startRecording()
         }
     }
     
@@ -63,22 +61,18 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTextField.addTarget(self, action: #selector(CountrySearchViewController.textFieldDidChange11), for: UIControlEvents.allEditingEvents)
-        //let reachability = Reachability()!
-             // let api = ApiHandler.sharedInstance
-    // let wc = WebServiceManager.sharedInstance
         WebServiceManager.sharedInstance.showActivityIndicatory(uiView: self.view)
         WebServiceManager.sharedInstance.fetchCountries(withCompletionBlock: {(_ _countries: [Any]) -> Void in
             print(_countries)
-
+            
             self.noInternetVC.isHidden = true
-           // print(country123!)
             for conty in _countries
             {
                 var country123 = (conty as? IMCountry)?.name
-            self.countryNameAAray.add(country123!)
+                self.countryNameAAray.add(country123!)
                 self.countryNameAAray1.add(country123!)
                 self.countryArray.add(conty)
-            
+                
             }
             WebServiceManager.sharedInstance.stopActivityIndicatory(uiView: self.view)
             self.countrySearchTableView.reloadData()
@@ -86,10 +80,6 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         }, failedBlock: {() -> Void in
             self.noInternetVC.isHidden = false
         })
-
-   //self.countrySearchTableView.reloadData()
-        
-        // Do any additional setup after loading the view.
         
         
         if #available(iOS 10.0, *) {
@@ -119,7 +109,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
                 case .notDetermined:
                     self.isEnab = false
                     print("Speech recognition not yet authorized")
-         
+                    
                 }
                 
                 OperationQueue.main.addOperation {
@@ -133,15 +123,8 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: reachability)
-        NotificationCenter.default.addObserver(self, selector:  #selector(CountrySearchViewController.reachabilityChanged(_:)),name: ReachabilityChangedNotification,object: reachability)
-        do{
-            try reachability.startNotifier()
-        }catch{
-            print("could not start reachability notifier")
-        }
-
-      
+        
+        
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchTextField.resignFirstResponder()
@@ -150,15 +133,13 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     
     func handleReachabilityChanged(notification:NSNotification)
     {
-        // notification.object will be a 'Reachability' object that you can query
-        // for the network status.
         
         NSLog("Network reachability has changed.");
     }
     
     func reachabilityChanged(_ sender: NSNotification) {
         
-      
+        
         
         let reachability = sender.object as! Reachability
         
@@ -166,7 +147,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         if (reachability.isReachable)
         {
             print("Internet Connection Available!")
-           
+            
         }
         else
         {
@@ -175,12 +156,12 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
             
             
         }
-       
+        
         
         
     }
     
-   // MARK: - Microphone Function
+    // MARK: - Microphone Function
     
     func startRecording() {
         if #available(iOS 10.0, *){
@@ -273,7 +254,6 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
-       // cell.flagImgView.image = UIImage(named: flagArray[indexPath.row])
         cell.countryNameLB.text = countryNameAAray[indexPath.row] as! String
         return cell
     }
@@ -287,40 +267,36 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         print(co.countryId)
         WebServiceManager.sharedInstance.countrySelection = countryArray[indexPath.row] as! IMCountry
         WebServiceManager.sharedInstance.user.countryCode = WebServiceManager.sharedInstance.countrySelection.countryId
-       selectedContryCode = WebServiceManager.sharedInstance.countrySelection.countryId
-      //print(WebServiceManager.sharedInstance.countrySelection.name)
+        selectedContryCode = WebServiceManager.sharedInstance.countrySelection.countryId
         print(WebServiceManager.sharedInstance.user.countryCode ?? "")
         print(selectedContryCode)
         
-       
+        
         WebServiceManager.sharedInstance.fetchFunctionList(withCompletionBlock: {(_ functions: [Any]) -> Void in
-           print(functions)
-           WebServiceManager.sharedInstance.user.functions = functions
+            print(functions)
+            WebServiceManager.sharedInstance.user.functions = functions
             
             let nextView = self.storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
             print(self.selectedCountryStr)
-           selectedcountry = self.selectedCountryStr as NSString
-          // nextView.countryBtn.setTitle("hi", for: UIControlState.normal)
-                self.navigationController?.pushViewController(nextView, animated: true)
-    
+            selectedcountry = self.selectedCountryStr as NSString
+            self.navigationController?.pushViewController(nextView, animated: true)
+            
             
         }, failedBlock: {() -> Void in
         })
-            
-            
+        
+        
         if(isCall == "SplashView")
         {
             
-//            let nextView = self.storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
-//            self.navigationController?.pushViewController(nextView, animated: true)
             
         }
         else
         {
             
-             self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
-       
+        
     }
     
     func textFieldDidChange11()
@@ -328,7 +304,6 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         if((searchTextField.text?.characters.count)! > 0)
         {
             let searchpredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchTextField.text!)
-            //filterArray = NSArray()
             countryNameAAray.filter(using: searchpredicate)
             self.countrySearchTableView.reloadData()
         }
@@ -345,28 +320,28 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     func textFieldDidChangeSiri() {
         
         if((searchTextField.text?.characters.count)! > 0){
-            var searchString = searchTextField.text?.uppercased()
+            var searchString = searchTextField.text
             let searchpredicate = NSPredicate(format: "SELF == %@", searchString!) //ANY keywords.name LIKE[c]
-            //filterArray = NSArray()
             countryNameAAray.filter(using: searchpredicate)
             print(countryNameAAray)
             print(countryNameAAray.count)
             if(countryNameAAray.count == 1){
                 
                 if(isCall == "SplashView"){
-                
-                let nextView = self.storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
-                self.navigationController?.pushViewController(nextView, animated: true)
+                    
+                    let nextView = self.storyboard?.instantiateViewController(withIdentifier: "loginView") as! ViewController
+                    selectedcountry = countryNameAAray.object(at: 0) as! NSString
+                    self.navigationController?.pushViewController(nextView, animated: true)
                 }else{
                     self.dismiss(animated: true, completion: nil)
                 }
             }else{
-                 countryNameAAray = self.countryNameAAray1.mutableCopy() as! NSMutableArray
+                countryNameAAray = self.countryNameAAray1.mutableCopy() as! NSMutableArray
                 let searchpredicate = NSPredicate(format: "SELF CONTAINS %@", searchString!) //ANY keywords.name LIKE[c]
-                //filterArray = NSArray()
+                
                 countryNameAAray.filter(using: searchpredicate)
                 
-            self.countrySearchTableView.reloadData()
+                self.countrySearchTableView.reloadData()
             }
         }else{
             countryNameAAray.removeAllObjects()
@@ -381,7 +356,6 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
             print(_countries)
             self.noInternetVC.isHidden = true
             
-            // print(country123!)
             for conty in _countries
             {
                 var country123 = (conty as? IMCountry)?.name

@@ -15,7 +15,7 @@ class ResponseParser: NSObject
 {
     var lines:NSArray!
     var response: NSString!
-    
+    var errorMsg : String! = ""
     
     //Declare afterwards in IMBASKET class
    
@@ -240,6 +240,7 @@ class ResponseParser: NSObject
             var errorDiscription: String = ""
             if (errorDiscStrElements?.count)! > 0 {
                 errorDiscription = (errorDiscStrElements?[1] as? String)!
+                self.errorMsg = errorDiscription
             }
             var errorCodeStr: String? = (lines[10] as? String)
             if (errorCodeStr as? NSString)?.range(of: "9999").location != NSNotFound {

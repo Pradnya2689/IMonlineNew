@@ -9,7 +9,7 @@
 import UIKit
 import Speech
 
-
+//var reachability = Reachability()
 
 var selectedContryCode : String = String()
 
@@ -32,6 +32,8 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
     
+   let reachability = Reachability()!
+    
     let MESSAGE_TITLE_KEY = "title"
     let MESSAGE_DESC_KEY = "description"
     
@@ -45,6 +47,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     var countryArray = NSMutableArray()
     var flagArray = ["Australia","Croatia","England","France","Iceland","Jordan"]
     
+    @IBOutlet var noInternetVC:UIView!
 
 
     @IBAction func micBtnAction(_ sender: UIButton) {
@@ -60,12 +63,14 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTextField.addTarget(self, action: #selector(CountrySearchViewController.textFieldDidChange11), for: UIControlEvents.allEditingEvents)
-      // let api = ApiHandler.sharedInstance
+        //let reachability = Reachability()!
+             // let api = ApiHandler.sharedInstance
     // let wc = WebServiceManager.sharedInstance
+        WebServiceManager.sharedInstance.showActivityIndicatory(uiView: self.view)
         WebServiceManager.sharedInstance.fetchCountries(withCompletionBlock: {(_ _countries: [Any]) -> Void in
             print(_countries)
 
-            
+            self.noInternetVC.isHidden = true
            // print(country123!)
             for conty in _countries
             {
@@ -75,9 +80,11 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
                 self.countryArray.add(conty)
             
             }
+            WebServiceManager.sharedInstance.stopActivityIndicatory(uiView: self.view)
             self.countrySearchTableView.reloadData()
             
         }, failedBlock: {() -> Void in
+            self.noInternetVC.isHidden = false
         })
 
    //self.countrySearchTableView.reloadData()
@@ -125,13 +132,53 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: reachability)
+        NotificationCenter.default.addObserver(self, selector:  #selector(CountrySearchViewController.reachabilityChanged(_:)),name: ReachabilityChangedNotification,object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+
+      
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchTextField.resignFirstResponder()
         return true
     }
     
+    func handleReachabilityChanged(notification:NSNotification)
+    {
+        // notification.object will be a 'Reachability' object that you can query
+        // for the network status.
+        
+        NSLog("Network reachability has changed.");
+    }
     
+    func reachabilityChanged(_ sender: NSNotification) {
+        
+      
+        
+        let reachability = sender.object as! Reachability
+        
+        
+        if (reachability.isReachable)
+        {
+            print("Internet Connection Available!")
+           
+        }
+        else
+        {
+            
+            print("Internet Connection not Available!")
+            
+            
+        }
+       
+        
+        
+    }
     
    // MARK: - Microphone Function
     
@@ -329,7 +376,26 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         
         //return true
     }
-
+    @IBAction func retryBtntClk(){
+        WebServiceManager.sharedInstance.fetchCountries(withCompletionBlock: {(_ _countries: [Any]) -> Void in
+            print(_countries)
+            self.noInternetVC.isHidden = true
+            
+            // print(country123!)
+            for conty in _countries
+            {
+                var country123 = (conty as? IMCountry)?.name
+                self.countryNameAAray.add(country123!)
+                self.countryNameAAray1.add(country123!)
+                self.countryArray.add(conty)
+                
+            }
+            self.countrySearchTableView.reloadData()
+            
+        }, failedBlock: {() -> Void in
+            self.noInternetVC.isHidden = false
+        })
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

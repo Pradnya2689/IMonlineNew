@@ -38,18 +38,18 @@ class WebServiceManager: NSObject {
     var outageHtmlData:String!
     var isOutageAvailable:Bool!
     
+     var actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     private override init() {
         print("inside webservice")
     }
 
-    
+    // MARK: - FETCH COUNTRIES FUNCTION
     func fetchCountries(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
  
         
-       
-        let params: [AnyHashable: Any]? = [
-            "LANGCODE" : (NSLocale.preferredLanguages[0])
-        ]
+        let params = self.preferredLanguageDictionary()
+        
         self.performRESTCall(baseURL: Constants.URL_GET_COUNTRY_LIST, httpMethod: "GET", parameters: params as! [NSObject : AnyObject], successBlock: {(_ responseText: String) -> Void in
             print(successBlock)
             
@@ -57,22 +57,18 @@ class WebServiceManager: NSObject {
             var arr : NSArray = []
             arr = parser.myArrayFunc() as NSArray
             successBlock(arr as! [Any])
-//            let parser = ResponseParser().response
-//            var arr : NSArray = []
-//                          arr = parser.myArrayFunc() as NSArray
-//            //
-//                            successBlock(arr as NSArray)
-           // successBlock = SUC
+
         }, failedBlock: failedBlock)
         
         
     }
     
+    
+    // MARK: - FETCH FUNCTIONLIST FUNCTION
     func fetchFunctionList(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void) {
         
-        let params: [AnyHashable: Any]? = [
-            "LANGCODE" : (NSLocale.preferredLanguages[0])
-        ]
+        let params = self.preferredLanguageDictionary()
+        
         self.performRESTCall(baseURL: Constants.URL_GET_FUNCTION_LIST, httpMethod: "GET", parameters: params as! [NSObject : AnyObject], successBlock: {(_ responseText: String) -> Void in
             print(successBlock)
             //let stringdemo = responseText as
@@ -93,7 +89,7 @@ class WebServiceManager: NSObject {
         
         
     }
-    
+    // MARK: - LOGIN RELATED FUNCTIONS
     func loginWebservice(withCompletionBlock successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void){
            let paramStr: String = "?DEVICE=%@&AGENT=%@&OSVERSION=%@&CONNECTIONTYPE=%@&APPVERSION=%@&lang=%@&country=%@&deviceid=%@&saveid=%@&securitycode=%@&resendcode=%@"
             
@@ -115,129 +111,215 @@ class WebServiceManager: NSObject {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         
+       // let parameters = "username:\(WebServiceManager.sharedInstance.user.userId!)\npassword:\(WebServiceManager.sharedInstance.user.password!)"
         let parameters = "username:\(WebServiceManager.sharedInstance.user.userId!)\npassword:\(WebServiceManager.sharedInstance.user.password!)"
         print(parameters)
         urlRequest.httpBody = parameters.data(using: String.Encoding.utf8)
         
         urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
    
-        Alamofire.request(urlRequest)
+        Alamofire.request(urlRequest).validate()
             .responseString { response in
-                print("Response String: \(response.result.value)")
-                let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
-                print(parser.lines)
-               // let sessionCookie = IMHelper.fetchSessionCookie(request:  response.response!)
-                let allCookies = IMHelper.fetchCookieArray(response: response.response! )
-                let cookval = allCookies.first!
-                print(allCookies)
-                IMHelper.setCookie(domain: cookval.domain, path: cookval.path, name: cookval.name, value: cookval.value, secure: cookval.isSecure, expires: cookval.expiresDate!,url: "")
+                print("Response String: \(response.result.description)")
                 
-                if parser.isOutageAvailable() && self.isOutagePageVisible {
-                    var outageResponse: String = parser.outageResponse()
-                    self.isOutagePageVisible = true
-                    failedBlock()
-                }
-                if self.user != nil
-                {
-                    self.user.sessionCookie = cookval
-                    self.user.allCookies = allCookies
-                }
-                let message = parser.validateLogin()
-                if(message == ""){
-                self.user .remember()
-               // let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iOS&APPVERSION=3.0&CONNECTIONTYPE=WIFI&DEVICE=iPhone&OSVERSION=10.2&uid=pradnya.dongre@ingrammicro.com&lang=EN&country=MX")!
-                    
-                    let paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&uid=%@&lang=%@&country=%@"
-                    let settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr), "iOS", IMHelper.appVersion(),
-                    "WIFI",//IMHelper.connectionType(),
-                        IMHelper.deviceModel(),
-                        IMHelper.currentOS(),
-                        (self.user.userId)!,
-                        WebServiceManager.sharedInstance.countrySelection.languageCode,
-                        WebServiceManager.sharedInstance.countrySelection.countryId)
-                    
-                    var urlRequest = URLRequest(url: URL(string:settingsPath)!)
-                urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
-                urlRequest.httpMethod = "GET"
-                urlRequest.httpShouldHandleCookies = true
-                urlRequest.addValue("0", forHTTPHeaderField: "Content-Length")
-                urlRequest.httpShouldHandleCookies = true
-                print("urlstr \(urlRequest)")
-                Alamofire.request(urlRequest)
-                    .responseString { response in
-                        print("Response String: \(response.result.value)")
-                        let settingsParser = ResponseParser.init(responseStr: response.result.value as! NSString)
-                      
+                switch(response.result) {
+                case .success(_):
+                    if let data = response.result.value{
+                        print(response.response?.statusCode)
+                        let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                        print(parser.lines.object(at: 0))
                         
-                            //self.user.remember()
-                        if settingsParser.isOutageAvailable() && !self.isOutagePageVisible {
-                            var outageResponse: String = settingsParser.outageResponse()
+                        let fullName    = parser.lines.object(at: 0)
+                        let fullNameArr = (fullName as AnyObject).components(separatedBy: ";")
+                        
+                        let name    = fullNameArr[0]
+                        print(name)
+                        // let sessionCookie = IMHelper.fetchSessionCookie(request:  response.response!)
+                        let allCookies = IMHelper.fetchCookieArray(response: response.response! )
+                        let cookval = allCookies.first!
+                        print(allCookies)
+                        IMHelper.setCookie(domain: cookval.domain, path: cookval.path, name: cookval.name, value: cookval.value, secure: cookval.isSecure, expires: cookval.expiresDate!,url: "")
+                        if(name == "Failure"){
+                            failedBlock()
+                        }
+                        
+                        if parser.isOutageAvailable() && self.isOutagePageVisible {
+                            var outageResponse: String = parser.outageResponse()
                             self.isOutagePageVisible = true
                             failedBlock()
                         }
-
-                        if (settingsParser.canLogin()){
-                            self.user.canAccessTracking = settingsParser.canAccessTracking()
-                            self.user.canOrder = settingsParser.canOrder()
-                            self.user.isAdmin = settingsParser.isAdmin()
-                            self.user.isDropShipAllowed = settingsParser.isDropshipAllowed()
-                            //46276 Amit.p
-                            self.user.isStatesAvailable = settingsParser.isStatesAvailable()
-                            self.user.currency = WebServiceManager.sharedInstance.countrySelection.currencySymbol as NSString!
-                            self.user.searchFilters = settingsParser.searchFilters() as NSArray!
-                            settingsParser.cultureSettings()
-
-                            if !(UserDefaults.standard.string(forKey: "selectedCountry") == WebServiceManager.sharedInstance.countrySelection.countryId) || !(UserDefaults.standard.string(forKey: "loginUserId") == WebServiceManager.sharedInstance.user.userId) {
-                                UserDefaults.standard.set(true, forKey: "updateCache")
-                                UserDefaults.standard.set(WebServiceManager.sharedInstance.countrySelection.countryId, forKey: "selectedCountry")
-                                UserDefaults.standard.set(WebServiceManager.sharedInstance.user.userId, forKey: "loginUserId")
-                                UserDefaults.standard.set(nil, forKey: "setDeliveryway")
-                                self.user.defaultUserSetting()
-                                //uttam.b Ticket 54178:Switching User or coutry should refresh right data
-                            }
-                            else {
-                                UserDefaults.standard.set(false, forKey: "updateCache")
-                            }
+                        if self.user != nil
+                        {
+                            self.user.sessionCookie = cookval
+                            self.user.allCookies = allCookies
+                        }
+                        let message = parser.validateLogin()
+                        if(message == ""){
+                            self.user .remember()
+                            // let url = URL(string: "https://mobility-stg.ingrammicro.com/1.0.0.0/Settings/ReadLocalSettingsList/?AGENT=iOS&APPVERSION=3.0&CONNECTIONTYPE=WIFI&DEVICE=iPhone&OSVERSION=10.2&uid=pradnya.dongre@ingrammicro.com&lang=EN&country=MX")!
+                            self.localsettingAfterLogin(successBlock:{ Void in
+                                
+                              successBlock(fullNameArr)
+                            }, failedBlock:  {() -> Void in
+                                
+                                print("error handling for failure pending" )
+                            })
+                        
                             
-                            self.loadWheelData()
-                            
-                            
-                            if (self.user.isStatesAvailable)! {
-                                DispatchQueue.global(qos: .default).async(execute: {() -> Void in
-                                   //pending
-                                   //  self.loadStates()
-                                })
-                            }
-                       
-                            
-                            //block()
-                        }else{
-                            
-                            //DLog("loginUserWithCompletionBlock settings canLogin says, user has no rights")
-                            if settingsParser.isOutageAvailable() && !self.isOutageAvailable {
-                                let outageResponse: String = settingsParser.outageResponse()
-                                self.isOutageAvailable = true
-                                failedBlock()
-                            }
-                            else if !settingsParser.isOutageAvailable() {
-                               // failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
-                            }
                             
                         }
-                        if(response.result.isFailure){
-                            let settingsParser = ResponseParser(responseStr: response.result.value as! NSString)
-                            if settingsParser.isOutageAvailable() {
-                                let outageResponse: String = settingsParser.outageResponse()
-                                self.isOutageAvailable = true
-                                //failedBlock(outageResponse, true)
-                            }
-                            else if !settingsParser.isOutageAvailable() {
-                               // failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
-                            }
-                        }
-                        }
+                         successBlock(fullNameArr)
+                    }
+                    
+                    break
+                    
+                case .failure( let error):
+                    print(response.result.error)
                     
                     
+                    //guard case let .failure(error) = response.result else { return }
+                    if let error = error as? AFError {
+                        switch error {
+                        case .invalidURL(let url):
+                            print("Invalid URL: \(url) - \(error.localizedDescription)")
+                        case .parameterEncodingFailed(let reason):
+                            print("Parameter encoding failed: \(error.localizedDescription)")
+                            print("Failure Reason: \(reason)")
+                        case .multipartEncodingFailed(let reason):
+                            print("Multipart encoding failed: \(error.localizedDescription)")
+                            print("Failure Reason: \(reason)")
+                        case .responseValidationFailed(let reason):
+                            print("Response validation failed: \(error.localizedDescription)")
+                            print("Failure Reason: \(reason)")
+                            
+                            switch reason {
+                            case .dataFileNil, .dataFileReadFailed:
+                                print("Downloaded file could not be read")
+                            case .missingContentType(let acceptableContentTypes):
+                                print("Content Type Missing: \(acceptableContentTypes)")
+                            case .unacceptableContentType(let acceptableContentTypes, let responseContentType):
+                                print("Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)")
+                            case .unacceptableStatusCode(let code):
+                                print("Response status code was unacceptable: \(code)")
+                            }
+                        case .responseSerializationFailed(let reason):
+                            print("Response serialization failed: \(error.localizedDescription)")
+                            print("Failure Reason: \(reason)")
+                        }
+                        
+                        print("Underlying error: \(error.underlyingError)")
+                    } else if let error = error as? URLError {
+                        print("URLError occurred: \(error)")
+                    } else {
+                        print("Unknown error: \(error)")
+                    }
+                    
+                    failedBlock()
+                    break
+                    
+                }
+                
+                
+                
+              
+        }
+            .responseJSON { response in
+                print("Response JSON: \(response.result.value)")
+        }
+            
+            
+    }
+    
+    func localsettingAfterLogin(successBlock: @escaping (_: [Any]) -> Void, failedBlock: @escaping (_: Void) -> Void)
+    {
+        let paramStr: String = "?AGENT=%@&APPVERSION=%@&CONNECTIONTYPE=%@&DEVICE=%@&OSVERSION=%@&uid=%@&lang=%@&country=%@"
+        let settingsPath = String(format: IMHelper.getURIforContractName("ReadLocalSettingsList") + (paramStr), "iOS", IMHelper.appVersion(),
+                                  "WIFI",//IMHelper.connectionType(),
+            IMHelper.deviceModel(),
+            IMHelper.currentOS(),
+            (self.user.userId)!,
+            WebServiceManager.sharedInstance.countrySelection.languageCode,
+            WebServiceManager.sharedInstance.countrySelection.countryId)
+        
+        var urlRequest = URLRequest(url: URL(string:settingsPath)!)
+        urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
+        urlRequest.httpMethod = "GET"
+        urlRequest.httpShouldHandleCookies = true
+        urlRequest.addValue("0", forHTTPHeaderField: "Content-Length")
+        urlRequest.httpShouldHandleCookies = true
+        print("urlstr \(urlRequest)")
+        Alamofire.request(urlRequest)
+            .responseString { response in
+                print("Response String: \(response.result.value)")
+                let settingsParser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                
+                
+                //self.user.remember()
+                if settingsParser.isOutageAvailable() && !self.isOutagePageVisible {
+                    var outageResponse: String = settingsParser.outageResponse()
+                    self.isOutagePageVisible = true
+                    failedBlock()
+                }
+                
+                if (settingsParser.canLogin()){
+                    self.user.canAccessTracking = settingsParser.canAccessTracking()
+                    self.user.canOrder = settingsParser.canOrder()
+                    self.user.isAdmin = settingsParser.isAdmin()
+                    self.user.isDropShipAllowed = settingsParser.isDropshipAllowed()
+                    //46276 Amit.p
+                    self.user.isStatesAvailable = settingsParser.isStatesAvailable()
+                    self.user.currency = WebServiceManager.sharedInstance.countrySelection.currencySymbol as NSString!
+                    self.user.searchFilters = settingsParser.searchFilters() as NSArray!
+                    settingsParser.cultureSettings()
+                    
+                    if !(UserDefaults.standard.string(forKey: "selectedCountry") == WebServiceManager.sharedInstance.countrySelection.countryId) || !(UserDefaults.standard.string(forKey: "loginUserId") == WebServiceManager.sharedInstance.user.userId) {
+                        UserDefaults.standard.set(true, forKey: "updateCache")
+                        UserDefaults.standard.set(WebServiceManager.sharedInstance.countrySelection.countryId, forKey: "selectedCountry")
+                        UserDefaults.standard.set(WebServiceManager.sharedInstance.user.userId, forKey: "loginUserId")
+                        UserDefaults.standard.set(nil, forKey: "setDeliveryway")
+                        self.user.defaultUserSetting()
+                        //uttam.b Ticket 54178:Switching User or coutry should refresh right data
+                    }
+                    else {
+                        UserDefaults.standard.set(false, forKey: "updateCache")
+                    }
+                    
+                    self.loadWheelData()
+                    
+                    
+                    if (self.user.isStatesAvailable)! {
+                        DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+                            
+                            //pending
+                            //  self.loadStates()
+                        })
+                    }
+                    
+                    
+                    //block()
+                }else{
+                    
+                    //DLog("loginUserWithCompletionBlock settings canLogin says, user has no rights")
+                    if settingsParser.isOutageAvailable() && !self.isOutageAvailable {
+                        let outageResponse: String = settingsParser.outageResponse()
+                        self.isOutageAvailable = true
+                        failedBlock()
+                    }
+                    else if !settingsParser.isOutageAvailable() {
+                        // failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
+                    }
+                    
+                }
+                if(response.result.isFailure){
+                    let settingsParser = ResponseParser(responseStr: response.result.value as! NSString)
+                    if settingsParser.isOutageAvailable() {
+                        let outageResponse: String = settingsParser.outageResponse()
+                        self.isOutageAvailable = true
+                        failedBlock()
+                    }
+                    else if !settingsParser.isOutageAvailable() {
+                        failedBlock()
+                    }
                 }
                 if((response.error) == nil){
                     let settingsParser = ResponseParser(responseStr: response.result.value as! NSString)
@@ -247,17 +329,13 @@ class WebServiceManager: NSObject {
                         //failedBlock(outageResponse, true)
                     }
                     else if !settingsParser.isOutageAvailable() {
-                       // failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
+                        // failedBlock(NSLocalizedString("General Login Error Message", comment: "login failed error message"), false)
                     }
                     
-
+                    
                 }
         }
-            .responseJSON { response in
-                print("Response JSON: \(response.result.value)")
-        }
-            
-            
+    
     }
    
     func loginUserLegacy(withCompletionBlock block: @escaping (_: Void) -> Void, failedBlock: @escaping (_ errorMessage: String, _ isOutage: Bool) -> Void) {
@@ -426,10 +504,7 @@ class WebServiceManager: NSObject {
         print(url)
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "PUT"
-        
-        //let parameters = "username:\(WebServiceManager.sharedInstance.user.userId!)\npassword:\(WebServiceManager.sharedInstance.user.password!)"
-       // print(parameters)
-       // urlRequest.httpBody = parameters.data(using: String.Encoding.utf8)
+    
         
         
         urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
@@ -580,6 +655,8 @@ class WebServiceManager: NSObject {
         }, failedBlock: failedBlock)
 
     }
+    
+     // MARK: - GENERAL NETWORK CALLS(PERFORM REST CALL)
     func performRESTCall(baseURL: String, httpMethod: String, parameters: [NSObject : AnyObject], successBlock: @escaping (_ response: String) -> Void, failedBlock: @escaping () -> Void) {
         //    NSLog(@"Received Parameters: %@",parameters);
         self.performRESTCall(baseURL, httpMethod: (httpMethod as! String), parameters: parameters, successBlock: successBlock, failedBlock: failedBlock, showLoginViewIfSessionInvalid: true)
@@ -621,113 +698,174 @@ class WebServiceManager: NSObject {
         
         urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
         
-        Alamofire.request(urlRequest)
+        Alamofire.request(urlRequest).validate()
             .responseString { response in
-                print("Response String: \(response.result.value)")
-                let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
-               // successBlock(parser.response as String)
+               
                 
-                var validSession: Bool = true
+               
+                //////
                 
-                if (self.countrySelection.environmentType == Constants.ENV_DACH)
-                {
-                    //                    var location: String? = (request.responseHeaders()["Location"] as? String)
-                    //                    if request.responseStatusCode() == 302 && location != nil
-                    //                    {
-                    //                        validSession = false
-                    //                    }
-                }
-                else if (self.countrySelection.environmentType == Constants.ENV_ENDEAVOUR)
-                {
+                
+                
+                switch(response.result) {
+                case .success(_):
+//                    if let data = response.result.value{
+//                        print(response.result.value)
+//                    }
+                    print("Response String: \(response.result.value)")
                     let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
-                    let res = parser.response as String
+                    // successBlock(parser.response as String)
                     
+                    var validSession: Bool = true
                     
-                    if parser.isOutageAvailable() && !self.isOutagePageVisible {
-                        self.isOutagePageVisible = true
-                        self.user.isOutage = true
-                        self.outageHtmlData = (parser.outageResponse() as String)
-                       // failedBlock(self.outageHtmlData, true)
-                                              //  failedBlock(outageHtmlData, true)
+                    if (self.countrySelection.environmentType == Constants.ENV_DACH)
+                    {
+                        //                    var location: String? = (request.responseHeaders()["Location"] as? String)
+                        //                    if request.responseStatusCode() == 302 && location != nil
+                        //                    {
+                        //                        validSession = false
+                        //                    }
                     }
-                    
-                    if self.user.sessionCookie != nil {
-                        var now = Date()
-                        //                        DLog("exptime:%f now:%f", user.sessionCookie.expiresDate.timeIntervalSince1970, now.timeIntervalSince1970)
-                            var elapsedTime: TimeInterval = self.user.sessionCookie.expiresDate!.timeIntervalSince1970 - now.timeIntervalSince1970
-                                              self.user.remainingTime = elapsedTime
-                                                if elapsedTime < 0
-                                                {
-                                                    validSession = false
-                                                }
+                    else if (self.countrySelection.environmentType == Constants.ENV_ENDEAVOUR)
+                    {
+                        let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                        let res = parser.response as String
                         
-                     //   var messageDict: [String: String] = [:]
-                        var messageDict: NSMutableDictionary = parser.validateEndeavourSession(urlString)
-                        if messageDict != nil {
-                          
-                            var title: String? = messageDict.value(forKey: MESSAGE_TITLE_KEY) as! String?
-                            var message: String?=""
-                            if let a = messageDict.value(forKey: MESSAGE_DESC_KEY) as? String{
-                                message = a
+                        
+                        if parser.isOutageAvailable() && !self.isOutagePageVisible {
+                            self.isOutagePageVisible = true
+                            self.user.isOutage = true
+                            self.outageHtmlData = (parser.outageResponse() as String)
+                            // failedBlock(self.outageHtmlData, true)
+                            //  failedBlock(outageHtmlData, true)
+                        }
+                        
+                        if self.user.sessionCookie != nil {
+                            var now = Date()
+                            //                        DLog("exptime:%f now:%f", user.sessionCookie.expiresDate.timeIntervalSince1970, now.timeIntervalSince1970)
+                            var elapsedTime: TimeInterval = self.user.sessionCookie.expiresDate!.timeIntervalSince1970 - now.timeIntervalSince1970
+                            self.user.remainingTime = elapsedTime
+                            if elapsedTime < 0
+                            {
+                                validSession = false
                             }
                             
-                            
-                            var orderService: String = "Order"
-                            var basketListService: String = "Basket/List/?"
-                            var range: NSRange = (urlString as NSString).range(of: orderService, options: .caseInsensitive)
-                            var rangeBasket: NSRange = (urlString as NSString).range(of: basketListService, options: .caseInsensitive)
-                            if range.location == NSNotFound {
-                                if rangeBasket.location == NSNotFound {
-                                    if((message?.characters.count)! > 0){
-                                        var alertView = UIAlertView(title: title!, message: message!, delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
-                                        alertView.show()
+                            //   var messageDict: [String: String] = [:]
+                            var messageDict: NSMutableDictionary = parser.validateEndeavourSession(urlString)
+                            if messageDict != nil {
+                                
+                                var title: String? = messageDict.value(forKey: MESSAGE_TITLE_KEY) as! String?
+                                var message: String?=""
+                                if let a = messageDict.value(forKey: MESSAGE_DESC_KEY) as? String{
+                                    message = a
+                                }
+                                
+                                
+                                var orderService: String = "Order"
+                                var basketListService: String = "Basket/List/?"
+                                var range: NSRange = (urlString as NSString).range(of: orderService, options: .caseInsensitive)
+                                var rangeBasket: NSRange = (urlString as NSString).range(of: basketListService, options: .caseInsensitive)
+                                if range.location == NSNotFound {
+                                    if rangeBasket.location == NSNotFound {
+                                        if((message?.characters.count)! > 0){
+                                            var alertView = UIAlertView(title: title!, message: message!, delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
+                                            alertView.show()
+                                        }
+                                        else{
+                                            
+                                        }
+                                        
                                     }
-                                    else{
-//                                        var alertView = UIAlertView(title: title!, message: "", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "")
-//                                        alertView.show()
-                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                        
+                    }
+                    
+                    if !validSession {
+                        // session has expired, present login view modally
+                        let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
+                        if showLoginViewIfSessionInvalid && !parser.isOutageAvailable() && !(self.user.isOutage!)
+                        {
+                            if #available(iOS 10.0, *) {
+                                (UIApplication.shared.delegate as? AppDelegate)?.showModalLogin(withSuccessBlock: {() -> Void in
+                                    (UIApplication.shared.delegate as? AppDelegate)?.hideModalLogin()
                                     
+                                    self.performCall(baseURL, parameters: parameters, successBlock: successBlock, failedBlock: failedBlock, showLoginViewIfSessionInvalid: false)
+                                    return
+                                }, failedBlock: failedBlock)
+                            } else {
+                                OperationQueue.main.addOperation {() -> Void in
+                                    failedBlock()
                                 }
                             }
-                            // [alertView show];//Temporarily hiding error alert messages
                         }
-                    }
-                    
-                    
-                }
-                
-                if !validSession {
-                    // session has expired, present login view modally
-                    let parser = ResponseParser.init(responseStr: response.result.value as! NSString)
-                    if showLoginViewIfSessionInvalid && !parser.isOutageAvailable() && !(self.user.isOutage!)
-                    {
-                        if #available(iOS 10.0, *) {
-                            (UIApplication.shared.delegate as? AppDelegate)?.showModalLogin(withSuccessBlock: {() -> Void in
-                                (UIApplication.shared.delegate as? AppDelegate)?.hideModalLogin()
- 
-                                self.performCall(baseURL, parameters: parameters, successBlock: successBlock, failedBlock: failedBlock, showLoginViewIfSessionInvalid: false)
-                                return
-                            }, failedBlock: failedBlock)
-                        } else {
+                        else {
                             OperationQueue.main.addOperation {() -> Void in
                                 failedBlock()
                             }
                         }
                     }
                     else {
+                        var responseString = parser.response as String
                         OperationQueue.main.addOperation {() -> Void in
-                            failedBlock()
+                            successBlock(responseString)
                         }
-                    }
-                }
-                else {
-                    var responseString = parser.response as String
-                    OperationQueue.main.addOperation {() -> Void in
-                        successBlock(responseString)
+                        
                     }
 
+                    break
+                    
+                case .failure( let error):
+                    print(response.result.error)
+                    
+                    
+                    //guard case let .failure(error) = response.result else { return }
+                    if let error = error as? AFError {
+                        switch error {
+                        case .invalidURL(let url):
+                            print("Invalid URL: \(url) - \(error.localizedDescription)")
+                        case .parameterEncodingFailed(let reason):
+                            print("Parameter encoding failed: \(error.localizedDescription)")
+                            print("Failure Reason: \(reason)")
+                        case .multipartEncodingFailed(let reason):
+                            print("Multipart encoding failed: \(error.localizedDescription)")
+                            print("Failure Reason: \(reason)")
+                        case .responseValidationFailed(let reason):
+                            print("Response validation failed: \(error.localizedDescription)")
+                            print("Failure Reason: \(reason)")
+                            
+                            switch reason {
+                            case .dataFileNil, .dataFileReadFailed:
+                                print("Downloaded file could not be read")
+                            case .missingContentType(let acceptableContentTypes):
+                                print("Content Type Missing: \(acceptableContentTypes)")
+                            case .unacceptableContentType(let acceptableContentTypes, let responseContentType):
+                                print("Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)")
+                            case .unacceptableStatusCode(let code):
+                                print("Response status code was unacceptable: \(code)")
+                            }
+                        case .responseSerializationFailed(let reason):
+                            print("Response serialization failed: \(error.localizedDescription)")
+                            print("Failure Reason: \(reason)")
+                        }
+                        
+                        print("Underlying error: \(error.underlyingError)")
+                    } else if let error = error as? URLError {
+                        print("URLError occurred: \(error)")
+                    } else {
+                        print("Unknown error: \(error)")
+                    }
+                    
+                    
+                    break
+                    
                 }
-
+                
+                
+                
 
             }
             .responseJSON { response in
@@ -918,11 +1056,7 @@ class WebServiceManager: NSObject {
         
         let url = URL(string: urlString)!
         var urlRequest = URLRequest(url: url)
-        
-        
-       // urlRequest.httpMethod = ""
-        
-        
+     
         urlRequest.addValue(Constants.CONTENTYPE_VALUE, forHTTPHeaderField: Constants.CONTENTYPE)
         
         Alamofire.request(urlRequest)
@@ -948,21 +1082,7 @@ class WebServiceManager: NSObject {
         let countryCode: String? = (languageDic["kCFLocaleCountryCodeKey"] as? String)
         //countryCode = "US"
         let languageCode: String? = (languageDic["kCFLocaleLanguageCodeKey"] as! String)
-        //languageCode = "en"
-//        print(IMCountry.sharedInstance.countryId)
-//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
-//        print(WebServiceManager.sharedInstance.user?.language )
-//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
-//        print(WebServiceManager.sharedInstance.user.language )
-////        print(IMUser.sharedInstance.bnr)
-        
-//        print(WebServiceManager.sharedInstance.countrySelection.countryId)
-//        print(WebServiceManager.sharedInstance.user.language)
-//        print(WebServiceManager.sharedInstance.user.bnr)
-//        
-//        print(WebServiceManager.sharedInstance.user.customerNumber)
-//        print( WebServiceManager.sharedInstance.user.userId)
-//        print(WebServiceManager.sharedInstance.user.sessionId)
+ 
         
          return "country=\(IMHelper.empty(forNil: (WebServiceManager.sharedInstance.countrySelection.countryId)))&ccd=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.language ?? ""))&lang=\(languageCode!)&bnr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.bnr ?? ""))&knr=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.customerNumber ?? ""))&uid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.userId ?? ""))&sid=\(IMHelper.empty(forNil: WebServiceManager.sharedInstance.user.sessionId ?? ""))"
     }
@@ -979,4 +1099,35 @@ class WebServiceManager: NSObject {
 
                    return retval
     }
+    
+     // MARK: - PREFFERED LOCAL LANGUAGE FUNCTIONS
+    func preferredLanguageDictionary() -> NSMutableDictionary
+    {
+    
+        
+        let params: NSMutableDictionary = [
+            "LANGCODE" : (NSLocale.preferredLanguages[0])
+        ]
+        return params
+    }
+    func showActivityIndicatory(uiView: UIView)
+    {
+        //var actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+        actInd.frame = CGRect(x:0, y: 0, width: 40, height:40)
+        actInd.center = uiView.center
+        actInd.hidesWhenStopped = true
+        actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        actInd.color = UIColor.blue
+        uiView.addSubview(actInd)
+        actInd.startAnimating()
+    }
+    
+    func stopActivityIndicatory(uiView: UIView)
+    {
+       
+        actInd.stopAnimating()
+    }
+    
+    
+    
 }

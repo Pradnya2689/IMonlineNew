@@ -26,11 +26,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     @IBOutlet weak var usernameTF: UITextField!
     @IBOutlet weak var forgotPassBtn: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
-    
-    var namePassString : String! = ""
-    var userCredentialsArray : [String] = []
-    var isTouchIDAuthenticated : Bool = false
-    var launchedBefore : Bool = false
+    @IBOutlet var noInternetVC:UIView!
     
     @IBAction func countryBtnAction(_ sender: UIButton) {
         
@@ -125,6 +121,32 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         registerKeyboardNotifications()
     }
     
+    
+    func reachabilityChanged(_ sender: NSNotification) {
+        
+        
+        
+        let reachability = sender.object as! Reachability
+        
+        
+        if (reachability.isReachable)
+        {
+            print("Internet Connection Available!")
+            
+        }
+        else
+        {
+            
+            print("Internet Connection not Available!")
+            
+            
+        }
+        // print("Internet Connection not Available!")
+        
+        
+    }
+
+    
     override func viewWillDisappear(_ animated: Bool) {
         
         //navigationController?.isNavigationBarHidden = false
@@ -171,7 +193,11 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         
         //For endavour contry
         if("E" == Constants.ENV_ENDEAVOUR){
-            
+            WebServiceManager.sharedInstance.loginWebservice(withCompletionBlock: { (_: [Any]) in
+                 self.noInternetVC.isHidden = true
+            }, failedBlock: {() -> Void in
+                 self.noInternetVC.isHidden = false
+            })
         }
         
         else if("L" == Constants.ENV_LEGACY)
@@ -179,10 +205,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         
         }
         
-        WebServiceManager.sharedInstance.loginWebservice(withCompletionBlock: { (_: [Any]) in
-            
-        }, failedBlock: {() -> Void in
-        })
+       
     }
     
     func getVisibleElements(byFunctions _functions: [IMFunctionList]) -> NSMutableArray {
@@ -237,6 +260,15 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         alertView.delegate = nil
         alertView.addButton(withTitle: "OK")
         alertView.show()
+    }
+    @IBAction func retrybtnClk(){
+        self.noInternetVC.isHidden = true
+        if(usernameTF.text == "" && passwordTF.text == ""){
+            showAlert(messageToShow: "Please enter username, password field.")
+        }else{
+            loginService(userid: usernameTF.text!, password: passwordTF.text!)
+        }
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

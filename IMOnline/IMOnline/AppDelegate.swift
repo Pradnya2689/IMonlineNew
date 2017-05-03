@@ -9,11 +9,15 @@
 import UIKit
 import CoreData
 import Alamofire
+
+ //var  reachability = Reachability()!
 @available(iOS 10.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    let reachability = Reachability()!
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -27,23 +31,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         UIApplication.shared.statusBarStyle = .lightContent
         
-        InternetConnctionChk()
+        NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: reachability)
+        NotificationCenter.default.addObserver(self, selector:  #selector(AppDelegate.reachabilityChanged(_:)),name: ReachabilityChangedNotification,object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+    //NotificationCenter.default.addObserver(self, selector:#selector(handleReachabilityChanged(notification:)), name: NSNotification.Name.reachabilityChanged, object: nil)
+        //InternetConnctionChk()
         return true
     }
+    func handleReachabilityChanged(notification:NSNotification)
+    {
+        // notification.object will be a 'Reachability' object that you can query
+        // for the network status.
+        
+        NSLog("Network reachability has changed.");
+    }
     
+    func reachabilityChanged(_ sender: NSNotification) {
+        
+        
+        
+        let reachability = sender.object as! Reachability
+        
+        if (reachability.isReachable)
+        {
+            print("Internet Connection Available!")
+                  }
+        else
+        {
+            
+            print("Internet Connection not Available!")
+            
+            
+        }
+       
+        
+        
+    }
     func getDelegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
     func InternetConnctionChk(){
-        let manager = NetworkReachabilityManager(host: "www.apple.com")
         
-        manager?.listener = { status in
+        let manager = NetworkReachabilityManager(host: "www.apple.com")
+         manager?.startListening()
+        manager?.listener =
+            {
+            status in
             print("Network Status Changed: \(status)")
             
         }
         
-        manager?.startListening()
+       
+       //manager?.networkReachabilityStatus
+        
     }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

@@ -105,8 +105,8 @@
 		C3CD10111E979301002920A0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		C3CD10121E979301002920A0 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		C3CD10181E97C7F6002920A0 /* CountrySearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountrySearchTableViewCell.swift; path = ../CountrySearchTableViewCell.swift; sourceTree = "<group>"; };
-		D914E0571EA7968600D82BAD /* IMFunctionList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMFunctionList.swift; sourceTree = "<group>"; };
-		D943D20A1EB8CB2F00570D5C /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		D914E0571EA7968600D82BAD /* IMFunctionList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMFunctionList.swift; path = ../IMFunctionList.swift; sourceTree = "<group>"; };
+		D943D20A1EB8CB2F00570D5C /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = ../Reachability.swift; sourceTree = "<group>"; };
 		D943D20C1EB8CD1900570D5C /* IMOnline-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IMOnline-Bridging-Header.h"; sourceTree = "<group>"; };
 		D96D366D1EA4AC20000AEE8F /* IMCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IMCountry.swift; path = ../IMCountry.swift; sourceTree = "<group>"; };
 		D98FEB6C1E9FA98700B4C03C /* IMUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMUser.swift; sourceTree = "<group>"; };
@@ -172,6 +172,7 @@
 				4C8798C21EA78C2A00D1AB91 /* IMGroupCombi.swift */,
 				4C8798C41EA795A400D1AB91 /* IMSearchPredicate.swift */,
 				4C6B0C9D1EA7A7150005E6E1 /* ProductGroup.swift */,
+				D914E0571EA7968600D82BAD /* IMFunctionList.swift */,
 			);
 			name = NewtWorkClasses;
 			sourceTree = "<group>";
@@ -260,6 +261,7 @@
 		C360246F1E96219E00C72D82 /* IMOnline */ = {
 			isa = PBXGroup;
 			children = (
+				D943D2141EB9D39B00570D5C /* Reachability */,
 				C35B681E1E9F54BC00260F01 /* ProductSearch */,
 				4C78154E1E9F541800F0F3D0 /* NewtWorkClasses */,
 				4CA7AE661E9E26D500E0DCBB /* Modules */,
@@ -294,6 +296,14 @@
 				C36024951E96219E00C72D82 /* Info.plist */,
 			);
 			path = IMOnlineUITests;
+			sourceTree = "<group>";
+		};
+		D943D2141EB9D39B00570D5C /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D943D20A1EB8CB2F00570D5C /* Reachability.swift */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -767,7 +777,7 @@
 				INFOPLIST_FILE = IMOnline/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ingrammicro.imonline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "IMOnline-Bridging-Header.h";
@@ -787,7 +797,7 @@
 				INFOPLIST_FILE = IMOnline/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.TEST1.IMOnline;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ingrammicro.imonline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "IMOnline-Bridging-Header.h";

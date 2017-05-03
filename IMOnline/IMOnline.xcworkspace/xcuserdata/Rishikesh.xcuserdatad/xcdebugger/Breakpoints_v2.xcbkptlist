@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "loginUserLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "loginUserLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -57,28 +57,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CountrySearchViewController.swift"
-            timestampString = "515486338.080534"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
-            landmarkName = "tableView(_:didSelectRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "405"
-            endingLineNumber = "405"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "loginUserLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "414"
-            endingLineNumber = "414"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "loginUserLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "541"
-            endingLineNumber = "541"
+            startingLineNumber = "535"
+            endingLineNumber = "535"
             landmarkName = "fetchSessionForLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -153,28 +137,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CountrySearchViewController.swift"
-            timestampString = "515486338.080534"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
-            landmarkName = "textFieldDidChange11()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "IMOnline/ViewController.swift"
-            timestampString = "514302681.532336"
+            timestampString = "515488170.386025"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "countryBtnAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,13 +154,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/ViewController.swift"
-            timestampString = "514303937.560155"
+            timestampString = "515488170.386025"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "ViewController"
-            landmarkType = "3">
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "keyboardWillHide(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -202,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "450"
-            endingLineNumber = "450"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "loginUserLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "466"
-            endingLineNumber = "466"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
             landmarkName = "loginUserLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
             <Locations>
@@ -234,11 +202,11 @@
                   moduleName = "IMOnline"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Rishikesh/Documents/IMonlineNew/IMOnline/IMOnline/WebServiceManager.swift"
-                  timestampString = "515486338.316968"
+                  timestampString = "515495714.903895"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "467"
-                  endingLineNumber = "467"
+                  startingLineNumber = "468"
+                  endingLineNumber = "468"
                   offsetFromSymbolStart = "5884">
                </Location>
                <Location
@@ -249,11 +217,11 @@
                   moduleName = "IMOnline"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Rishikesh/Documents/IMonlineNew/IMOnline/IMOnline/WebServiceManager.swift"
-                  timestampString = "515486338.318255"
+                  timestampString = "515495714.905179"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "467"
-                  endingLineNumber = "467"
+                  startingLineNumber = "468"
+                  endingLineNumber = "468"
                   offsetFromSymbolStart = "7500">
                </Location>
             </Locations>
@@ -266,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "536"
-            endingLineNumber = "536"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
             landmarkName = "fetchSessionForLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
+            startingLineNumber = "473"
+            endingLineNumber = "473"
             landmarkName = "loginUserLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CountrySearchViewController.swift"
-            timestampString = "515486338.080534"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "startRecording()"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515420235.191851"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "fetchFunctionList(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
             landmarkName = "loginUserLegacy(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,12 +346,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/ViewController.swift"
-            timestampString = "515053540.130263"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "loginClicked()"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "reachabilityChanged(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -394,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "563"
-            endingLineNumber = "563"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
             landmarkName = "loadStates()"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,77 +378,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "675"
-            endingLineNumber = "675"
+            startingLineNumber = "641"
+            endingLineNumber = "641"
             landmarkName = "performRESTCall(_:httpMethod:parameters:successBlock:failedBlock:showLoginViewIfSessionInvalid:contentType:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "888"
-            endingLineNumber = "888"
-            landmarkName = "WebServiceManager"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "929"
-            endingLineNumber = "929"
-            landmarkName = "WebServiceManager"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "930"
-            endingLineNumber = "930"
-            landmarkName = "WebServiceManager"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "931"
-            endingLineNumber = "931"
-            landmarkName = "WebServiceManager"
-            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -506,28 +410,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "666"
-            endingLineNumber = "666"
+            startingLineNumber = "629"
+            endingLineNumber = "629"
             landmarkName = "performRESTCall(_:httpMethod:parameters:successBlock:failedBlock:showLoginViewIfSessionInvalid:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "596"
-            endingLineNumber = "596"
-            landmarkName = "loadStates()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -554,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CountrySearchViewController.swift"
-            timestampString = "515486338.080534"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -566,16 +454,16 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "IMOnline.CountrySearchViewController.tableView (__ObjC.UITableView, didSelectRowAt : Foundation.IndexPath) -&gt; ()"
+                  symbolName = "IMOnline.CountrySearchViewController.(tableView (__ObjC.UITableView, didSelectRowAt : Foundation.IndexPath) -&gt; ()).(closure #1)"
                   moduleName = "IMOnline"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Rishikesh/Documents/IMonlineNew/IMOnline/CountrySearchViewController.swift"
-                  timestampString = "515486338.364015"
+                  timestampString = "515495714.948714"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "300"
                   endingLineNumber = "300"
-                  offsetFromSymbolStart = "2476">
+                  offsetFromSymbolStart = "312">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -585,12 +473,12 @@
                   moduleName = "IMOnline"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Rishikesh/Documents/IMonlineNew/IMOnline/CountrySearchViewController.swift"
-                  timestampString = "515486338.365311"
+                  timestampString = "515495714.950051"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "301"
-                  endingLineNumber = "301"
-                  offsetFromSymbolStart = "24">
+                  startingLineNumber = "300"
+                  endingLineNumber = "300"
+                  offsetFromSymbolStart = "1004">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -618,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CountrySearchViewController.swift"
-            timestampString = "515486338.080534"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -634,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
             <Locations>
@@ -646,31 +534,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "IMOnline.WebServiceManager.loginWebservice (withCompletionBlock : (Swift.Array&lt;Any&gt;) -&gt; (), failedBlock : () -&gt; ()) -&gt; ()"
+                  symbolName = "IMOnline.WebServiceManager.loginWebservice (withCompletionBlock : (Swift.Array&lt;Any&gt;) -&gt; (), failedBlock : (Swift.String) -&gt; ()) -&gt; ()"
                   moduleName = "IMOnline"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Rishikesh/Documents/IMonlineNew/IMOnline/IMOnline/WebServiceManager.swift"
-                  timestampString = "515486338.372897"
+                  timestampString = "515495714.957271"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "225"
-                  endingLineNumber = "225"
+                  startingLineNumber = "226"
+                  endingLineNumber = "226"
                   offsetFromSymbolStart = "3232">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "IMOnline.WebServiceManager.(loginWebservice (withCompletionBlock : (Swift.Array&lt;Any&gt;) -&gt; (), failedBlock : () -&gt; ()) -&gt; ()).(closure #1)"
+                  symbolName = "IMOnline.WebServiceManager.(loginWebservice (withCompletionBlock : (Swift.Array&lt;Any&gt;) -&gt; (), failedBlock : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "IMOnline"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Rishikesh/Documents/IMonlineNew/IMOnline/IMOnline/WebServiceManager.swift"
-                  timestampString = "515486338.374204"
+                  timestampString = "515495714.958572"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "225"
-                  endingLineNumber = "225"
-                  offsetFromSymbolStart = "26640">
+                  startingLineNumber = "226"
+                  endingLineNumber = "226"
+                  offsetFromSymbolStart = "27328">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -682,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515420235.191851"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -698,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "710"
-            endingLineNumber = "710"
+            startingLineNumber = "656"
+            endingLineNumber = "656"
             landmarkName = "performRESTCall(_:httpMethod:parameters:successBlock:failedBlock:showLoginViewIfSessionInvalid:contentType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -714,27 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
-            landmarkName = "performRESTCall(_:httpMethod:parameters:successBlock:failedBlock:showLoginViewIfSessionInvalid:contentType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515420235.191851"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -746,11 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -762,43 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422411.374785"
+            timestampString = "515496720.664871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CountrySearchViewController.swift"
-            timestampString = "515428311.597651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515420235.191851"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -810,11 +650,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422288.934555"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IMOnline/WebServiceManager.swift"
+            timestampString = "515496570.38716"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
             <Locations>
@@ -822,26 +678,26 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "IMOnline.WebServiceManager.(loginWebservice (withCompletionBlock : (Swift.Array&lt;Any&gt;) -&gt; (), failedBlock : () -&gt; ()) -&gt; ()).(closure #1)"
+                  symbolName = "IMOnline.WebServiceManager.(loginWebservice (withCompletionBlock : (Swift.Array&lt;Any&gt;) -&gt; (), failedBlock : (Swift.String) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "IMOnline"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Rishikesh/Documents/IMonlineNew/IMOnline/IMOnline/WebServiceManager.swift"
-                  timestampString = "515486338.395491"
+                  timestampString = "515495714.989342"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "160"
                   endingLineNumber = "160"
-                  offsetFromSymbolStart = "5320">
+                  offsetFromSymbolStart = "5876">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "IMOnline.WebServiceManager.(loginWebservice (withCompletionBlock : (Swift.Array&lt;Any&gt;) -&gt; (), failedBlock : () -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  symbolName = "IMOnline.WebServiceManager.(loginWebservice (withCompletionBlock : (Swift.Array&lt;Any&gt;) -&gt; (), failedBlock : (Swift.String) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
                   moduleName = "IMOnline"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Rishikesh/Documents/IMonlineNew/IMOnline/IMOnline/WebServiceManager.swift"
-                  timestampString = "515486338.396782"
+                  timestampString = "515495714.991198"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "162"
@@ -858,11 +714,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422290.092986"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -874,11 +730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/WebServiceManager.swift"
-            timestampString = "515422290.716666"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -890,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/AppDelegate.swift"
-            timestampString = "515485799.988138"
+            timestampString = "515490896.360457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "InternetConnctionChk()"
             landmarkType = "7">
          </BreakpointContent>
@@ -906,27 +762,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMOnline/AppDelegate.swift"
-            timestampString = "515485799.988138"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "InternetConnctionChk()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IMOnline/AppDelegate.swift"
-            timestampString = "515485799.988138"
+            timestampString = "515490896.360457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "84"
             endingLineNumber = "84"
+            landmarkName = "InternetConnctionChk()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IMOnline/AppDelegate.swift"
+            timestampString = "515490896.360457"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "InternetConnctionChk()"
             landmarkType = "7">
          </BreakpointContent>
@@ -954,12 +810,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CountrySearchViewController.swift"
-            timestampString = "515428880.566424"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -970,11 +826,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CountrySearchViewController.swift"
-            timestampString = "515485132.639561"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "handleReachabilityChanged(notification:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CountrySearchViewController.swift"
+            timestampString = "515496570.38716"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "startRecording()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IMOnline/WebServiceManager.swift"
+            timestampString = "515496570.38716"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "loginWebservice(withCompletionBlock:failedBlock:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IMOnline/AppDelegate.swift"
+            timestampString = "515491080.021886"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "reachabilityChanged(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -986,12 +890,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CountrySearchViewController.swift"
-            timestampString = "515486338.080534"
+            timestampString = "515496570.38716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "reachabilityChanged(_:)"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
+            landmarkName = "textFieldDidChangeSiri()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

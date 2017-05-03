@@ -11,14 +11,14 @@ import CoreData
 import Alamofire
 
  //var  reachability = Reachability()!
-@available(iOS 10.0, *)
+//@available(iOS 10.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+   
     let reachability = Reachability()!
-
+    var isInternetAvailable:Bool!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -58,11 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (reachability.isReachable)
         {
+            isInternetAvailable = true
             print("Internet Connection Available!")
                   }
         else
         {
-            
+             isInternetAvailable = false
             print("Internet Connection not Available!")
             
             
@@ -111,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        //self.saveContext()
     }
     
     func showModalLogin(withSuccessBlock successBlock: @escaping (_: Void) -> Void, failedBlock: @escaping (_: Void) -> Void) {

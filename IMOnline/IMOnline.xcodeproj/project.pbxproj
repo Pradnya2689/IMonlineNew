@@ -235,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				C31BF4B41EB9B8BB00DC82EE /* IMWebViewController.swift */,
+				D943D20A1EB8CB2F00570D5C /* Reachability.swift */,
 				D914E0571EA7968600D82BAD /* IMFunctionList.swift */,
 				C360246F1E96219E00C72D82 /* IMOnline */,
 				C36024871E96219E00C72D82 /* IMOnlineTests */,

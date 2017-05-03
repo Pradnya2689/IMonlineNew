@@ -1117,7 +1117,7 @@ class WebServiceManager: NSObject {
         actInd.center = uiView.center
         actInd.hidesWhenStopped = true
         actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        actInd.color = UIColor.blue
+        actInd.color = UIColor(red: 21.0/255.0, green: 75.0/255.0, blue: 173.0/255.0, alpha: 1.0)
         uiView.addSubview(actInd)
         actInd.startAnimating()
     }

@@ -41,7 +41,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     var selectedCountryStr : String = ""
 //    var countryNameAAray : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
 //    var countryNameAAray1 : NSMutableArray! = ["AUSTRALIA","CROATIA","ENGLAND","FRANCE","ICELAND","JORDAN"]
-    
+    var imageName : String = ""
     var countryNameAAray  = NSMutableArray()
     var countryNameAAray1 = NSMutableArray()
     var countryArray = NSMutableArray()
@@ -80,6 +80,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
                 self.countryArray.add(conty)
             
             }
+            
             WebServiceManager.sharedInstance.stopActivityIndicatory(uiView: self.view)
             self.countrySearchTableView.reloadData()
             
@@ -273,7 +274,11 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
-       // cell.flagImgView.image = UIImage(named: flagArray[indexPath.row])
+        var co = countryArray[indexPath.row] as! IMCountry
+        
+         imageName = co.countryId
+        
+        cell.flagImgView.image = UIImage(named: imageName)
         cell.countryNameLB.text = countryNameAAray[indexPath.row] as! String
         return cell
     }

@@ -45,6 +45,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
     var countryArray = NSMutableArray()
     var flagArray = ["Australia","Croatia","England","France","Iceland","Jordan"]
     
+    @IBOutlet var noInternetVC:UIView!
 
 
     @IBAction func micBtnAction(_ sender: UIButton) {
@@ -65,7 +66,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         WebServiceManager.sharedInstance.fetchCountries(withCompletionBlock: {(_ _countries: [Any]) -> Void in
             print(_countries)
 
-            
+            self.noInternetVC.isHidden = true
            // print(country123!)
             for conty in _countries
             {
@@ -78,6 +79,7 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
             self.countrySearchTableView.reloadData()
             
         }, failedBlock: {() -> Void in
+            self.noInternetVC.isHidden = false
         })
 
    //self.countrySearchTableView.reloadData()
@@ -329,7 +331,26 @@ class CountrySearchViewController: UIViewController, UITableViewDelegate,UITable
         
         //return true
     }
-
+    @IBAction func retryBtntClk(){
+        WebServiceManager.sharedInstance.fetchCountries(withCompletionBlock: {(_ _countries: [Any]) -> Void in
+            print(_countries)
+            self.noInternetVC.isHidden = true
+            
+            // print(country123!)
+            for conty in _countries
+            {
+                var country123 = (conty as? IMCountry)?.name
+                self.countryNameAAray.add(country123!)
+                self.countryNameAAray1.add(country123!)
+                self.countryArray.add(conty)
+                
+            }
+            self.countrySearchTableView.reloadData()
+            
+        }, failedBlock: {() -> Void in
+            self.noInternetVC.isHidden = false
+        })
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

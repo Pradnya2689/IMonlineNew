@@ -54,7 +54,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         tap.delegate = self
         view.addGestureRecognizer(tap)
         
-        navigationController?.isNavigationBarHidden = true
+        
         
         //create gradient effect
         self.countryBtn.applyGradient(colours: [UIColor(red: 236.0/255, green: 243.0/255, blue: 255.0/255, alpha: 1.0), UIColor(red: 216.0/255.0, green: 230.0/255.0, blue: 255.0/255.0, alpha: 1.0)])
@@ -119,11 +119,15 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         self.countryBtn.setTitle(selectedcountry as String, for: UIControlState.normal)
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        navigationController?.isNavigationBarHidden = true
        
         registerKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
+        //navigationController?.isNavigationBarHidden = false
         unregisterKeyboardNotifications()
     }
     
@@ -144,8 +148,7 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         if(usernameTF.text == "" && passwordTF.text == ""){
             showAlert(messageToShow: "Please enter username, password field.")
         }else{
-            
-            WebServiceManager.sharedInstance.loginWebservice()
+            loginService(userid: usernameTF.text!, password: passwordTF.text!)
         }
 
     }
@@ -241,7 +244,26 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     }
     
     
+    @IBAction func conditionUseBtnAction(_ sender: UIButton) {
+        
+//        let webView = storyboard?.instantiateViewController(withIdentifier: "webView") as! IMWebViewController
+//        navigationController?.present(webView, animated: true, completion: nil)
+        
+        
+        let VC1 = self.storyboard!.instantiateViewController(withIdentifier: "webView") as! IMWebViewController
+        let navController = UINavigationController(rootViewController: VC1)
+        self.present(navController, animated:true, completion: nil)
+        
+    }
     
+    @IBAction func contectUsBtnAction(_ sender: UIButton) {
+        
+        let VC1 = self.storyboard!.instantiateViewController(withIdentifier: "webView") as! IMWebViewController
+        let navController = UINavigationController(rootViewController: VC1)
+        self.present(navController, animated:true, completion: nil)
+
+        
+    }
     // MARK: - TouchID Functions
     
 //    func authenticateUser(){

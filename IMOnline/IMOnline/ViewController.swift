@@ -27,6 +27,8 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
     @IBOutlet weak var forgotPassBtn: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
     
+    let reachability = Reachability()!
+    
     var namePassString : String! = ""
     var userCredentialsArray : [String] = []
     var isTouchIDAuthenticated : Bool = false
@@ -119,9 +121,43 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         self.countryBtn.setTitle(selectedcountry as String, for: UIControlState.normal)
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: reachability)
+        NotificationCenter.default.addObserver(self, selector:  #selector(CountrySearchViewController.reachabilityChanged(_:)),name: ReachabilityChangedNotification,object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
        
         registerKeyboardNotifications()
     }
+    
+    
+    func reachabilityChanged(_ sender: NSNotification) {
+        
+        
+        
+        let reachability = sender.object as! Reachability
+        
+        
+        if (reachability.isReachable)
+        {
+            print("Internet Connection Available!")
+            
+        }
+        else
+        {
+            
+            print("Internet Connection not Available!")
+            
+            
+        }
+        // print("Internet Connection not Available!")
+        
+        
+    }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         unregisterKeyboardNotifications()
@@ -145,7 +181,9 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
             showAlert(messageToShow: "Please enter username, password field.")
         }else{
             
-            WebServiceManager.sharedInstance.loginWebservice()
+        
+           self.loginService(userid: usernameTF.text!, password: passwordTF.text!)
+
         }
 
     }
@@ -177,8 +215,11 @@ class ViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDe
         }
         
         WebServiceManager.sharedInstance.loginWebservice(withCompletionBlock: { (_: [Any]) in
+             self.showAlert(messageToShow: "Login successful")  
             
         }, failedBlock: {() -> Void in
+            
+             self.showAlert(messageToShow: "Login Failed")
         })
     }
     
